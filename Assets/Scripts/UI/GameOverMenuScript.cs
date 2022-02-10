@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameOverMenuScript : MonoBehaviour
 {
     private Image[] imageChildren;
-    private MoveHeroe moveHeroe;
+    private PlayerCharacteristic playerCharacteristic;
 
     public void RestartScene()
     {
@@ -25,9 +25,9 @@ public class GameOverMenuScript : MonoBehaviour
         CloseGameOverMenuCoroutineAfterAds();
     }
 
-    public void OpenGameOverMenu(MoveHeroe mh)
+    public void OpenGameOverMenu(PlayerCharacteristic mh)
     {
-        this.moveHeroe = mh;
+        this.playerCharacteristic = mh;
         StartCoroutine(OpenGameOverMenuCoroutine());
     }
 
@@ -62,9 +62,9 @@ public class GameOverMenuScript : MonoBehaviour
         vec.z = -100;
         gameObject.GetComponent<RectTransform>().position = vec;
 
-        moveHeroe.gameObject.SetActive(true);
-        moveHeroe.health = moveHeroe.GetComponent<HealthBar>().numberOfLives;
-        moveHeroe.OnImmortality(2);
+        playerCharacteristic.gameObject.SetActive(true);
+        playerCharacteristic.health = playerCharacteristic.maxHealth;
+        playerCharacteristic.OnImmortality(2);
 
         gameObject.SetActive(false);
     }

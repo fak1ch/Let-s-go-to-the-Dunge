@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
             else if (enemy){
                 if (collision.CompareTag("Player"))
                 {
-                    collision.GetComponent<MoveHeroe>().TakeDamage(damage);
+                    collision.GetComponent<PlayerCharacteristic>().TakeDamage(damage);
                     Destroy(gameObject);
                 }
             }

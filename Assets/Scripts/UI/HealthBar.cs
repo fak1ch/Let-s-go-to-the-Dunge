@@ -13,20 +13,20 @@ public class HealthBar : MonoBehaviour
     public Sprite halfLive;
     public Sprite emptyLive;
 
-    private MoveHeroe moveHeroe;
+    private PlayerCharacteristic playerCharacteristic;
     void Start()
     {
-        moveHeroe = GameObject.FindWithTag("Player").GetComponent<MoveHeroe>();
-        health = moveHeroe.health;
+        playerCharacteristic = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacteristic>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        health = moveHeroe.health;
+        health = playerCharacteristic.health;
+        numberOfLives = playerCharacteristic.maxHealth;
         if (health > numberOfLives)
         {
-            moveHeroe.health = numberOfLives;
+            playerCharacteristic.health = numberOfLives;
         }
         for(int i = 0; i < 2 * lives.Length; i++)
         {

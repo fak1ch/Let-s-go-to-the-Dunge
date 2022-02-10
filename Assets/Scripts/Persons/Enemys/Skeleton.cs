@@ -11,12 +11,12 @@ public class Skeleton : Enemy, IEnemy
     {
         StartMethod(GetComponent<Skeleton>());
     }
-    // Update is called once per frame
-    void FixedUpdate()
+
+    private void Update()
     {
         if (playerIsAlive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
         }
         else
         {

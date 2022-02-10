@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour, IScript
         rb = GetComponent<Rigidbody2D>();
     }
 
-
     private void Update()
     {
         moveInput = Vector2.zero;
@@ -48,9 +47,5 @@ public class PlayerController : MonoBehaviour, IScript
         moveVelocity = speed * moveInput;
 
         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
-    }
-
-    private void FixedUpdate()
-    {
     }
 }

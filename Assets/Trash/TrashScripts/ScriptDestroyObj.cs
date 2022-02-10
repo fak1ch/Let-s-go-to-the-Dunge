@@ -5,7 +5,6 @@ using UnityEngine;
 public class ScriptDestroyObj : MonoBehaviour
 {
     public GameObject badPistol;
-    public MoveHeroe mh;
     void Start()
     {
         StartCoroutine(PickBadPistol());
@@ -15,7 +14,7 @@ public class ScriptDestroyObj : MonoBehaviour
     {
         var pistol = Instantiate(badPistol, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.1f);
-        mh.PickBadPistol(pistol);
+        StaticClass.weaponsInventory.PickBadPistol(pistol);
         Destroy(gameObject);
     }
 }

@@ -14,7 +14,6 @@ public class MainScript : MonoBehaviour
     [Header("Now exists")]
     public List<GameObject> rooms = new List<GameObject>();
     public List<IEnemy> enemies = new List<IEnemy>();
-    public int Enemies { get; set; }
     public new Camera camera;
 
     public Joystick attackJoystick;
@@ -31,7 +30,8 @@ public class MainScript : MonoBehaviour
         {
             StaticClass.player = GameObject.FindGameObjectWithTag("Player");
         }
-        StaticClass.moveHeroe = StaticClass.player.GetComponent<MoveHeroe>();
+        StaticClass.playerCharacteristic = StaticClass.player.GetComponent<PlayerCharacteristic>();
+        StaticClass.weaponsInventory = StaticClass.player.GetComponent<WeaponsInventory>();
 
         soundPlay = GetComponent<AudioSource>();
         variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomVariants>();
@@ -121,6 +121,10 @@ public class MainScript : MonoBehaviour
     {
         if (cheats)
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Time.timeScale = 0;
+            }
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 Time.timeScale = 1;

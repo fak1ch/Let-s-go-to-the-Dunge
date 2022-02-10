@@ -37,13 +37,10 @@ public class Robot : Enemy, IEnemy
                 timeBtwShots -= Time.deltaTime;
             }
         }
-    }
 
-    void FixedUpdate()
-    {
         if (playerIsAlive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
         }
         else
         {

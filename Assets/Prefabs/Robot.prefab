@@ -208,12 +208,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  moveHeroe: {fileID: 0}
+  playerCharacteristic: {fileID: 0}
   health: 3
   damage: 1
-  speed: 50
+  speed: 40
   timeBtwAttack: 0
   playerIsAlive: 1
+  mainScript: {fileID: 0}
+  startPosition: {x: 0, y: 0}
   bullet: {fileID: 4114687247719641019, guid: 239aea93406e2514d86cc6ae164a5957, type: 3}
   shotPoint: {fileID: 1350237800907043289}
   startTimeBtwShots: 1

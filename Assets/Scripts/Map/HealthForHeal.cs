@@ -17,10 +17,10 @@ public class HealthForHeal : MonoBehaviour
     {
         if (lockerOpen)
         {
-            if (collision.GetComponent<MoveHeroe>() != null)
+            if (collision.GetComponent<PlayerCharacteristic>() != null)
             {
                 lockerOpen = false;
-                collision.GetComponent<MoveHeroe>().health += 2;
+                collision.GetComponent<PlayerCharacteristic>().health += 2;
                 Destroy(gameObject);
             }
         }

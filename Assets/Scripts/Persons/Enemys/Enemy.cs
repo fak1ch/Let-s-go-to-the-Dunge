@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public GameObject player;
-    public MoveHeroe moveHeroe;
+    public PlayerCharacteristic playerCharacteristic;
     public int health;
     public int damage;
     public float speed;
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
     public void StartMethod(IEnemy script)
     {
         player = StaticClass.player;
-        moveHeroe = StaticClass.moveHeroe;
+        playerCharacteristic = StaticClass.playerCharacteristic;
         mainScript = StaticClass.mainScript;
         thisGameObjectScript = script;
         mainScript.enemies.Add(thisGameObjectScript);
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator AttackThePlayer(Collider2D collider)
     {
-        moveHeroe.TakeDamage(damage);
+        playerCharacteristic.TakeDamage(damage);
         yield return new WaitForSeconds(timeBtwAttack);
         collider.enabled = true;
     }

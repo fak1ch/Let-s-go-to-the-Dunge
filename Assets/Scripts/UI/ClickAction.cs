@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ClickAction : MonoBehaviour
 {
-    private MoveHeroe moveHeroe;
+    private WeaponsInventory weaponsInventory;
     private void Start()
     {
-        moveHeroe = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveHeroe>();
+        weaponsInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponsInventory>();
     }
 
     public void ClickMethod()
@@ -17,8 +17,8 @@ public class ClickAction : MonoBehaviour
 
     IEnumerator ClickEvent()
     {
-        moveHeroe.androidClickAction = true;
+        weaponsInventory.androidClickAction = true;
         yield return new WaitForSeconds(0.1f);
-        moveHeroe.androidClickAction = false;
+        weaponsInventory.androidClickAction = false;
     }
 }

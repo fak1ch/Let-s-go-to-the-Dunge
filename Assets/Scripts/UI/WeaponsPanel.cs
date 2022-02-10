@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class WeaponsPanel : MonoBehaviour
 {
     private Image image;
-    private MoveHeroe moveHeroe;
+    private WeaponsInventory weaponsInventory;
     void Start()
     {
         image = gameObject.GetComponent<Image>();
-        moveHeroe = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveHeroe>();
+        weaponsInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponsInventory>();
     }
 
     public void ChangeSprite(Sprite sprite)
@@ -28,16 +28,16 @@ public class WeaponsPanel : MonoBehaviour
 
     public void ChangeGun()
     {
-        if (moveHeroe.Weapons.Count == 2)
+        if (weaponsInventory.weapons.Count == 2)
         {
-            if (moveHeroe.ActiveGun == 1)
+            if (weaponsInventory.activeGun == 1)
             {
-                moveHeroe.SelectGun(10);
+                weaponsInventory.SelectGun(1);
             }
             else
-            if (moveHeroe.ActiveGun == 0) 
+            if (weaponsInventory.activeGun == 0)
             {
-                moveHeroe.SelectGun(11);
+                weaponsInventory.SelectGun(2);
             }
         }
     }

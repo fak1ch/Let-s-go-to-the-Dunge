@@ -7,6 +7,7 @@ public static partial class StaticClass
     public static TypeOfDevice typeOfDevice = TypeOfDevice.Phone;
 
     public static GameObject player;
-    public static MoveHeroe moveHeroe;
+    public static PlayerCharacteristic playerCharacteristic;
+    public static WeaponsInventory weaponsInventory;
     public static MainScript mainScript;
 }

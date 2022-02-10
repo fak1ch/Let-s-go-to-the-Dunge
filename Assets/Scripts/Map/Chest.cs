@@ -5,13 +5,13 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     public GameObject openChest;
-    private MoveHeroe moveHeroe;
+    private WeaponsInventory weaponsInventory;
     private MainScript mainScript;
     private bool locked = false;
     // Start is called before the first frame update
     void Start()
     {
-        moveHeroe = GameObject.FindGameObjectWithTag("Player").GetComponent<MoveHeroe>();
+        weaponsInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponsInventory>();
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
     }
 
@@ -22,7 +22,7 @@ public class Chest : MonoBehaviour
             {
                 if (collision.CompareTag("Player"))
                 {
-                    if (Input.GetKey(KeyCode.E) || moveHeroe.androidClickAction)
+                    if (Input.GetKey(KeyCode.E) || weaponsInventory.androidClickAction)
                     {
                         locked = true;
                         Instantiate(openChest, transform.position, Quaternion.identity);
@@ -43,9 +43,9 @@ public class Chest : MonoBehaviour
 
     IEnumerator AllowPick()
     {
-        moveHeroe.allowPick = false;
+        weaponsInventory.allowPick = false;
         yield return new WaitForSeconds(1f);
-        moveHeroe.GetComponent<MoveHeroe>().allowPick = true;
+        weaponsInventory.GetComponent<WeaponsInventory>().allowPick = true;
         Destroy(gameObject);
     }
 }
