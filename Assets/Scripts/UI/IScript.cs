@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
+
+namespace Assets.Scripts
+{
+    interface IScript
+    {
+        public Vector2 MoveInput { get; set; }
+    }
+}

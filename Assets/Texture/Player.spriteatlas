@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 5cbfaa5d64a00a64cb9ed3b4394e914b, type: 3}
+    - {fileID: 2800000, guid: 10b41d0eea41675418b3e9b8620c9bcc, type: 3}
+    totalSpriteSurfaceArea: 4823300
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -4604660596062396274, guid: 5cbfaa5d64a00a64cb9ed3b4394e914b, type: 3}
+  - {fileID: -6091119869962400515, guid: 5cbfaa5d64a00a64cb9ed3b4394e914b, type: 3}
+  - {fileID: 3728181804458484845, guid: 5cbfaa5d64a00a64cb9ed3b4394e914b, type: 3}
+  - {fileID: 1077831998431077483, guid: 5cbfaa5d64a00a64cb9ed3b4394e914b, type: 3}
+  - {fileID: -3445709882487539103, guid: 5cbfaa5d64a00a64cb9ed3b4394e914b, type: 3}
+  - {fileID: 8650686018608678452, guid: 10b41d0eea41675418b3e9b8620c9bcc, type: 3}
+  - {fileID: 4423847608570429676, guid: 10b41d0eea41675418b3e9b8620c9bcc, type: 3}
+  - {fileID: -8492353959161482201, guid: 10b41d0eea41675418b3e9b8620c9bcc, type: 3}
+  - {fileID: -3557635615369440930, guid: 10b41d0eea41675418b3e9b8620c9bcc, type: 3}
+  - {fileID: -8961929699780928309, guid: 10b41d0eea41675418b3e9b8620c9bcc, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - AnimationRun_4
+  - AnimationRun_3
+  - AnimationRun_2
+  - AnimationRun_1
+  - AnimationRun_0
+  - AnimationHold_4
+  - AnimationHold_1
+  - AnimationHold_0
+  - AnimationHold_3
+  - AnimationHold_2
+  m_RenderDataMap: {}
+  m_Tag: Player
+  m_IsVariant: 0

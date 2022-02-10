@@ -1,0 +1,417 @@
+fileFormatVersion: 2
+guid: 5c1d03fe9815d3b478e5c2603026e88f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9185555396359367578
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_0"
+  - first:
+      213: 6691100228235660673
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_1"
+  - first:
+      213: -897733506038916028
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_2"
+  - first:
+      213: 4928857518619307131
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_3"
+  - first:
+      213: 1065320317023464908
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_4"
+  - first:
+      213: -3503873066024914084
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_5"
+  - first:
+      213: -4112583166332571647
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_6"
+  - first:
+      213: 5424274901515001138
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_7"
+  - first:
+      213: -7911615430436007961
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_8"
+  - first:
+      213: -1695760261030404340
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_9"
+  - first:
+      213: 8923472692216083857
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_10"
+  - first:
+      213: 3831553861003874430
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_11"
+  - first:
+      213: 3840381306666205261
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_12"
+  - first:
+      213: 7860006677365595788
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_13"
+  - first:
+      213: 4619827316283863696
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_14"
+  - first:
+      213: -9207196663458753887
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_15"
+  - first:
+      213: -9099566529632846939
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_16"
+  - first:
+      213: -7221408660627125432
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_17"
+  - first:
+      213: -2955481370612537710
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_18"
+  - first:
+      213: 867242064716265567
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_19"
+  - first:
+      213: 6214774135101011642
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_20"
+  - first:
+      213: -9131090812640994136
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_21"
+  - first:
+      213: -7195283821456420849
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_22"
+  - first:
+      213: 9051557398056928680
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_23"
+  - first:
+      213: 4490121980645058614
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_24"
+  - first:
+      213: -6036847350749914725
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_25"
+  - first:
+      213: 1180229294208208395
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_26"
+  - first:
+      213: -2031073584681414675
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_27"
+  - first:
+      213: -2692959426319538676
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_28"
+  - first:
+      213: -4941136477003158095
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_29"
+  - first:
+      213: 4078270569435359629
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_30"
+  - first:
+      213: -4404784512122123209
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_31"
+  - first:
+      213: 7151857879615978575
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_32"
+  - first:
+      213: 2893780522561683169
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_33"
+  - first:
+      213: -595950845003679709
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_34"
+  - first:
+      213: -7316734589316958392
+    second: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_35"
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_0"
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 360
+        width: 86
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 664d35fb80a568080800000000000000
+      internalID: -9185555396359367578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_1"
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 361
+        width: 82
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18d8584e4309bdc50800000000000000
+      internalID: 6691100228235660673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_2"
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 361
+        width: 74
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44c9595f12c9a83f0800000000000000
+      internalID: -897733506038916028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_3"
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 293
+        width: 22
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c21d98cc1d66440800000000000000
+      internalID: 4928857518619307131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_4"
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 290
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccda03c1f27c8ce00800000000000000
+      internalID: 1065320317023464908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_5"
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 289
+        width: 37
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c53b681c20ebf5fc0800000000000000
+      internalID: -3503873066024914084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_6"
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 283
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 100fe7d466b2de6c0800000000000000
+      internalID: -4112583166332571647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_7"
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 279
+        width: 38
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23d5edca845e64b40800000000000000
+      internalID: 5424274901515001138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "TX Shadow Plant \u2014 \u043A\u043E\u043F\u0438\u044F_8"
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 285
+        width: 41
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7efcc5dfeab443290800000000000000
+      internalID: -7911615430436007961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
