@@ -20,7 +20,7 @@ public class ManaParticle : MonoBehaviour
             if (collision.CompareTag("Player"))
             {
                 lockerOpen = false;
-                StaticClass.weaponsInventory.weapons[StaticClass.weaponsInventory.activeGun].GetComponent<WeaponScript>().script.ChangeManaBar(manacost);
+                StaticClass.weaponsInventory.weapons[StaticClass.weaponsInventory.activeGun].GetComponent<Weapon>().ChangeManaBar(manacost);
                 Destroy(gameObject);
             }
         }

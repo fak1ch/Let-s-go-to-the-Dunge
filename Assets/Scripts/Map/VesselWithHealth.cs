@@ -7,6 +7,7 @@ public class VesselWithHealth : MonoBehaviour
     public bool mostPercent = false;
 
     public GameObject healHealth;
+
     public void SpawnHealth()
     {
         if (mostPercent)

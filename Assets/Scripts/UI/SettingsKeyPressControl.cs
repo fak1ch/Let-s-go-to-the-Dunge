@@ -10,21 +10,30 @@ public class SettingsKeyPressControl : MonoBehaviour
 
     public Slider masterSlider;
     public Slider musicSlider;
+    public Slider menuMusicSlider;
     public Slider soundsSlider;
-    private void Awake()
+
+    private void Start()
     {
         ApplySaveSettings();
     }
 
-    private void ApplySaveSettings()
+    public void ApplySaveSettings()
     {
         mixer.audioMixer.SetFloat("masterVolume", PlayerPrefs.GetFloat("masterVolume"));
         mixer.audioMixer.SetFloat("musicVolume", PlayerPrefs.GetFloat("musicVolume"));
+        mixer.audioMixer.SetFloat("menuMusicVolume", PlayerPrefs.GetFloat("menuMusicVolume"));
         mixer.audioMixer.SetFloat("soundsVolume", PlayerPrefs.GetFloat("soundsVolume"));
 
-        masterSlider.value = (PlayerPrefs.GetFloat("masterVolume") + 80) / 100;
-        musicSlider.value = (PlayerPrefs.GetFloat("musicVolume") + 80) / 100;
-        soundsSlider.value = (PlayerPrefs.GetFloat("soundsVolume") + 80) / 100;
+        masterSlider.value = (PlayerPrefs.GetFloat("masterVolume") + 80) / 80;
+        musicSlider.value = (PlayerPrefs.GetFloat("musicVolume") + 80) / 80;
+        menuMusicSlider.value = (PlayerPrefs.GetFloat("menuMusicVolume") + 80) / 80;
+        soundsSlider.value = (PlayerPrefs.GetFloat("soundsVolume") + 80) / 80;
+
+        Vector3 vec = GetComponent<RectTransform>().position;
+        vec.z = 0;
+        GetComponent<RectTransform>().position = vec;
+        gameObject.SetActive(false);
     }
 
     void Update()
@@ -37,17 +46,35 @@ public class SettingsKeyPressControl : MonoBehaviour
 
     public void SliderMasterChanged()
     {
-        mixer.audioMixer.SetFloat("masterVolume", (masterSlider.value * 100) - 80);
+        mixer.audioMixer.SetFloat("masterVolume", (80 * masterSlider.value) - 80);
     }
 
     public void SliderMusicChanged()
     {
-        mixer.audioMixer.SetFloat("musicVolume", (musicSlider.value * 100) - 80);
+        mixer.audioMixer.SetFloat("musicVolume", (80 * musicSlider.value) - 80);
+    }
+
+    public void SliderMenuMusicChanged()
+    {
+        mixer.audioMixer.SetFloat("menuMusicVolume", (80 * menuMusicSlider.value) - 80);
     }
 
     public void SliderSoundsChanged()
     {
-        mixer.audioMixer.SetFloat("soundsVolume", (soundsSlider.value * 100) - 80);
+        mixer.audioMixer.SetFloat("soundsVolume", (80 * soundsSlider.value) - 80);
+    }
+
+    public void ReturnToDefaultSettings()
+    {
+        mixer.audioMixer.SetFloat("masterVolume", 0);
+        mixer.audioMixer.SetFloat("musicVolume", 0);
+        mixer.audioMixer.SetFloat("menuMusicVolume", 0);
+        mixer.audioMixer.SetFloat("soundsVolume", 0);
+
+        masterSlider.value = 1f;
+        musicSlider.value = 1f;
+        menuMusicSlider.value = 1f;
+        soundsSlider.value = 1f;
     }
 
     public void CloseSettings()
@@ -58,8 +85,9 @@ public class SettingsKeyPressControl : MonoBehaviour
 
     private void SaveFieldsToStaticClass()
     {
-        PlayerPrefs.SetFloat("masterVolume", (masterSlider.value * 100) - 80);
-        PlayerPrefs.SetFloat("musicVolume", (musicSlider.value * 100) - 80);
-        PlayerPrefs.SetFloat("soundsVolume", (soundsSlider.value * 100) - 80);
+        PlayerPrefs.SetFloat("masterVolume", (80 * masterSlider.value) - 80);
+        PlayerPrefs.SetFloat("musicVolume", (80 * musicSlider.value) - 80);
+        PlayerPrefs.SetFloat("menuMusicVolume", (80 * menuMusicSlider.value) - 80);
+        PlayerPrefs.SetFloat("soundsVolume", (80 * soundsSlider.value) - 80);
     }
 }

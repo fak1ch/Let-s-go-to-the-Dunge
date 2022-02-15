@@ -12,7 +12,6 @@ public class Boss : Enemy, IEnemy
     public Transform bulletPoint;
     public Transform bulletPoint2;
     private float angle;
-    private float plusAngle;
 
     private bool locked = false;
     private bool lockedChoose = false;
@@ -23,7 +22,7 @@ public class Boss : Enemy, IEnemy
 
     void Start()
     {
-        StartMethod(GetComponent<Boss>());
+        StartMethod();
         bossHp = GameObject.FindGameObjectWithTag("BossHp").GetComponent<UIBossHp>();
         bossHp.StartHealth(health);
         anim = GetComponent<Animator>();
@@ -95,7 +94,7 @@ public class Boss : Enemy, IEnemy
     {
         if (playerIsAlive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            rb.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
         }
         else
         {
@@ -130,9 +129,9 @@ public class Boss : Enemy, IEnemy
         {
             var b = Instantiate(bullet, bulletPoint.transform.position, Quaternion.identity);
             var a = Instantiate(bullet, bulletPoint2.transform.position, Quaternion.identity);
-            b.GetComponent<Bullet>().speed = b.GetComponent<Bullet>().speed / 1.5f;
+            a.GetComponentInChildren<Bullet>().speed = b.GetComponentInChildren<Bullet>().speed / 2;
             b.transform.Rotate(0.0f, 0.0f, angle);
-            a.GetComponent<Bullet>().speed = b.GetComponent<Bullet>().speed / 1.5f;
+            b.GetComponentInChildren<Bullet>().speed = b.GetComponentInChildren<Bullet>().speed / 1.5f;
             a.transform.Rotate(0.0f, 0.0f, angle);
             
             angle -= plusAngle;
@@ -156,7 +155,6 @@ public class Boss : Enemy, IEnemy
         if (health <= 0)
         {
             GetComponent<DropManaAfterDeath>().DropManaAfterDead();
-            mainScript.enemies.Remove(thisGameObjectScript);
             SpawnPortal();
             Destroy(gameObject);
         }

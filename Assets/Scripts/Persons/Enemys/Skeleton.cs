@@ -9,14 +9,14 @@ public class Skeleton : Enemy, IEnemy
 {
     void Start()
     {
-        StartMethod(GetComponent<Skeleton>());
+        StartMethod();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (playerIsAlive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
+            rb.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
         }
         else
         {

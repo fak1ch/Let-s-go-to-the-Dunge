@@ -45,7 +45,10 @@ public class PlayerController : MonoBehaviour, IScript
         moveInput.Normalize();
 
         moveVelocity = speed * moveInput;
+    }
 
+    private void FixedUpdate()
+    {
         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
     }
 }

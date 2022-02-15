@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bazuka : Weapon, IWeapon
 {
-    void Start()
+    void Start() 
     {
-        StartMethod(GetComponent<Bazuka>());
+        StartMethod();
     }
 
     private void Update()

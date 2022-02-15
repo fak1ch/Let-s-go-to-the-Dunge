@@ -6,7 +6,7 @@ public class Uzi : Weapon, IWeapon
 {
     void Start()
     {
-        StartMethod(GetComponent<Uzi>());
+        StartMethod();
     }
 
     private void Update()

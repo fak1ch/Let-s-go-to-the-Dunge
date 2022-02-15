@@ -9,9 +9,9 @@ public class Weapon : MonoBehaviour
     public int manacoast;
     public GameObject bullet;
     public Transform shotPoint;
-    public IWeapon thisWeaponScript;
+    public AudioSource audioSource;
 
-    public bool IsDropped { get { return IsDropped; } set { isDropped = value; } }
+    public bool IsDropped { get { return isDropped; } set { isDropped = value; } }
 
     private bool isDropped = true;
     private Joystick joystick;
@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
     //    AttackFromWeapon();
     //}
 
-    public void StartMethod(IWeapon weapon)
+    public void StartMethod()
     {
         mainScript = StaticClass.mainScript;
         player = StaticClass.player;
@@ -43,8 +43,6 @@ public class Weapon : MonoBehaviour
         manaText = GameObject.FindGameObjectWithTag("ManaText").GetComponent<Text>();
         image = GameObject.Find("Mana123").GetComponent<Image>();
         manaText.text = $"{playerCharacteristic.mana}/{playerCharacteristic.maxMana}";
-        thisWeaponScript = weapon;
-        GetComponent<WeaponScript>().script = thisWeaponScript;
     }
 
     public virtual void AttackFromWeapon()
@@ -57,10 +55,11 @@ public class Weapon : MonoBehaviour
                 {
                     if (joystick.Direction != Vector2.zero && playerCharacteristic.mana >= manacoast)
                     {
+                        timeBtwShots = startTimeBtwShots;
+                        ShootPlay();
                         Instantiate(bullet, shotPoint.position, shotPoint.rotation);
                         Vector3 vector = bullet.transform.position;
                         bullet.transform.position = vector;
-                        timeBtwShots = startTimeBtwShots;
                         ChangeManaBar(-manacoast);
                     }
                 }
@@ -68,10 +67,11 @@ public class Weapon : MonoBehaviour
                 {
                     if (Input.GetMouseButton(0) && playerCharacteristic.mana >= manacoast)
                     {
+                        timeBtwShots = startTimeBtwShots;
+                        ShootPlay();
                         Instantiate(bullet, shotPoint.position, shotPoint.rotation);
                         Vector3 vector = bullet.transform.position;
                         bullet.transform.position = vector;
-                        timeBtwShots = startTimeBtwShots;
                         ChangeManaBar(-manacoast);
                     }
                 }
@@ -147,5 +147,11 @@ public class Weapon : MonoBehaviour
         float j = playerCharacteristic.maxMana;
         float z = k / j;
         image.fillAmount = z;
+    }
+
+    public void ShootPlay()
+    {
+        audioSource.Stop();
+        audioSource.Play();
     }
 }

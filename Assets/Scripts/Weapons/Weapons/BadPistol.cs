@@ -6,7 +6,7 @@ public class BadPistol : Weapon, IWeapon
 {
     void Start()
     {
-        StartMethod(GetComponent<BadPistol>());
+        StartMethod();
     }
 
     private void Update()

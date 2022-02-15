@@ -210,13 +210,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  moveHeroe: {fileID: 0}
+  playerCharacteristic: {fileID: 0}
   health: 100
   damage: 1
   speed: 100
   timeBtwAttack: 1
   playerIsAlive: 1
   mainScript: {fileID: 0}
+  startPosition: {x: 0, y: 0}
+  rb: {fileID: 0}
   bullet: {fileID: 6207451842096547130, guid: ac0d78a9d48da634dbd04282e7434771, type: 3}
   bulletCount: 32
   bulletPoint: {fileID: 1749760193589685384}

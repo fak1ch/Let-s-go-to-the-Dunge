@@ -13,7 +13,7 @@ public class MainScript : MonoBehaviour
 
     [Header("Now exists")]
     public List<GameObject> rooms = new List<GameObject>();
-    public List<IEnemy> enemies = new List<IEnemy>();
+    public List<Enemy> enemies = new List<Enemy>();
     public new Camera camera;
 
     public Joystick attackJoystick;
@@ -102,7 +102,7 @@ public class MainScript : MonoBehaviour
 
     public void SetToAllEnemiesAlivePlayerOrDead(bool value)
     {
-        foreach(IEnemy enemy in enemies)
+        foreach(Enemy enemy in enemies)
         {
             enemy.SetPlayerIsAlive(value);
         }

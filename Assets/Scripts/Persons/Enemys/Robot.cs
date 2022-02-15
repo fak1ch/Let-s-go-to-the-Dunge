@@ -6,12 +6,13 @@ public class Robot : Enemy, IEnemy
 {
     public GameObject bullet;
     public Transform shotPoint;
-    private float timeBtwShots;
     public float startTimeBtwShots;
+
+    private float timeBtwShots;
     // Start is called before the first frame update
     void Start()
     {
-        StartMethod(GetComponent<Robot>());
+        StartMethod();
         timeBtwShots = startTimeBtwShots;
     }
 
@@ -37,10 +38,13 @@ public class Robot : Enemy, IEnemy
                 timeBtwShots -= Time.deltaTime;
             }
         }
+    }
 
+    private void FixedUpdate()
+    {
         if (playerIsAlive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
+            rb.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
         }
         else
         {

@@ -11,10 +11,9 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float timeBtwAttack;
     public bool playerIsAlive = true;
-
     public MainScript mainScript;
-    public IEnemy thisGameObjectScript;
-    public Vector2 startPosition; 
+    public Vector2 startPosition;
+    public Rigidbody2D rb;
 
     public void UpdateRotateSprite()
     {
@@ -41,14 +40,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void StartMethod(IEnemy script)
+    public void StartMethod()
     {
         player = StaticClass.player;
         playerCharacteristic = StaticClass.playerCharacteristic;
         mainScript = StaticClass.mainScript;
-        thisGameObjectScript = script;
-        mainScript.enemies.Add(thisGameObjectScript);
         startPosition = transform.position;
+        StaticClass.mainScript.enemies.Add(GetComponent<Enemy>());
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     private IEnumerator AttackThePlayer(Collider2D collider)
@@ -63,15 +62,15 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            StaticClass.mainScript.enemies.Remove(GetComponent<Enemy>());
             GetComponent<DropManaAfterDeath>().DropManaAfterDead();
-            mainScript.enemies.Remove(thisGameObjectScript);
             Destroy(gameObject);
         }
     }
 
     public void MoveToSpawnPosition()
     {
-        transform.position = Vector2.MoveTowards(transform.position, startPosition, speed * Time.deltaTime);
+        rb.position = Vector2.MoveTowards(transform.position, startPosition, speed * Time.fixedDeltaTime);
     }
 
     public void SetPlayerIsAlive(bool value)

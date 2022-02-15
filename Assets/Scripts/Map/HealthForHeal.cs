@@ -1,23 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthForHeal : MonoBehaviour
 {
     private bool lockerOpen = true;
 
-
-    private GameObject player;
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (lockerOpen)
         {
-            if (collision.GetComponent<PlayerCharacteristic>() != null)
+            if (collision.CompareTag("Player"))
             {
                 lockerOpen = false;
                 collision.GetComponent<PlayerCharacteristic>().health += 2;
@@ -28,9 +19,9 @@ public class HealthForHeal : MonoBehaviour
 
     private void Update()
     {
-        if (DistanceBetween2dPoints(player.transform.position, gameObject.transform.position) < 100)
+        if (DistanceBetween2dPoints(StaticClass.player.transform.position, gameObject.transform.position) < 100)
         {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position, 5 * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, StaticClass.player.transform.position, 6 * Time.deltaTime);
         }
     }
 
