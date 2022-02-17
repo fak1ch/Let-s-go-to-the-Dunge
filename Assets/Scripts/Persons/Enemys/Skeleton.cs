@@ -11,18 +11,15 @@ public class Skeleton : Enemy, IEnemy
     {
         StartMethod();
     }
+    private void Update()
+    {
+        EnemyMove();
+        UpdateRotateSprite();
+    }
 
     private void FixedUpdate()
     {
-        if (playerIsAlive)
-        {
-            rb.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
-        }
-        else
-        {
-            MoveToSpawnPosition();
-        }
-        UpdateRotateSprite();
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)

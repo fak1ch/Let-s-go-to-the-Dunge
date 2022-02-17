@@ -8,11 +8,11 @@ public class PlayerCharacteristic : MonoBehaviour
     public int health;
     public int maxHealth;
     public GameObject gunPlace;
+    public GameOverMenuScript gameOverMenuScript;
 
     private Joystick joystick;
     private bool facingRight = false;
     private new Camera camera;
-    private GameOverMenuScript gameOverMenuScript;
     private bool immortalityOn = false;
     // Start is called before the first frame update
 
@@ -24,8 +24,6 @@ public class PlayerCharacteristic : MonoBehaviour
         {
             joystick = GameObject.FindGameObjectWithTag("JoystickMove").GetComponent<FixedJoystick>();
         }
-        gameOverMenuScript = GameObject.FindGameObjectWithTag("GameOverMenu").GetComponent<GameOverMenuScript>();
-        gameOverMenuScript.StartGameOverMenu();
     }
 
     void FixedUpdate()
@@ -93,7 +91,7 @@ public class PlayerCharacteristic : MonoBehaviour
                 health = 0;
                 StaticClass.mainScript.SetToAllEnemiesAlivePlayerOrDead(false);
                 gameOverMenuScript.gameObject.SetActive(true);
-                gameOverMenuScript.OpenGameOverMenu(gameObject.GetComponent<PlayerCharacteristic>());
+                gameOverMenuScript.OpenGameOverMenu();
                 StartCoroutine(PlayerSetFalse(0.1f));
             }
         }

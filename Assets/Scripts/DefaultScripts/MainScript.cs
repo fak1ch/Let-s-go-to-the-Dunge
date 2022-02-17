@@ -34,7 +34,7 @@ public class MainScript : MonoBehaviour
         StaticClass.weaponsInventory = StaticClass.player.GetComponent<WeaponsInventory>();
 
         soundPlay = GetComponent<AudioSource>();
-        variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomVariants>();
+        try {variants =  GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomVariants>(); } catch { }
         roomsCount = rooms.Count;
         StartCoroutine(CheckEndSpawn());
         StartCoroutine(StartMusic());
@@ -75,7 +75,10 @@ public class MainScript : MonoBehaviour
         else if(rooms.Count == roomsCount)
         {
             endSpawn = true;
-            SpawnBossRoom();
+            if (variants != null)
+            {
+                SpawnBossRoom();
+            }
         }
     }
 
@@ -96,7 +99,7 @@ public class MainScript : MonoBehaviour
         int k = roomWithMaxPosition.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
         rooms.Remove(roomWithMaxPosition);
         Destroy(roomWithMaxPosition);
-        var obj = Instantiate(variants.bossRooms[k-1], pos, Quaternion.identity);
+        var obj = Instantiate(variants.bossRooms[k-1], pos, Quaternion.Euler(-90,0,0));
         obj.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().OpenDoors();
     }
 

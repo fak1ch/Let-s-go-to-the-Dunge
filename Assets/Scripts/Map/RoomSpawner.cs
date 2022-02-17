@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
     public Direction direction;
+    public RoomVariants variants;
+
     public enum Direction
     {
         None,
@@ -14,7 +14,6 @@ public class RoomSpawner : MonoBehaviour
         Left
     }
 
-    private RoomVariants variants;
     public bool spawned = false;
     private float waitTime = 3f;
 
@@ -30,28 +29,29 @@ public class RoomSpawner : MonoBehaviour
     {
         if (!spawned)
         {
-            if (direction == Direction.Top && variants.topRooms.Count !=0)
+            int k = variants.numberOfMassive;
+            if (direction == Direction.Top && variants.massiveVariants[k,0].Count !=0)
             {
-                Instantiate(variants.topRooms[0], RoundVector3(transform.position), variants.topRooms[0].transform.rotation);
-                variants.topRooms.RemoveAt(0);
+                Instantiate(variants.massiveVariants[k, 0][0], RoundVector3(transform.position), variants.massiveVariants[k, 0][0].transform.rotation);
+                variants.massiveVariants[k, 0].RemoveAt(0);
             }
             else 
-            if (direction == Direction.Right && variants.rightRooms.Count != 0)
+            if (direction == Direction.Right && variants.massiveVariants[k, 1].Count != 0)
             {
-                Instantiate(variants.rightRooms[0], RoundVector3(transform.position), variants.rightRooms[0].transform.rotation);
-                variants.rightRooms.RemoveAt(0);
+                Instantiate(variants.massiveVariants[k, 1][0], RoundVector3(transform.position), variants.massiveVariants[k, 1][0].transform.rotation);
+                variants.massiveVariants[k, 1].RemoveAt(0);
             }
             else
-            if (direction == Direction.Bottom && variants.bottomRooms.Count != 0)
+            if (direction == Direction.Bottom && variants.massiveVariants[k, 2].Count != 0)
             {
-                Instantiate(variants.bottomRooms[0], RoundVector3(transform.position), variants.bottomRooms[0].transform.rotation);
-                variants.bottomRooms.RemoveAt(0);
+                Instantiate(variants.massiveVariants[k, 2][0], RoundVector3(transform.position), variants.massiveVariants[k, 2][0].transform.rotation);
+                variants.massiveVariants[k, 2].RemoveAt(0);
             }
             else
-            if (direction == Direction.Left && variants.leftRooms.Count != 0)
+            if (direction == Direction.Left && variants.massiveVariants[k, 3].Count != 0)
             {
-                Instantiate(variants.leftRooms[0], RoundVector3(transform.position), variants.leftRooms[0].transform.rotation);
-                variants.leftRooms.RemoveAt(0);
+                Instantiate(variants.massiveVariants[k, 3][0], RoundVector3(transform.position), variants.massiveVariants[k, 3][0].transform.rotation);
+                variants.massiveVariants[k, 3].RemoveAt(0);
             }
             spawned = true;
         }

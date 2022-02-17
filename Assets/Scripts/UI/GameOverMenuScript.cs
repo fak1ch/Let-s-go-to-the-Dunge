@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameOverMenuScript : MonoBehaviour
 {
     private Image[] imageChildren;
-    private PlayerCharacteristic playerCharacteristic;
 
     public void RestartScene()
     {
@@ -25,18 +24,29 @@ public class GameOverMenuScript : MonoBehaviour
         CloseGameOverMenuCoroutineAfterAds();
     }
 
-    public void OpenGameOverMenu(PlayerCharacteristic mh)
+    public void OpenGameOverMenu()
     {
-        this.playerCharacteristic = mh;
         StartCoroutine(OpenGameOverMenuCoroutine());
     }
 
     IEnumerator OpenGameOverMenuCoroutine()
     {
-        Vector3 vec = gameObject.GetComponent<RectTransform>().position;
-        vec.z = 0;
-        gameObject.GetComponent<RectTransform>().position = vec;
         Color color = gameObject.GetComponent<Image>().color;
+        color.a = 0f;
+        gameObject.GetComponent<Image>().color = color;
+
+        imageChildren = gameObject.transform.GetComponentsInChildren<Image>();
+
+        for (int i = 0; i < imageChildren.Length; i++)
+        {
+            imageChildren[i].color = color;
+        }
+
+        Vector3 vec = gameObject.GetComponent<RectTransform>().position;
+        vec.z = 100;
+        gameObject.GetComponent<RectTransform>().position = vec;
+
+        color = gameObject.GetComponent<Image>().color;
 
         for (float i=0f; i < 1; i += 0.05f)
         {
@@ -62,25 +72,9 @@ public class GameOverMenuScript : MonoBehaviour
         vec.z = -100;
         gameObject.GetComponent<RectTransform>().position = vec;
 
-        playerCharacteristic.gameObject.SetActive(true);
-        playerCharacteristic.health = playerCharacteristic.maxHealth;
-        playerCharacteristic.OnImmortality(2);
-
-        gameObject.SetActive(false);
-    }
-
-    public void StartGameOverMenu()
-    {
-        Color color = gameObject.GetComponent<Image>().color;
-        color.a = 0f;
-        gameObject.GetComponent<Image>().color = color;
-
-        imageChildren = gameObject.transform.GetComponentsInChildren<Image>();
-        
-        for(int i = 0; i < imageChildren.Length; i++)
-        {
-            imageChildren[i].color = color;
-        }
+        StaticClass.playerCharacteristic.gameObject.SetActive(true);
+        StaticClass.playerCharacteristic.health = StaticClass.playerCharacteristic.maxHealth;
+        StaticClass.playerCharacteristic.OnImmortality(2);
 
         gameObject.SetActive(false);
     }

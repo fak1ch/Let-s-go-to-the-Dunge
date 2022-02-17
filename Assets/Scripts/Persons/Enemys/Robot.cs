@@ -18,6 +18,9 @@ public class Robot : Enemy, IEnemy
 
     void Update()
     {
+        EnemyMove();
+        UpdateRotateSprite();
+
         if (playerIsAlive)
         {
             Vector3 vec = mainScript.camera.WorldToScreenPoint(player.transform.position);
@@ -31,26 +34,13 @@ public class Robot : Enemy, IEnemy
             {
                 Instantiate(bullet, shotPoint.position, shotPoint.rotation);
 
-                timeBtwShots = startTimeBtwShots;
+                timeBtwShots = startTimeBtwShots; 
             }
             else
             {
                 timeBtwShots -= Time.deltaTime;
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (playerIsAlive)
-        {
-            rb.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
-        }
-        else
-        {
-            MoveToSpawnPosition();
-        }
-        UpdateRotateSprite();
     }
 
     private void OnTriggerStay2D(Collider2D collision)

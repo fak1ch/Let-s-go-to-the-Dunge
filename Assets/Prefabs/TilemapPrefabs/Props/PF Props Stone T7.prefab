@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7947911505737750448}
   - component: {fileID: 7947911505737750450}
   - component: {fileID: 4760906292488180028}
+  - component: {fileID: -8052712672619204658}
   m_Layer: 20
   m_Name: PF Props Stone T7
   m_TagString: Ground
@@ -114,6 +115,22 @@ PolygonCollider2D:
       - {x: 0.12559119, y: 0.09187657}
       - {x: 0.87286663, y: 0.54154617}
       - {x: 0.7735759, y: 0.8009462}
+--- !u!114 &-8052712672619204658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947911505737750455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &7947911505844789836
 GameObject:
   m_ObjectHideFlags: 0

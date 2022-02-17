@@ -94,7 +94,10 @@ public class Boss : Enemy, IEnemy
     {
         if (playerIsAlive)
         {
-            rb.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
+            navAgent.SetDestination(player.transform.position);
+            Vector3 vec = transform.position;
+            vec.z = 0;
+            transform.position = vec;
         }
         else
         {
@@ -105,7 +108,7 @@ public class Boss : Enemy, IEnemy
             }
             else
             {
-                MoveToSpawnPosition();
+                MoveToStartPosition();
             }
         }
     }

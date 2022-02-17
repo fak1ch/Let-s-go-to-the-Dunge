@@ -6,8 +6,6 @@ public class BazukaBullet : Bullet
 {
     public GameObject bullet;
 
-    private bool locker = false;
-
     // Update is called once per frame
     void Update()  
     {

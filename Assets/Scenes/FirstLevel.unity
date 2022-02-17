@@ -1202,7 +1202,7 @@ PrefabInstance:
     - target: {fileID: 6940805587758466935, guid: 48be1ee8e0926a049a35f564ec79bf36,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -99999
       objectReference: {fileID: 0}
     - target: {fileID: 6940805587758466935, guid: 48be1ee8e0926a049a35f564ec79bf36,
         type: 3}
@@ -1286,7 +1286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &476922467
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1295,7 +1295,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476922466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1138684916}
@@ -1517,7 +1517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -100, y: -121, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3077,31 +3077,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581bacddd2602074681533281963110d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainRoomSpawn: 1
   topRooms:
-  - {fileID: 615165708979296623, guid: 79ff8d8db035d414282346158c78b457, type: 3}
-  - {fileID: 4213283083420921189, guid: c2769ea31a12cca4799e1761694615cb, type: 3}
-  - {fileID: 7985756892621435211, guid: e1141687079ff954c8194dd007edcd89, type: 3}
+  - {fileID: 277699495260564236, guid: bb17aaa48a704ee488b82a2aa5b49701, type: 3}
+  - {fileID: 3958001674820249353, guid: e1141687079ff954c8194dd007edcd89, type: 3}
   rightRooms:
-  - {fileID: 6443553096246427497, guid: 189577ec93c96954fa066e8fb9a981f5, type: 3}
-  - {fileID: 5823995046573192555, guid: b1fc0bc20aa23f44eb487ac653fbea65, type: 3}
-  - {fileID: 2282749431080149332, guid: e9f151e2c6dd09448b04fc24273841da, type: 3}
+  - {fileID: 3724531010344846213, guid: ecb3abbb11d9b6d4e99e249d4075fb36, type: 3}
+  - {fileID: 2612435513807813880, guid: 2aa99ca7c779fc1439d7915e633c3293, type: 3}
+  - {fileID: 3657985077980651211, guid: e9f151e2c6dd09448b04fc24273841da, type: 3}
   bottomRooms:
-  - {fileID: 3153951091825843551, guid: bb17aaa48a704ee488b82a2aa5b49701, type: 3}
-  - {fileID: 4213283083420921189, guid: c2769ea31a12cca4799e1761694615cb, type: 3}
-  - {fileID: 7054394230620574603, guid: 7d171ee82db3b1a40895b39b6367c596, type: 3}
+  - {fileID: 5320211945938333522, guid: 79ff8d8db035d414282346158c78b457, type: 3}
+  - {fileID: 1238352567052854194, guid: c2769ea31a12cca4799e1761694615cb, type: 3}
+  - {fileID: 9069753869831929686, guid: 7d171ee82db3b1a40895b39b6367c596, type: 3}
   leftRooms:
-  - {fileID: 8702164142589730971, guid: ecb3abbb11d9b6d4e99e249d4075fb36, type: 3}
-  - {fileID: 1926162016189408736, guid: f842ac19ca129cc4a98ae09e52b523ac, type: 3}
+  - {fileID: 5833693562084809936, guid: 189577ec93c96954fa066e8fb9a981f5, type: 3}
+  - {fileID: 9061782148258583213, guid: b1fc0bc20aa23f44eb487ac653fbea65, type: 3}
+  - {fileID: 2496104656458785150, guid: f842ac19ca129cc4a98ae09e52b523ac, type: 3}
+  topRooms1:
+  - {fileID: 5320211945938333522, guid: 79ff8d8db035d414282346158c78b457, type: 3}
+  - {fileID: 1238352567052854194, guid: c2769ea31a12cca4799e1761694615cb, type: 3}
+  - {fileID: 3958001674820249353, guid: e1141687079ff954c8194dd007edcd89, type: 3}
+  rightRooms1:
+  - {fileID: 5833693562084809936, guid: 189577ec93c96954fa066e8fb9a981f5, type: 3}
+  - {fileID: 9061782148258583213, guid: b1fc0bc20aa23f44eb487ac653fbea65, type: 3}
+  - {fileID: 3657985077980651211, guid: e9f151e2c6dd09448b04fc24273841da, type: 3}
+  bottomRooms1:
+  - {fileID: 277699495260564236, guid: bb17aaa48a704ee488b82a2aa5b49701, type: 3}
+  - {fileID: 1238352567052854194, guid: c2769ea31a12cca4799e1761694615cb, type: 3}
+  - {fileID: 9069753869831929686, guid: 7d171ee82db3b1a40895b39b6367c596, type: 3}
+  leftRooms1:
+  - {fileID: 3724531010344846213, guid: ecb3abbb11d9b6d4e99e249d4075fb36, type: 3}
+  - {fileID: 2496104656458785150, guid: f842ac19ca129cc4a98ae09e52b523ac, type: 3}
   mainRooms:
-  - {fileID: 7709340341745662665, guid: 0e17ea7100f2551489a12420f4347e16, type: 3}
-  - {fileID: 8315686330885681755, guid: 38d2c20306dd71d4e95a406ca5dffdef, type: 3}
-  - {fileID: 7011552833943463471, guid: 7584a974120d3204ea629b785be6417a, type: 3}
-  - {fileID: 9029645769902834062, guid: e5c543741d52c2643abe18508e2bb3ba, type: 3}
+  - {fileID: 7508685972581884940, guid: 0e17ea7100f2551489a12420f4347e16, type: 3}
+  - {fileID: 7179464337335279669, guid: 38d2c20306dd71d4e95a406ca5dffdef, type: 3}
+  - {fileID: 1263609931891888801, guid: 7584a974120d3204ea629b785be6417a, type: 3}
+  - {fileID: 834575183849133630, guid: 65e441a71d46d734aa9f30924da480f4, type: 3}
   bossRooms:
-  - {fileID: 7852025718045783907, guid: 7c729a29b98957d48acc8562acdf339e, type: 3}
-  - {fileID: 5664450385161378314, guid: ba4565b20bc979f47973ab229be77d52, type: 3}
-  - {fileID: 7907460292464084573, guid: 353cc3dcc33e54746888fce01318a69b, type: 3}
-  - {fileID: 6356889663774568503, guid: 1de8112ea43100b45bf15cf8c9c8ec84, type: 3}
+  - {fileID: 8118349119589841338, guid: 26f43fd3b52d0db43a071ca8160aec3a, type: 3}
+  - {fileID: 7349802877672234352, guid: ba4565b20bc979f47973ab229be77d52, type: 3}
+  - {fileID: 6059933542281076367, guid: 353cc3dcc33e54746888fce01318a69b, type: 3}
+  - {fileID: 1792444672339901356, guid: 1de8112ea43100b45bf15cf8c9c8ec84, type: 3}
+  numberOfMassive: 0
 --- !u!4 &1185859925
 Transform:
   m_ObjectHideFlags: 0
@@ -4045,12 +4062,12 @@ PrefabInstance:
     - target: {fileID: 1918276500374243939, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 1918276500374243939, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -121
       objectReference: {fileID: 0}
     - target: {fileID: 1918276500374243939, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
         type: 3}
@@ -4099,8 +4116,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8725967238286128820, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
         type: 3}
-      propertyPath: maxHealth
-      value: 6
-      objectReference: {fileID: 0}
+      propertyPath: gameOverMenuScript
+      value: 
+      objectReference: {fileID: 476922471}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68b8ae8bf06c82b47ab897b4cca380c2, type: 3}

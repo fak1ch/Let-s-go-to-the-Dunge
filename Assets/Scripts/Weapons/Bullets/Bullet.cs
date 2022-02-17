@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public bool enemy = false;
     public AudioSoundAfterDestroy sound;
 
-    private bool locker = false;
+    public bool locker = false;
 
     public void UpdateBullet()
     {

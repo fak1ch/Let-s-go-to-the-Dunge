@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,8 +13,24 @@ public class Enemy : MonoBehaviour
     public float timeBtwAttack;
     public bool playerIsAlive = true;
     public MainScript mainScript;
-    public Vector2 startPosition;
+    public Vector3 startPosition;
     public Rigidbody2D rb;
+    public Animator animator;
+    public bool animHasBeenChanged = false;
+    public NavMeshAgent navAgent;
+
+    public void StartMethod()
+    {
+        player = StaticClass.player;
+        playerCharacteristic = StaticClass.playerCharacteristic;
+        mainScript = StaticClass.mainScript;
+        startPosition = transform.position;
+        StaticClass.mainScript.enemies.Add(GetComponent<Enemy>());
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        TryGetComponent(out animator);
+        navAgent.updateRotation = false;
+        navAgent.updateUpAxis = false;
+    }
 
     public void UpdateRotateSprite()
     {
@@ -26,6 +43,10 @@ public class Enemy : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
+
+        Vector3 vec = transform.position;
+        vec.z = 0;
+        transform.position = vec;
     }
 
     public void TriggerAttackPlayer(Collider2D collision)
@@ -38,16 +59,6 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(AttackThePlayer(gameObject.GetComponent<Collider2D>()));
             }
         }
-    }
-
-    public void StartMethod()
-    {
-        player = StaticClass.player;
-        playerCharacteristic = StaticClass.playerCharacteristic;
-        mainScript = StaticClass.mainScript;
-        startPosition = transform.position;
-        StaticClass.mainScript.enemies.Add(GetComponent<Enemy>());
-        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     private IEnumerator AttackThePlayer(Collider2D collider)
@@ -68,9 +79,31 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void MoveToSpawnPosition()
+    public virtual void EnemyMove()
     {
-        rb.position = Vector2.MoveTowards(transform.position, startPosition, speed * Time.fixedDeltaTime);
+        if (playerIsAlive)
+        {
+            navAgent.SetDestination(player.transform.position);
+            if (!animHasBeenChanged && animator != null)
+            {
+                animHasBeenChanged = !animHasBeenChanged;
+                animator.SetBool("isRun", true);
+            }
+        }
+        else
+        {
+            MoveToStartPosition();
+        }
+    }
+
+    public void MoveToStartPosition()
+    {
+        navAgent.SetDestination(startPosition);
+        if (animHasBeenChanged && transform.position == startPosition && animator != null)
+        {
+            animHasBeenChanged = !animHasBeenChanged;
+            animator.SetBool("isRun", false);
+        }
     }
 
     public void SetPlayerIsAlive(bool value)
