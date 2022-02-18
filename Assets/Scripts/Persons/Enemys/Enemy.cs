@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     public bool animHasBeenChanged = false;
     public NavMeshAgent navAgent;
 
+    private Vector3 targetForMove;
+    private bool lockerForAIMove = false;
+
     public void StartMethod()
     {
         player = StaticClass.player;
@@ -81,9 +84,13 @@ public class Enemy : MonoBehaviour
 
     public virtual void EnemyMove()
     {
+        if (!lockerForAIMove)
+        {
+            StartCoroutine(TargetForMovePos());
+        }
         if (playerIsAlive)
         {
-            navAgent.SetDestination(player.transform.position);
+            navAgent.SetDestination(targetForMove);
             if (!animHasBeenChanged && animator != null)
             {
                 animHasBeenChanged = !animHasBeenChanged;
@@ -94,6 +101,16 @@ public class Enemy : MonoBehaviour
         {
             MoveToStartPosition();
         }
+    }
+
+    private IEnumerator TargetForMovePos()
+    {
+        lockerForAIMove = true;
+        targetForMove = player.transform.position;
+        targetForMove.y += 15;
+        float time = DistanceBetween2dPoints(player.transform.position, transform.position)/2000;
+        yield return new WaitForSeconds(time);
+        lockerForAIMove = false;
     }
 
     public void MoveToStartPosition()
@@ -109,5 +126,26 @@ public class Enemy : MonoBehaviour
     public void SetPlayerIsAlive(bool value)
     {
         playerIsAlive = value;
+    }
+
+    private float DistanceBetween2dPoints(Vector2 vec1, Vector2 vec2)
+    {
+        float distance;
+
+        distance = Mathf.Pow(Mathf.Pow(vec2.x - vec1.x, 2) + Mathf.Pow(vec2.y - vec1.y, 2), 0.5f);
+
+        return distance;
+    }
+
+    private float DistanceBetween2dPoints(Vector3 vec11, Vector3 vec22)
+    {
+        Vector2 vec1 = new Vector2(vec11.x, vec11.y);
+        Vector2 vec2 = new Vector2(vec22.x, vec22.y);
+
+        float distance;
+
+        distance = Mathf.Pow(Mathf.Pow(vec2.x - vec1.x, 2) + Mathf.Pow(vec2.y - vec1.y, 2), 0.5f);
+
+        return distance;
     }
 }

@@ -21,7 +21,6 @@ public class MainScript : MonoBehaviour
     private AudioSource soundPlay;
     private int roomsCount;
     private RoomVariants variants;
-    private GameObject roomWithMaxPosition;
 
     void Start()
     {
@@ -84,21 +83,27 @@ public class MainScript : MonoBehaviour
 
     private void SpawnBossRoom()
     {
-        roomWithMaxPosition = rooms[0];
+        List<GameObject> rms1Doors = new List<GameObject>();
+        GameObject roomForBoss = rooms[0];
         float maxDistance = 0;
         for(int i = 1; i < rooms.Count; i++)
         {
-            float distance = DistanceBetween2dPoints(rooms[i].transform.position, rooms[0].transform.position);
-            if (distance > maxDistance)
+            if (rooms[i].GetComponentInChildren<EnemySpawner>().doors.Count == 1) { rms1Doors.Add(rooms[i]);}
+        }
+        for (int i = 1; i < rms1Doors.Count; i++)
+        {
+            float distance = DistanceBetween2dPoints(rms1Doors[i].transform.position, rooms[0].transform.position);
+            if (maxDistance < distance)
             {
-                roomWithMaxPosition = rooms[i];
                 maxDistance = distance;
+                roomForBoss = rms1Doors[i];
             }
         }
-        Vector3 pos = roomWithMaxPosition.transform.position;
-        int k = roomWithMaxPosition.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
-        rooms.Remove(roomWithMaxPosition);
-        Destroy(roomWithMaxPosition);
+
+        Vector3 pos = roomForBoss.transform.position;
+        int k = roomForBoss.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
+        rooms.Remove(roomForBoss);
+        Destroy(roomForBoss);
         var obj = Instantiate(variants.bossRooms[k-1], pos, Quaternion.Euler(-90,0,0));
         obj.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().OpenDoors();
     }
@@ -111,7 +116,7 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    private float DistanceBetween2dPoints(Vector2 vec1, Vector2 vec2)
+     private float DistanceBetween2dPoints(Vector2 vec1, Vector2 vec2)
     {
         float distance;
 
