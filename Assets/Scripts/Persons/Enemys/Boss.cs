@@ -16,7 +16,6 @@ public class Boss : Enemy, IEnemy
     private bool locked = false;
     private bool lockedChoose = false;
 
-    private Animator anim;
     public GameObject portal;
     public UIBossHp bossHp;
 
@@ -25,7 +24,6 @@ public class Boss : Enemy, IEnemy
         StartMethod();
         bossHp = GameObject.FindGameObjectWithTag("BossHp").GetComponent<UIBossHp>();
         bossHp.StartHealth(health);
-        anim = GetComponent<Animator>();
         bossRoom = GameObject.FindWithTag("BossRoom");
         target = player.transform;
         SetBoolShoot(false);
@@ -55,7 +53,7 @@ public class Boss : Enemy, IEnemy
     {
         if (GetBoolRun())
         {
-            Run();
+            EnemyMove();
         }
         else if (GetBoolShoot())
         {
@@ -90,26 +88,21 @@ public class Boss : Enemy, IEnemy
         }
     }
 
-    private void Run()
+    public override void EnemyMove()
     {
+        if (!lockerForAIMove)
+        {
+            StartCoroutine(TargetForMovePos());
+        }
         if (playerIsAlive)
         {
-            navAgent.SetDestination(player.transform.position);
-            Vector3 vec = transform.position;
-            vec.z = 0;
-            transform.position = vec;
+            navAgent.SetDestination(targetForMove);
+            SetBoolShoot(false);
+            SetBoolRun(false);
         }
         else
         {
-            if (transform.position.x == startPosition.x && transform.position.y == startPosition.y)
-            {
-                SetBoolShoot(false);
-                SetBoolRun(false);
-            }
-            else
-            {
-                MoveToStartPosition();
-            }
+            MoveToStartPosition();
         }
     }
 
@@ -168,12 +161,12 @@ public class Boss : Enemy, IEnemy
     {
         if (value)
         {
-            anim.SetBool("isRunning", true);
-            anim.SetBool("isShooting", false);
+            animator.SetBool("isRunning", true);
+            animator.SetBool("isShooting", false);
         }
         else if (!value)
         {
-            anim.SetBool("isRunning", false);
+            animator.SetBool("isRunning", false);
         }
     }
 
@@ -181,23 +174,23 @@ public class Boss : Enemy, IEnemy
     {
         if (value)
         {
-            anim.SetBool("isRunning", false);
-            anim.SetBool("isShooting", true);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isShooting", true);
         }
         else if (!value)
         {
-            anim.SetBool("isShooting", false);
+            animator.SetBool("isShooting", false);
         }
     }
 
     private bool GetBoolRun()
     {
-        return anim.GetBool("isRunning");
+        return animator.GetBool("isRunning");
     }
 
     private bool GetBoolShoot()
     {
-        return anim.GetBool("isShooting");
+        return animator.GetBool("isShooting");
     }
 
     public void BossDie()

@@ -206,7 +206,7 @@ MonoBehaviour:
   m_UseGeometry: 1
   m_OverrideByGrid: 0
   m_UseMeshPrefab: {fileID: 0}
-  m_CompressBounds: 0
+  m_CompressBounds: 1
   m_OverrideVector: {x: 1, y: 1, z: 1}
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 61e0b415b3ce53e4cba2ce8132d8708e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 97345439396e7034ba35f4b94822ce7b, type: 2}
 --- !u!1001 &3724531008478297542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -654,6 +654,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TilemapGroud
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833892469126226261, guid: 1dacee0d143dd5846b70e55d8196026d,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833892469126226261, guid: 1dacee0d143dd5846b70e55d8196026d,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833892469126226261, guid: 1dacee0d143dd5846b70e55d8196026d,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833892469126226261, guid: 1dacee0d143dd5846b70e55d8196026d,
+        type: 3}
+      propertyPath: m_Origin.x
+      value: -28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833892469126226261, guid: 1dacee0d143dd5846b70e55d8196026d,
+        type: 3}
+      propertyPath: m_Origin.y
+      value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833892469126226261, guid: 1dacee0d143dd5846b70e55d8196026d,
+        type: 3}
+      propertyPath: m_Origin.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5833892469126226261, guid: 1dacee0d143dd5846b70e55d8196026d,
         type: 3}

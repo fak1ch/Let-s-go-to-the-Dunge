@@ -19,8 +19,8 @@ public class Enemy : MonoBehaviour
     public bool animHasBeenChanged = false;
     public NavMeshAgent navAgent;
 
-    private Vector3 targetForMove;
-    private bool lockerForAIMove = false;
+    public Vector3 targetForMove;
+    public bool lockerForAIMove = false;
 
     public void StartMethod()
     {
@@ -103,12 +103,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private IEnumerator TargetForMovePos()
+    public IEnumerator TargetForMovePos()
     {
         lockerForAIMove = true;
         targetForMove = player.transform.position;
-        targetForMove.y += 15;
-        float time = DistanceBetween2dPoints(player.transform.position, transform.position)/2000;
+        float time = DistanceBetween2dPoints(player.transform.position, transform.position)/1500;
         yield return new WaitForSeconds(time);
         lockerForAIMove = false;
     }
