@@ -46,6 +46,7 @@ public class Boss : Enemy, IEnemy
     {
         Vector3 vec = bossRoom.transform.position;
         vec.x = vec.x - 325;
+        vec.y = vec.y - 100;
         Instantiate(portal, vec, Quaternion.identity);
     }
 
@@ -152,6 +153,7 @@ public class Boss : Enemy, IEnemy
         {
             GetComponent<DropManaAfterDeath>().DropManaAfterDead();
             SpawnPortal();
+            bossHp.gameObject.SetActive(false);
             Destroy(gameObject);
         }
         bossHp.TakeDamage(damage);
