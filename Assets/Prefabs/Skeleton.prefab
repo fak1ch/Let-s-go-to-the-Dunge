@@ -165,7 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 557a391c3219356489987de42973dda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaParticle: {fileID: 4201500662848923099, guid: 0e8a1806bdff7b148922ac8b9c741b5c,
+  _manaParticle: {fileID: 4201500662848923099, guid: 0e8a1806bdff7b148922ac8b9c741b5c,
+    type: 3}
+  _amethyst: {fileID: 9126542147375325520, guid: f3cf9dd956c53ea4da8f131cebc12010,
     type: 3}
 --- !u!114 &1335963615418421112
 MonoBehaviour:
@@ -192,6 +194,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   animHasBeenChanged: 0
   navAgent: {fileID: 7768505107567575271}
+  targetForMove: {x: 0, y: 0, z: 0}
+  lockerForAIMove: 0
 --- !u!95 &774100251817429271
 Animator:
   serializedVersion: 3

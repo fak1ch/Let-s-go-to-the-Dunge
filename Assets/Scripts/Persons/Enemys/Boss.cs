@@ -26,18 +26,16 @@ public class Boss : Enemy, IEnemy
         bossHp.StartHealth(health);
         bossRoom = GameObject.FindWithTag("BossRoom");
         target = player.transform;
-        SetBoolShoot(false);
-        SetBoolRun(false);
+        if (!lockedChoose)
+        {
+            StartCoroutine(ChooseAction());
+        }
     }
 
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!lockedChoose)
-        {
-            StartCoroutine(ChooseAction());
-        }
         UpdateRotateSprite();
         SmartMenu();
     }
@@ -73,6 +71,7 @@ public class Boss : Enemy, IEnemy
     {
         lockedChoose = true;
         yield return new WaitForSeconds(1);
+        SetBoolRun(false);
         SetBoolShoot(true);
         yield return new WaitForSeconds(3);
         for(; ; )
@@ -85,26 +84,27 @@ public class Boss : Enemy, IEnemy
             }
             yield return new WaitForSeconds(i);
             SetBoolShoot(true);
+            SetBoolRun(false);
             target = player.transform;
         }
     }
 
     public override void EnemyMove()
     {
-        if (!lockerForAIMove)
-        {
-            StartCoroutine(TargetForMovePos());
-        }
         if (playerIsAlive)
         {
-            navAgent.SetDestination(targetForMove);
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
             SetBoolShoot(false);
-            SetBoolRun(false);
         }
         else
         {
             MoveToStartPosition();
         }
+    }
+
+    public override void MoveToStartPosition()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 
     private void Shoot()
@@ -116,7 +116,7 @@ public class Boss : Enemy, IEnemy
         }
     }
 
-    IEnumerator Shoot1()
+    private IEnumerator Shoot1()
     {
         float timeBtwShots = 0.1f;
         bulletCount = Random.Range(8, 49);
@@ -151,7 +151,7 @@ public class Boss : Enemy, IEnemy
         health -= damage;
         if (health <= 0)
         {
-            GetComponent<DropManaAfterDeath>().DropManaAfterDead();
+            GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
             SpawnPortal();
             bossHp.gameObject.SetActive(false);
             Destroy(gameObject);

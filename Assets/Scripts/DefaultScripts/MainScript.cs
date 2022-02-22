@@ -76,15 +76,17 @@ public class MainScript : MonoBehaviour
             endSpawn = true;
             if (variants != null)
             {
-                SpawnBossRoom();
+                SpawnBossRoomAndShop();
             }
         }
     }
 
-    private void SpawnBossRoom()
+    private void SpawnBossRoomAndShop()
     {
         List<GameObject> rms1Doors = new List<GameObject>();
         GameObject roomForBoss = rooms[0];
+        int j = 0;
+        GameObject roomForShop = null;
         float maxDistance = 0;
         for(int i = 1; i < rooms.Count; i++)
         {
@@ -97,11 +99,22 @@ public class MainScript : MonoBehaviour
             {
                 maxDistance = distance;
                 roomForBoss = rms1Doors[i];
+                j = i;
             }
         }
+        rms1Doors.RemoveAt(j);
 
-        Vector3 pos = roomForBoss.transform.position;
-        int k = roomForBoss.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
+        if (rms1Doors.Count >= 1) { roomForShop = rms1Doors[Random.Range(0, rms1Doors.Count)]; }
+
+
+        rooms.Remove(roomForShop);
+        Destroy(roomForShop);
+        int k = roomForShop.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
+        Vector3 pos = roomForShop.transform.position;
+        var shop = Instantiate(variants.shopRooms[k - 1], pos, Quaternion.Euler(-90, 0, 0));
+
+        pos = roomForBoss.transform.position;
+        k = roomForBoss.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
         rooms.Remove(roomForBoss);
         Destroy(roomForBoss);
         var obj = Instantiate(variants.bossRooms[k-1], pos, Quaternion.Euler(-90,0,0));

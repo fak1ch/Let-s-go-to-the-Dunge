@@ -18,6 +18,7 @@ public class RoomVariants : MonoBehaviour
 
     public List<GameObject> mainRooms;
     public List<GameObject> bossRooms;
+    public List<GameObject> shopRooms;
 
     public List<GameObject>[,] massiveVariants = new List<GameObject>[2, 4];
 

@@ -10,20 +10,25 @@ public class PlayerCharacteristic : MonoBehaviour
     public GameObject gunPlace;
     public GameOverMenuScript gameOverMenuScript;
 
-    private Joystick joystick;
-    private bool facingRight = false;
-    private new Camera camera;
-    private bool immortalityOn = false;
+    private Joystick _joystick;
+    private bool _facingRight = false;
+    private Camera _camera;
+    private bool _immortalityOn = false;
+    private int _amethists;
+    private AmethystPanel _amethystPanel;
+
+    public int Amethists { get { return _amethists; } set { _amethists = value; } }
     // Start is called before the first frame update
 
     void Start()
     {
-        camera = Camera.main;
+        _camera = Camera.main;
         mana = maxMana;
         if (StaticClass.typeOfDevice == StaticClass.TypeOfDevice.Phone)
         {
-            joystick = GameObject.FindGameObjectWithTag("JoystickMove").GetComponent<FixedJoystick>();
+            _joystick = GameObject.FindGameObjectWithTag("JoystickMove").GetComponent<FixedJoystick>();
         }
+        _amethystPanel = GameObject.Find("AmethistsPanel").GetComponent<AmethystPanel>();
     }
 
     void FixedUpdate()
@@ -33,7 +38,7 @@ public class PlayerCharacteristic : MonoBehaviour
 
     private void Flip()
     {
-        facingRight = !facingRight;
+        _facingRight = !_facingRight;
 
         Vector3 vec = gunPlace.transform.localScale;
         vec.x *= -1;
@@ -54,7 +59,7 @@ public class PlayerCharacteristic : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = 5.23f;
 
-            Vector3 objectPos = camera.WorldToScreenPoint(transform.position);
+            Vector3 objectPos = _camera.WorldToScreenPoint(transform.position);
             mousePos.x = mousePos.x - objectPos.x;
             mousePos.y = mousePos.y - objectPos.y;
 
@@ -62,11 +67,11 @@ public class PlayerCharacteristic : MonoBehaviour
         }
         else
         {
-            angle = Mathf.Atan2(joystick.Vertical, joystick.Horizontal) * Mathf.Rad2Deg;
+            angle = Mathf.Atan2(_joystick.Vertical, _joystick.Horizontal) * Mathf.Rad2Deg;
         }
         if (angle >= 90 && angle <= 180 || angle <= -90 && angle >= -180)
         {
-            if (facingRight)
+            if (_facingRight)
             {
                 Flip();
             }
@@ -74,7 +79,7 @@ public class PlayerCharacteristic : MonoBehaviour
         else
         if (angle >= 0 && angle < 90 || angle < 0 && angle > -90)
         {
-            if (!facingRight)
+            if (!_facingRight)
             {
                 Flip();
             }
@@ -83,7 +88,7 @@ public class PlayerCharacteristic : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!immortalityOn)
+        if (!_immortalityOn)
         {
             health -= damage;
             if (health <= 0)
@@ -104,14 +109,20 @@ public class PlayerCharacteristic : MonoBehaviour
 
     private IEnumerator ImmortalityCoroutine(float i)
     {
-        immortalityOn = true;
+        _immortalityOn = true;
         yield return new WaitForSeconds(i);
-        immortalityOn = false;
+        _immortalityOn = false;
     }
 
     private IEnumerator PlayerSetFalse(float i)
     {
         yield return new WaitForSeconds(i);
         gameObject.SetActive(false);
+    }
+
+    public void TakeAmethyst(int value)
+    {
+        _amethists += value;
+        _amethystPanel.ChangeAmethistValue(_amethists);
     }
 }

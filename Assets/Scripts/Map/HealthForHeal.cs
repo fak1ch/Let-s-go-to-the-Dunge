@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class HealthForHeal : MonoBehaviour
 {
-    private bool lockerOpen = true;
+    public int HealValue = 2;
+    private bool _lockerOpen = true;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (lockerOpen)
+        if (_lockerOpen)
         {
             if (collision.CompareTag("Player"))
             {
-                lockerOpen = false;
-                collision.GetComponent<PlayerCharacteristic>().health += 2;
+                _lockerOpen = false;
+                collision.GetComponent<PlayerCharacteristic>().health += HealValue;
                 Destroy(gameObject);
             }
         }

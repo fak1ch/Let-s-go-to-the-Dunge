@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             StaticClass.mainScript.enemies.Remove(GetComponent<Enemy>());
-            GetComponent<DropManaAfterDeath>().DropManaAfterDead();
+            GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
             Destroy(gameObject);
         }
     }
@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
         lockerForAIMove = false;
     }
 
-    public void MoveToStartPosition()
+    public virtual void MoveToStartPosition()
     {
         navAgent.SetDestination(startPosition);
         if (animHasBeenChanged && transform.position == startPosition && animator != null)

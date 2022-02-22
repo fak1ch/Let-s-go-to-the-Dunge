@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 557a391c3219356489987de42973dda8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _manaParticle: {fileID: 4201500662848923099, guid: 0e8a1806bdff7b148922ac8b9c741b5c,
+      type: 3}
+  - _amethyst: {fileID: 9126542147375325520, guid: f3cf9dd956c53ea4da8f131cebc12010,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

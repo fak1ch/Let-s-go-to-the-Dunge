@@ -36,34 +36,39 @@ public class WeaponsInventory : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E) || androidClickAction)
                 {
-                    if (weapons.Count == 2)
-                    {
-                        weapons[activeGun].transform.SetParent(default);
-                        weapons[activeGun].GetComponent<Weapon>().IsDropped = true;
-                        weapons.RemoveAt(activeGun);
-                        weapons.Add(collision.gameObject);
-                        collision.gameObject.transform.position = gunPlace.transform.position;
-                        collision.gameObject.transform.SetParent(gunPlace.transform);
-                        collision.gameObject.GetComponent<Weapon>().IsDropped = false;
-                        SelectGun(weapons.Count);
-                        weapons[activeGun].GetComponent<SpriteRenderer>().sortingOrder = 3;
-                        StartCoroutine(AllowPickCorutine());
-                    }
-                    else if (weapons.Count == 1 || weapons.Count == 0)
-                    {
-                        weapons.Add(collision.gameObject);
-                        collision.gameObject.transform.position = gunPlace.transform.position;
-                        collision.gameObject.transform.SetParent(gunPlace.transform);
-                        collision.gameObject.GetComponent<Weapon>().IsDropped = false;
-                        SelectGun(weapons.Count);
-                        weapons[activeGun].GetComponent<SpriteRenderer>().sortingOrder = 3;
-                        StartCoroutine(AllowPickCorutine());
-                    }
-
-                    weaponsPanel.ChangeSprite(weapons[activeGun].GetComponent<SpriteRenderer>().sprite);
+                    PickGun(collision.gameObject);
                 }
             }
         }
+    }
+
+    public void PickGun(GameObject weapon)
+    {
+        if (weapons.Count == 2)
+        {
+            weapons[activeGun].transform.SetParent(default);
+            weapons[activeGun].GetComponent<Weapon>().IsDropped = true;
+            weapons.RemoveAt(activeGun);
+            weapons.Add(weapon);
+            weapon.gameObject.transform.position = gunPlace.transform.position;
+            weapon.gameObject.transform.SetParent(gunPlace.transform);
+            weapon.gameObject.GetComponent<Weapon>().IsDropped = false;
+            SelectGun(weapons.Count);
+            weapons[activeGun].GetComponent<SpriteRenderer>().sortingOrder = 3;
+            StartCoroutine(AllowPickCorutine());
+        }
+        else if (weapons.Count == 1 || weapons.Count == 0)
+        {
+            weapons.Add(weapon.gameObject);
+            weapon.gameObject.transform.position = gunPlace.transform.position;
+            weapon.gameObject.transform.SetParent(gunPlace.transform);
+            weapon.gameObject.GetComponent<Weapon>().IsDropped = false;
+            SelectGun(weapons.Count);
+            weapons[activeGun].GetComponent<SpriteRenderer>().sortingOrder = 3;
+            StartCoroutine(AllowPickCorutine());
+        }
+
+        weaponsPanel.ChangeSprite(weapons[activeGun].GetComponent<SpriteRenderer>().sprite);
     }
 
     private void DropGun()
