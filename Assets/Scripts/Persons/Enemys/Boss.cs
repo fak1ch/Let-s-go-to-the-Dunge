@@ -32,8 +32,6 @@ public class Boss : Enemy, IEnemy
         }
     }
 
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         UpdateRotateSprite();
@@ -198,6 +196,7 @@ public class Boss : Enemy, IEnemy
     public void BossDie()
     {
         SpawnPortal();
+        StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfMusicClips[Random.Range(0, StaticClass.mainScript.kindOfMusicClips.Count)]);
         Destroy(bossHp);
         Destroy(gameObject);
     }

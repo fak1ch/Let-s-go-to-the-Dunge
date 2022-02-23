@@ -13,6 +13,7 @@ public class WeaponsInventory : MonoBehaviour
     private bool allowDrop = true;
     private float timerTime = 0.5f;
     private WeaponsPanel weaponsPanel;
+    private List<Weapon> weaponsScripts = new List<Weapon>();
 
     void Start()
     {
@@ -49,7 +50,9 @@ public class WeaponsInventory : MonoBehaviour
             weapons[activeGun].transform.SetParent(default);
             weapons[activeGun].GetComponent<Weapon>().IsDropped = true;
             weapons.RemoveAt(activeGun);
+            weaponsScripts.RemoveAt(activeGun);
             weapons.Add(weapon);
+            weaponsScripts.Add(weapon.GetComponent<Weapon>());
             weapon.gameObject.transform.position = gunPlace.transform.position;
             weapon.gameObject.transform.SetParent(gunPlace.transform);
             weapon.gameObject.GetComponent<Weapon>().IsDropped = false;
@@ -60,6 +63,7 @@ public class WeaponsInventory : MonoBehaviour
         else if (weapons.Count == 1 || weapons.Count == 0)
         {
             weapons.Add(weapon.gameObject);
+            weaponsScripts.Add(weapon.GetComponent<Weapon>());
             weapon.gameObject.transform.position = gunPlace.transform.position;
             weapon.gameObject.transform.SetParent(gunPlace.transform);
             weapon.gameObject.GetComponent<Weapon>().IsDropped = false;
@@ -83,6 +87,7 @@ public class WeaponsInventory : MonoBehaviour
                     weapons[activeGun].transform.SetParent(default);
                     weapons[activeGun].GetComponent<Weapon>().IsDropped = true;
                     weapons.RemoveAt(activeGun);
+                    weaponsScripts.RemoveAt(activeGun);
                     SelectGun(weapons.Count);
                     StartCoroutine(AllowDropCorutine());
                     weaponsPanel.ChangeSprite(weapons[activeGun].GetComponent<SpriteRenderer>().sprite);
@@ -93,6 +98,7 @@ public class WeaponsInventory : MonoBehaviour
                     weapons[activeGun].transform.SetParent(default);
                     weapons[activeGun].GetComponent<Weapon>().IsDropped = true;
                     weapons.RemoveAt(activeGun);
+                    weaponsScripts.RemoveAt(activeGun);
 
                     activeGun = -1;
                     StartCoroutine(AllowDropCorutine());
@@ -149,6 +155,7 @@ public class WeaponsInventory : MonoBehaviour
     public void PickBadPistol(GameObject pistol)
     {
         weapons.Add(pistol);
+        weaponsScripts.Add(pistol.GetComponent<Weapon>());
         pistol.transform.position = gunPlace.transform.position;
         pistol.transform.SetParent(gunPlace.transform);
         weapons[0].GetComponent<SpriteRenderer>().sortingOrder = 3;
@@ -168,5 +175,10 @@ public class WeaponsInventory : MonoBehaviour
         allowPick = false;
         yield return new WaitForSeconds(timerTime);
         allowPick = true;
+    }
+
+    public void DoActiveGunAllowShootState(bool value)
+    {
+        weaponsScripts[activeGun].allowShoot = value;
     }
 }

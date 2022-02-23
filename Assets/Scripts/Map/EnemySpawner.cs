@@ -269,6 +269,8 @@ public class EnemySpawner : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             CloseDoors();
+            if (boss)
+            StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfBossMusic[Random.Range(0, StaticClass.mainScript.kindOfBossMusic.Count)]);
             StartCoroutine(SpawnFirstWave());
             playerTrigger = true;
             GetComponent<BoxCollider2D>().enabled = false;

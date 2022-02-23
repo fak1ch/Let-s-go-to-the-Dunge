@@ -110,7 +110,7 @@ RectTransform:
   m_GameObject: {fileID: 5230756764300058094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.005, y: 0.005, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children:
   - {fileID: 1620292616339797510}
   - {fileID: 6765017393485268765}
@@ -119,7 +119,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.3, y: 0.404}
+  m_AnchoredPosition: {x: 0.583, y: 0.42}
   m_SizeDelta: {x: 161.57104, y: 115.210236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5924944823875484328
@@ -430,6 +430,7 @@ MonoBehaviour:
   _health: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227, type: 3}
   _mana: {fileID: 7166170418527372959, guid: b4fbf778241fee44d8fb34e4862e4412, type: 3}
   _priceText: {fileID: 7859337141499356269}
+  _collider2d: {fileID: 8804442991036403692}
 --- !u!1 &8804442992301776247
 GameObject:
   m_ObjectHideFlags: 0

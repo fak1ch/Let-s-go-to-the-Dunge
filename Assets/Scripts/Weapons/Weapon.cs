@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     public GameObject bullet;
     public Transform shotPoint;
     public AudioSource audioSource;
+    public bool allowShoot = true;
 
     public bool IsDropped { get { return isDropped; } set { isDropped = value; } }
 
@@ -49,7 +50,7 @@ public class Weapon : MonoBehaviour
     {
         if (!isDropped)
         {
-            if (timeBtwShots <= 0)
+            if (timeBtwShots <= 0 && allowShoot)
             {
                 if (StaticClass.typeOfDevice == StaticClass.TypeOfDevice.Phone)
                 {

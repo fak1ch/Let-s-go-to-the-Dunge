@@ -10,6 +10,7 @@ public class MainScript : MonoBehaviour
     public List<GameObject> kindOfWeapons = new List<GameObject>();
     public List<GameObject> kindOfEnemies = new List<GameObject>();
     public List<AudioClip> kindOfMusicClips = new List<AudioClip>();
+    public List<AudioClip> kindOfBossMusic = new List<AudioClip>();
 
     [Header("Now exists")]
     public List<GameObject> rooms = new List<GameObject>();
@@ -48,19 +49,14 @@ public class MainScript : MonoBehaviour
     {
         soundPlay.Play();
         yield return new WaitForSeconds(6f);
-        MusicPlay();
+        MusicPlay(kindOfMusicClips[Random.Range(0, kindOfMusicClips.Count)]);
     }
 
-    public void MusicPlay()
+    public void MusicPlay(AudioClip audioClip)
     {
         soundPlay.Stop();
-        soundPlay.clip = kindOfMusicClips[Random.Range(0, kindOfMusicClips.Count)];
+        soundPlay.clip = audioClip;
         soundPlay.Play();
-    }
-
-    public void MusicStop()
-    {
-        soundPlay.Stop();
     }
 
     IEnumerator CheckEndSpawn()

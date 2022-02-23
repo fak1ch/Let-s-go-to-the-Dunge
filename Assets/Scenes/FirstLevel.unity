@@ -2067,7 +2067,7 @@ RectTransform:
   m_GameObject: {fileID: 880836805}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 733345084}
   m_Father: {fileID: 792222777}
@@ -2075,7 +2075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1372, y: -58}
+  m_AnchoredPosition: {x: 1412, y: -46}
   m_SizeDelta: {x: 64.7593, y: 64.7593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &880836807
@@ -2129,7 +2129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 733345085}
-  _jump: -72
+  _jump: -36
 --- !u!1 &900171860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3684,9 +3684,9 @@ MonoBehaviour:
   - {fileID: 6716826336580903018, guid: 90d20290acc66ff48941b06bcd82ba99, type: 3}
   - {fileID: 5155852972798614352, guid: 3ab64cd6fad06a34eb20d196cc31e6f7, type: 3}
   kindOfMusicClips:
-  - {fileID: 8300000, guid: 98a95215b8a68054e8ead008a70851d5, type: 3}
-  - {fileID: 8300000, guid: a075c26e3f710ee498fec71d17c822b4, type: 3}
-  - {fileID: 8300000, guid: 65a221720fae50f4d9ab13b50316fa27, type: 3}
+  - {fileID: 8300000, guid: 0e2c08548baaf6e4994bbab3c584612d, type: 3}
+  kindOfBossMusic:
+  - {fileID: 8300000, guid: 9e9b0598edc49994bb576da423ec7209, type: 3}
   rooms: []
   enemies: []
   camera: {fileID: 519420031}
