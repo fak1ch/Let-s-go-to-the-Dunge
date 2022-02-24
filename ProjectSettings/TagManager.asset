@@ -16,7 +16,6 @@ TagManager:
   - MainRoom
   - Room
   - Doors
-  - Objects
   - Door
   - RoomMover
   - Boss
@@ -30,6 +29,7 @@ TagManager:
   - JoystickMove
   - JoystickAttack
   - GameOverMenu
+  - bullet
   layers:
   - Default
   - TransparentFX

@@ -55,6 +55,9 @@ MonoBehaviour:
   doors: []
   chest: {fileID: 7325475035663237667, guid: a3b2458bf97ec00408cbad2a26a2b3b4, type: 3}
   boss: 0
+  enemySpawnMarker: {fileID: 4963510263631163911, guid: 7892cdc22bf1cef4da4097d07adda00c,
+    type: 3}
+  _boxCollider2d: {fileID: 3970266162154952217}
 --- !u!61 &3970266162154952217
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -62,7 +65,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7841660657196599260}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

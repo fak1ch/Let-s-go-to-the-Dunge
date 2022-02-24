@@ -448,6 +448,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomWall
       objectReference: {fileID: 0}
+    - target: {fileID: 8725211363553914705, guid: 8853c43b608585a4983d4f6884efdfbc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.041
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8853c43b608585a4983d4f6884efdfbc, type: 3}
 --- !u!1 &1681865558517729083 stripped

@@ -12,6 +12,6 @@ public class Bazuka : Weapon, IWeapon
     private void Update()
     {
         RotateWeapon();
-        AttackFromWeapon();
+        ClickButtonAttack();
     }
 }

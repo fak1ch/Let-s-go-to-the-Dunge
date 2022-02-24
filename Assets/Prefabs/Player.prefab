@@ -227,6 +227,7 @@ MonoBehaviour:
   allowPick: 1
   activeGun: 0
   weapons: []
+  targetForRotateAround: {fileID: 0}
 --- !u!114 &8725967238286128820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 1918276500821687035}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.6, y: 17.5, z: 0}
-  m_LocalScale: {x: -4.3619905, y: 4.36199, z: 4.36199}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1918276500374243939}
   m_RootOrder: 0

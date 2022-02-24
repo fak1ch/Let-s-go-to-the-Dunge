@@ -129,6 +129,7 @@ MonoBehaviour:
   bullet: {fileID: 2638028711620255204, guid: b5a623751c5743e4c81ba01614f50273, type: 3}
   shotPoint: {fileID: 4384453756463304452}
   audioSource: {fileID: 6350182548274242842}
+  greenZone: 0
 --- !u!82 &6350182548274242842
 AudioSource:
   m_ObjectHideFlags: 0

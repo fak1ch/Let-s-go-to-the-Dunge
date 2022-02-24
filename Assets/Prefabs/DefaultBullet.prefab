@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5322265025950318756}
   m_Layer: 20
   m_Name: bullet
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.104878426, y: -0.010245562}
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 692098648473304821}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   speed: 650
   lifetime: 10
   damage: 1
-  enemy: 0
+  enemyBullet: 0
   sound: {fileID: 9030348639900636588}
 --- !u!1 &2638028711620255204
 GameObject:

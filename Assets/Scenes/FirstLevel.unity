@@ -3219,6 +3219,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!4 &1176456229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1918276500821687036, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1918276500200419496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1185859923
 GameObject:
   m_ObjectHideFlags: 0
@@ -3407,7 +3413,7 @@ MonoBehaviour:
   fullLive: {fileID: 4606908045521496030, guid: 09f0d02af4642ad46b81cd09124484be,
     type: 3}
   halfLive: {fileID: 21300000, guid: 1dd82a15cda1046468accfc9e57b2490, type: 3}
-  emptyLive: {fileID: 21300000, guid: 22a4e1e8093613c4382819c18fddd8dc, type: 3}
+  emptyLive: {fileID: 21300000, guid: e116b6edd733ed34f990cf583597f2a9, type: 3}
 --- !u!1 &1449111378
 GameObject:
   m_ObjectHideFlags: 0
@@ -3686,7 +3692,7 @@ MonoBehaviour:
   kindOfMusicClips:
   - {fileID: 8300000, guid: 0e2c08548baaf6e4994bbab3c584612d, type: 3}
   kindOfBossMusic:
-  - {fileID: 8300000, guid: 9e9b0598edc49994bb576da423ec7209, type: 3}
+  - {fileID: 8300000, guid: 69a724dd39fa0c34080d0620b747fbd1, type: 3}
   rooms: []
   enemies: []
   camera: {fileID: 519420031}
@@ -4238,7 +4244,7 @@ PrefabInstance:
     - target: {fileID: 1918276500374243939, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -100
+      value: 14.1
       objectReference: {fileID: 0}
     - target: {fileID: 1918276500374243939, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
         type: 3}
@@ -4290,6 +4296,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1918276500821687035, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1918276500821687036, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813644409869527233, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
+        type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 1176456229}
     - target: {fileID: 8725967238286128820, guid: 68b8ae8bf06c82b47ab897b4cca380c2,
         type: 3}
       propertyPath: gameOverMenuScript

@@ -14,7 +14,7 @@ public class ScriptDestroyObj : MonoBehaviour
     {
         var pistol = Instantiate(badPistol, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.1f);
-        StaticClass.weaponsInventory.PickBadPistol(pistol);
+        StaticClass.weaponsInventory.PickGun(pistol);
         Destroy(gameObject);
     }
 }

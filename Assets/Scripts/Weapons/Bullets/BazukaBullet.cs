@@ -6,53 +6,24 @@ public class BazukaBullet : Bullet
 {
     public GameObject bullet;
 
+    private void Start()
+    {
+        StartMethod();
+    }
     // Update is called once per frame
     void Update()  
     {
         transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-        UpdateBullet();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        TriggerBullet(collision);
+        OnCollisionEnter2DMethod(collision.gameObject);
     }
 
-    public override void TriggerBullet(Collider2D collision)
+    public override void ExtraEffect()
     {
-        if (!locker)
-        {
-            if (!enemy)
-            {
-                if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
-                {
-                    locker = true;
-                    collision.GetComponent<Enemy>().TakeDamage(damage);
-                    Boom();
-                    Destroy(gameObject);
-                }
-            }
-            else if (enemy)
-            {
-                if (collision.CompareTag("Player"))
-                {
-                    locker = true;
-                    collision.GetComponent<PlayerCharacteristic>().TakeDamage(damage);
-                    Boom();
-                    Destroy(gameObject);
-                }
-            }
-            if (collision.CompareTag("Ground") || collision.CompareTag("Wall") || collision.CompareTag("Door"))
-            {
-                locker = true;
-                if (collision.GetComponent<VesselWithHealth>() != null)
-                {
-                    collision.GetComponent<VesselWithHealth>().SpawnHealth();
-                }
-                Boom();
-                Destroy(gameObject);
-            }
-        }
+        Boom();
     }
 
     private void Boom()

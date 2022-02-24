@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 2577585254963922476}
   - component: {fileID: 9140004029675014805}
   - component: {fileID: 4794855146724034517}
+  - component: {fileID: 5954777979732572883}
   m_Layer: 20
   m_Name: PF Props Pot B
   m_TagString: Ground
@@ -235,3 +236,34 @@ MonoBehaviour:
   mostPercent: 0
   healHealth: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227,
     type: 3}
+--- !u!60 &5954777979732572883
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2577585254963922480}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.78125, y: 0.84375}
+    newSize: {x: 1, y: 1.4375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.20414162, y: 0.24928045}
+      - {x: -0.2046051, y: 0.24963844}
+      - {x: -0.3269348, y: 0.15796566}
+      - {x: -0.20104218, y: 0.061688185}
+      - {x: 0.19948578, y: 0.05891943}
+      - {x: 0.326334, y: 0.15957463}

@@ -57,7 +57,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263406142964017831}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.462, y: -66.80701, z: 0}
   m_LocalScale: {x: 2.3863037, y: 2.3863037, z: 2.3863037}
   m_Children:
@@ -160,6 +160,7 @@ MonoBehaviour:
   bullet: {fileID: 6625505950047504366, guid: f3e39e0306285d04b85faee92161600e, type: 3}
   shotPoint: {fileID: 1263406141545101707}
   audioSource: {fileID: 3228477430584943966}
+  greenZone: 0
 --- !u!82 &3228477430584943966
 AudioSource:
   m_ObjectHideFlags: 0

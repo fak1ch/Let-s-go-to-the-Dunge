@@ -7,52 +7,53 @@ public class Bullet : MonoBehaviour
     public float speed;
     public float lifetime;
     public int damage;
-    public bool enemy = false;
+    public bool enemyBullet = false;
     public AudioSoundAfterDestroy sound;
 
-    public bool locker = false;
+    private bool _isOpen = true;
 
-    public void UpdateBullet()
+    protected void StartMethod()
     {
-        lifetime -= Time.deltaTime;
-        if (lifetime <= 0)
+        StartCoroutine(DestroyAfterTime());
+    }
+
+    protected void OnCollisionEnter2DMethod(GameObject entity)
+    {
+        if (_isOpen)
         {
-            DestroyBullet();
+            if (!enemyBullet)
+            {
+                if (entity.CompareTag("Enemy") || entity.CompareTag("Boss"))
+                {
+                    BulletTouch(entity.GetComponent<Enemy>());
+                }
+            }
+            else if (enemyBullet)
+            {
+                if (entity.CompareTag("Player"))
+                {
+                    BulletTouch(entity.GetComponent<PlayerCharacteristic>());
+                }
+            }
+            if (entity.CompareTag("Ground") || entity.CompareTag("Wall") || entity.CompareTag("Door"))
+            {
+                BulletTouch(null);
+            }
         }
     }
 
-    public virtual void TriggerBullet(Collider2D collision)
+    private void BulletTouch(IEntity script)
     {
-        if (!locker)
-        {
-            if (!enemy)
-            {
-                if (collision.CompareTag("Enemy") || collision.CompareTag("Boss"))
-                {
-                    locker = true;
-                    collision.GetComponent<Enemy>().TakeDamage(damage);
-                    DestroyBullet();
-                }
-            }
-            else if (enemy)
-            {
-                if (collision.CompareTag("Player"))
-                {
-                    locker = true;
-                    collision.GetComponent<PlayerCharacteristic>().TakeDamage(damage);
-                    DestroyBullet();
-                }
-            }
-            if (collision.CompareTag("Ground") || collision.CompareTag("Wall") || collision.CompareTag("Door"))
-            {
-                locker = true;
-                if (collision.GetComponent<VesselWithHealth>() != null)
-                {
-                    collision.GetComponent<VesselWithHealth>().SpawnHealth();
-                }
-                DestroyBullet();
-            }
-        }
+        _isOpen = false;
+        if (script != null)
+        script.TakeDamage(damage);
+        ExtraEffect();
+        DestroyBullet();
+    }
+
+    public virtual void ExtraEffect()
+    {
+
     }
 
     private void DestroyBullet()
@@ -62,5 +63,11 @@ public class Bullet : MonoBehaviour
             sound.PlaySoundAfterDestroy();
         }
         Destroy(gameObject);
+    }
+
+    private IEnumerator DestroyAfterTime()
+    {
+        yield return new WaitForSeconds(lifetime);
+        Destroy(transform.parent.gameObject);
     }
 }

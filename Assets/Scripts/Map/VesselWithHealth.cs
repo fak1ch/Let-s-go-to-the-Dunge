@@ -5,8 +5,9 @@ using UnityEngine;
 public class VesselWithHealth : MonoBehaviour
 {
     public bool mostPercent = false;
-
     public GameObject healHealth;
+
+    private bool isOpen = true;
 
     public void SpawnHealth()
     {
@@ -24,7 +25,15 @@ public class VesselWithHealth : MonoBehaviour
                 Instantiate(healHealth, gameObject.transform.position, Quaternion.identity);
             }
         }
-
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("bullet") && isOpen)
+        {
+            isOpen = false;
+            SpawnHealth();
+        }
     }
 }

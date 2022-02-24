@@ -11,7 +11,11 @@ public class BadPistol : Weapon, IWeapon
 
     private void Update()
     {
-        RotateWeapon();
-        AttackFromWeapon();
+        UpdateMethod();
+    }
+
+    private void FixedUpdate()
+    {
+        FixedUpdateMethod();
     }
 }

@@ -16,18 +16,17 @@ public class Chest : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision)
-    {   if (!locked)
+    { 
+        if (!locked)
         {
-            if (collision != null)
+            if (collision.CompareTag("Player"))
             {
-                if (collision.CompareTag("Player"))
+                if (Input.GetKey(KeyCode.E) || weaponsInventory.androidClickAction)
                 {
-                    if (Input.GetKey(KeyCode.E) || weaponsInventory.androidClickAction)
-                    {
-                        locked = true;
-                        Instantiate(openChest, transform.position, Quaternion.identity);
-                        SpawnWeapon();
-                    }
+                    locked = true;
+                    Instantiate(openChest, transform.position, Quaternion.identity);
+                    Destroy(GetComponent<CircleCollider2D>());
+                    SpawnWeapon();
                 }
             }
         }
@@ -45,7 +44,7 @@ public class Chest : MonoBehaviour
     {
         weaponsInventory.allowPick = false;
         yield return new WaitForSeconds(0.2f);
-        weaponsInventory.GetComponent<WeaponsInventory>().allowPick = true;
+        weaponsInventory.allowPick = true;
         Destroy(gameObject);
     }
 }

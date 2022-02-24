@@ -12,7 +12,7 @@ public class AudioSoundAfterDestroy : MonoBehaviour
         {
             if (!audioSource.isPlaying)
             {
-                Destroy(gameObject.transform.parent.gameObject);
+                Destroy(transform.parent.gameObject);
             }
         }
     }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8150476868300563360}
   - component: {fileID: 8150476868300563361}
   - component: {fileID: 3786497283071163173}
+  - component: {fileID: 3690782068886766279}
   m_Layer: 20
   m_Name: PF Props Crate Small
   m_TagString: Ground
@@ -148,6 +149,32 @@ MonoBehaviour:
   mostPercent: 1
   healHealth: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227,
     type: 3}
+--- !u!61 &3690782068886766279
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8150476868300563372}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0023748875, y: 0.29771316}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.8125, y: 1.21875}
+    newSize: {x: 0.8125, y: 1.21875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7475858, y: 0.5954263}
+  m_EdgeRadius: 0
 --- !u!1 &8150476868737220289
 GameObject:
   m_ObjectHideFlags: 0

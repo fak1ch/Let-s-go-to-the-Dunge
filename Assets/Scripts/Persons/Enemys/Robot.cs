@@ -13,13 +13,13 @@ public class Robot : Enemy, IEnemy
     void Start()
     {
         StartMethod();
+        startTimeBtwShots = Random.Range(startTimeBtwShots, startTimeBtwShots + 0.5f);
         timeBtwShots = startTimeBtwShots;
     }
 
     void Update()
     {
-        EnemyMove();
-        UpdateRotateSprite();
+        UpdateMethod();
 
         if (playerIsAlive)
         {
@@ -43,8 +43,8 @@ public class Robot : Enemy, IEnemy
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        TriggerAttackPlayer(collision);
+        CollisionAttackPlayer(collision.gameObject);
     }
 }

@@ -22,13 +22,16 @@ public class EnemySpawner : MonoBehaviour
     private List<GameObject> wave3 = new List<GameObject>();
 
     public List<GameObject> doors = new List<GameObject>();
+    private List<GameObject> enemyMarkers = new List<GameObject>();
 
     public GameObject chest;
     public bool boss = false;
+    public GameObject enemySpawnMarker;
 
     private bool FirstWaveEnd = false;
     private bool SecondWaveEnd = false;
     private bool ThirdWaveEnd = false;
+    [SerializeField]private BoxCollider2D _boxCollider2d;
 
     private MainScript mainScript;
     public enum TypeOfWave
@@ -43,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
     {
         mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
         points = new Vector2[numberOfSpawnPoints];
-        RecreatePoints();
+        StartCoroutine(DelayBeforeTriggerPlayer());
         RandomEnemys();
     }
 
@@ -134,6 +137,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnFirstWave()
     {
+        RecreatePoints();
         yield return new WaitForSeconds(2f);
         for (int i = 0; i < points.GetLength(0); i++)
         {
@@ -141,11 +145,13 @@ public class EnemySpawner : MonoBehaviour
             {
                 wave1.Add(Instantiate(enemy1[0], points[i], Quaternion.identity));
                 enemy1.RemoveAt(0);
+                Destroy(enemyMarkers[i]);
             }
             if (boss && enemy1.Count != 0)
             {
                 wave1.Add(Instantiate(enemy1[0], points[i], Quaternion.identity));
                 enemy1.RemoveAt(0);
+                Destroy(enemyMarkers[i]);
             }
         }
         FirstWaveEnd = true;
@@ -162,6 +168,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 wave2.Add(Instantiate(enemy2[0], points[i], Quaternion.identity));
                 enemy2.RemoveAt(0);
+                Destroy(enemyMarkers[i]);
             }
         }
         if (type2 == TypeOfWave.Double)
@@ -174,6 +181,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     wave2.Add(Instantiate(enemy2[0], points[i], Quaternion.identity));
                     enemy2.RemoveAt(0);
+                    Destroy(enemyMarkers[i]);
                 }
             }
         }
@@ -187,6 +195,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     wave2.Add(Instantiate(enemy2[0], points[i], Quaternion.identity));
                     enemy2.RemoveAt(0);
+                    Destroy(enemyMarkers[i]);
                 }
             }
         }
@@ -204,6 +213,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 wave3.Add(Instantiate(enemy3[0], points[i], Quaternion.identity));
                 enemy3.RemoveAt(0);
+                Destroy(enemyMarkers[i]);
             }
         }
         if (type2 == TypeOfWave.Double)
@@ -216,6 +226,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     wave3.Add(Instantiate(enemy3[0], points[i], Quaternion.identity));
                     enemy3.RemoveAt(0);
+                    Destroy(enemyMarkers[i]);
                 }
             }
         }
@@ -229,6 +240,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     wave3.Add(Instantiate(enemy3[0], points[i], Quaternion.identity));
                     enemy3.RemoveAt(0);
+                    Destroy(enemyMarkers[i]);
                 }
             }
         }
@@ -237,15 +249,19 @@ public class EnemySpawner : MonoBehaviour
 
     private void RecreatePoints()
     {
+        if (enemyMarkers.Count != 0) enemyMarkers.Clear();
         if (points.Length == 1)
         {
             points[0] = new Vector2(transform.root.localPosition.x -328, transform.root.localPosition.y);
+            enemyMarkers.Add(Instantiate(enemySpawnMarker, points[0], Quaternion.identity));
+            enemyMarkers[0].transform.localScale *= 2;
         }
         else
         {
             for (int i = 0; i < points.GetLength(0); i++)
             {
                 points[i] = new Vector2(transform.root.localPosition.x + Random.Range(-1250, 550), transform.root.localPosition.y + Random.Range(361, -550));
+                enemyMarkers.Add(Instantiate(enemySpawnMarker, points[i], Quaternion.identity));
             }
         }
     }
@@ -264,16 +280,22 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    private IEnumerator DelayBeforeTriggerPlayer()
+    {
+        yield return new WaitForSeconds(1f);
+        _boxCollider2d.enabled = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            Destroy(GetComponent<BoxCollider2D>());
             CloseDoors();
             if (boss)
             StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfBossMusic[Random.Range(0, StaticClass.mainScript.kindOfBossMusic.Count)]);
             StartCoroutine(SpawnFirstWave());
             playerTrigger = true;
-            GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }

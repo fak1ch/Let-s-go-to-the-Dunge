@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IEntity
 {
     public GameObject player;
     public PlayerCharacteristic playerCharacteristic;
@@ -22,6 +22,9 @@ public class Enemy : MonoBehaviour
     public Vector3 targetForMove;
     public bool lockerForAIMove = false;
 
+    private Collider2D _collider;
+    private bool _isOpen = false;
+
     public void StartMethod()
     {
         player = StaticClass.player;
@@ -33,6 +36,56 @@ public class Enemy : MonoBehaviour
         TryGetComponent(out animator);
         navAgent.updateRotation = false;
         navAgent.updateUpAxis = false;
+        StartCoroutine(TimeBeforeAttackAfterSpawn());
+    }
+
+    protected void UpdateMethod()
+    {
+        EnemyMove();
+        UpdateRotateSprite();
+    }
+
+    public void CollisionAttackPlayer(GameObject entity)
+    {
+        if (entity.CompareTag("Player"))
+        {
+            if (_isOpen)
+            {
+                if (_collider == null)
+                {
+                    _collider = GetComponent<Collider2D>();
+                    _collider.enabled = false;
+                    StartCoroutine(AttackThePlayer(_collider));
+                }
+                else if (_collider.enabled)
+                {
+                    _collider.enabled = false;
+                    StartCoroutine(AttackThePlayer(_collider));
+                }
+            }
+        }
+    }
+
+    private IEnumerator AttackThePlayer(Collider2D collider)
+    {
+        playerCharacteristic.TakeDamage(damage);
+        yield return new WaitForSeconds(timeBtwAttack);
+        collider.enabled = true;
+    }
+
+    public virtual void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            EnemyHasBeenKilled();
+        }
+    }
+
+    private IEnumerator TimeBeforeAttackAfterSpawn()
+    {
+        yield return new WaitForSeconds(1f);
+        _isOpen = true;
     }
 
     public void UpdateRotateSprite()
@@ -50,36 +103,6 @@ public class Enemy : MonoBehaviour
         Vector3 vec = transform.position;
         vec.z = 0;
         transform.position = vec;
-    }
-
-    public void TriggerAttackPlayer(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            if (gameObject.GetComponent<Collider2D>().enabled)
-            {
-                gameObject.GetComponent<Collider2D>().enabled = false;
-                StartCoroutine(AttackThePlayer(gameObject.GetComponent<Collider2D>()));
-            }
-        }
-    }
-
-    private IEnumerator AttackThePlayer(Collider2D collider)
-    {
-        playerCharacteristic.TakeDamage(damage);
-        yield return new WaitForSeconds(timeBtwAttack);
-        collider.enabled = true;
-    }
-
-    public virtual void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            StaticClass.mainScript.enemies.Remove(GetComponent<Enemy>());
-            GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
-            Destroy(gameObject);
-        }
     }
 
     public virtual void EnemyMove()
@@ -127,13 +150,11 @@ public class Enemy : MonoBehaviour
         playerIsAlive = value;
     }
 
-    private float DistanceBetween2dPoints(Vector2 vec1, Vector2 vec2)
+    public virtual void EnemyHasBeenKilled()
     {
-        float distance;
-
-        distance = Mathf.Pow(Mathf.Pow(vec2.x - vec1.x, 2) + Mathf.Pow(vec2.y - vec1.y, 2), 0.5f);
-
-        return distance;
+        StaticClass.mainScript.enemies.Remove(GetComponent<Enemy>());
+        GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
+        Destroy(gameObject);
     }
 
     private float DistanceBetween2dPoints(Vector3 vec11, Vector3 vec22)

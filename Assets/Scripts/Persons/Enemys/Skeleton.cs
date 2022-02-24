@@ -11,19 +11,14 @@ public class Skeleton : Enemy, IEnemy
     {
         StartMethod();
     }
+
     private void Update()
     {
-        EnemyMove();
-        UpdateRotateSprite();
+        UpdateMethod();
     }
 
-    private void FixedUpdate()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        TriggerAttackPlayer(collision); 
+        CollisionAttackPlayer(collision.gameObject);
     }
 }

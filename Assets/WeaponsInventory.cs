@@ -33,9 +33,9 @@ public class WeaponsInventory : MonoBehaviour
     {
         if (collision.CompareTag("Weapon"))
         {
-            if (allowPick)
+            if (Input.GetKey(KeyCode.E) || androidClickAction)
             {
-                if (Input.GetKey(KeyCode.E) || androidClickAction)
+                if (allowPick && collision.gameObject.GetComponent<Weapon>().IsDropped)
                 {
                     PickGun(collision.gameObject);
                 }
@@ -152,17 +152,6 @@ public class WeaponsInventory : MonoBehaviour
         }
     }
 
-    public void PickBadPistol(GameObject pistol)
-    {
-        weapons.Add(pistol);
-        weaponsScripts.Add(pistol.GetComponent<Weapon>());
-        pistol.transform.position = gunPlace.transform.position;
-        pistol.transform.SetParent(gunPlace.transform);
-        weapons[0].GetComponent<SpriteRenderer>().sortingOrder = 3;
-        pistol.GetComponent<Weapon>().IsDropped = false;
-        activeGun = 0;
-    }
-
     private IEnumerator AllowDropCorutine()
     {
         allowDrop = false;
@@ -177,8 +166,11 @@ public class WeaponsInventory : MonoBehaviour
         allowPick = true;
     }
 
-    public void DoActiveGunAllowShootState(bool value)
+    public void AllGunsGreenZoneState(bool value)
     {
-        weaponsScripts[activeGun].allowShoot = value;
+        foreach(var script in weaponsScripts)
+        {
+            script.greenZone = value;
+        }
     }
 }

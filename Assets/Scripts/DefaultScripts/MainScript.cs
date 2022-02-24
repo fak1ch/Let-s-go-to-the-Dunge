@@ -158,7 +158,7 @@ public class MainScript : MonoBehaviour
                 GameObject gm = GameObject.FindGameObjectWithTag("Boss");
                 if (gm != null)
                 {
-                    gm.GetComponent<Boss>().BossDie();
+                    gm.GetComponent<Boss>().EnemyHasBeenKilled();
                 }
             }
         }

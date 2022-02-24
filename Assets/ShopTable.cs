@@ -11,7 +11,6 @@ public class ShopTable : MonoBehaviour
     [SerializeField] private GameObject _health;
     [SerializeField] private GameObject _mana;
     [SerializeField] private Text _priceText;
-    [SerializeField] private CircleCollider2D _collider2d;
 
     private enum TypeOfItem { Health, Mana, Weapon }
     private GameObject _gameObjectItem;
@@ -54,11 +53,6 @@ public class ShopTable : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (isOpen) 
-            {
-                isOpen = false;
-                StaticClass.weaponsInventory.DoActiveGunAllowShootState(false);
-            }
             if (_isLockerOpen && (_weaponsInventory.androidClickAction || Input.GetKeyDown(KeyCode.E)) && StaticClass.playerCharacteristic.Amethists >= _price)
             {
                 _isLockerOpen = false;
@@ -66,15 +60,10 @@ public class ShopTable : MonoBehaviour
                 var gm = Instantiate(_gameObjectItem, _item.gameObject.transform.position, Quaternion.identity);
                 if (_typeOfItem == TypeOfItem.Weapon) _weaponsInventory.PickGun(gm);
 
+                Destroy(GetComponent<CircleCollider2D>());
+                StaticClass.weaponsInventory.AllGunsGreenZoneState(false);
                 Destroy(_item.gameObject);
-            }
-        }
-        else if (collision.IsTouching(_collider2d))
-        {
-            if (!isOpen)
-            {
-                isOpen = true;   
-                StaticClass.weaponsInventory.DoActiveGunAllowShootState(true);
+                Destroy(_priceText.transform.parent.gameObject);
             }
         }
     }

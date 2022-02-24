@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     public GameObject bullet;
     public Transform shotPoint;
     public AudioSource audioSource;
-    public bool allowShoot = true;
+    public bool greenZone = false;
 
     public bool IsDropped { get { return isDropped; } set { isDropped = value; } }
 
@@ -24,17 +24,6 @@ public class Weapon : MonoBehaviour
     private PlayerCharacteristic playerCharacteristic;
     private bool isFlipped = true;
 
-    //void Start()
-    //{
-    //    StartMethod();
-    //}
-
-    //private void Update()
-    //{
-    //    RotateWeapon();
-    //    AttackFromWeapon();
-    //}
-
     public void StartMethod()
     {
         mainScript = StaticClass.mainScript;
@@ -46,35 +35,26 @@ public class Weapon : MonoBehaviour
         manaText.text = $"{playerCharacteristic.mana}/{playerCharacteristic.maxMana}";
     }
 
-    public virtual void AttackFromWeapon()
+    protected void UpdateMethod()
+    {
+        RotateWeapon();
+        ClickButtonAttack();
+
+    }
+
+    protected void FixedUpdateMethod()
+    {
+    }
+
+    protected void ClickButtonAttack()
     {
         if (!isDropped)
         {
-            if (timeBtwShots <= 0 && allowShoot)
+            if (timeBtwShots <= 0 && !greenZone)
             {
-                if (StaticClass.typeOfDevice == StaticClass.TypeOfDevice.Phone)
+                if ((joystick.Direction != Vector2.zero) && playerCharacteristic.mana >= manacoast)
                 {
-                    if (joystick.Direction != Vector2.zero && playerCharacteristic.mana >= manacoast)
-                    {
-                        timeBtwShots = startTimeBtwShots;
-                        ShootPlay();
-                        Instantiate(bullet, shotPoint.position, shotPoint.rotation);
-                        Vector3 vector = bullet.transform.position;
-                        bullet.transform.position = vector;
-                        ChangeManaBar(-manacoast);
-                    }
-                }
-                else
-                {
-                    if (Input.GetMouseButton(0) && playerCharacteristic.mana >= manacoast)
-                    {
-                        timeBtwShots = startTimeBtwShots;
-                        ShootPlay();
-                        Instantiate(bullet, shotPoint.position, shotPoint.rotation);
-                        Vector3 vector = bullet.transform.position;
-                        bullet.transform.position = vector;
-                        ChangeManaBar(-manacoast);
-                    }
+                    AttackFromWeapon();
                 }
             }
             else
@@ -82,6 +62,14 @@ public class Weapon : MonoBehaviour
                 timeBtwShots -= Time.deltaTime;
             }
         }
+    }
+
+    public virtual void AttackFromWeapon()
+    {
+        timeBtwShots = startTimeBtwShots;
+        ShootPlay();
+        Instantiate(bullet, shotPoint.position, shotPoint.rotation);
+        ChangeManaBar(-manacoast);
     }
 
     public void RotateWeapon()

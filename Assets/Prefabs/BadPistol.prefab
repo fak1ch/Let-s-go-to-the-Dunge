@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 4608301883174389366}
   - component: {fileID: 1270670335729068273}
   - component: {fileID: 2977463991458867222}
+  - component: {fileID: 5678128455955250408}
+  - component: {fileID: -6433636871837572468}
   m_Layer: 20
   m_Name: BadPistol
   m_TagString: Weapon
@@ -57,8 +59,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4608301883174389365}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -127.36, y: 31.736797, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 8.234283, y: 8.234283, z: 8.234283}
   m_Children:
   - {fileID: 4608301883023845405}
@@ -159,6 +161,7 @@ MonoBehaviour:
   bullet: {fileID: 2638028711620255204, guid: b5a623751c5743e4c81ba01614f50273, type: 3}
   shotPoint: {fileID: 4608301883023845405}
   audioSource: {fileID: 2977463991458867222}
+  greenZone: 0
 --- !u!82 &2977463991458867222
 AudioSource:
   m_ObjectHideFlags: 0
@@ -256,3 +259,43 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &5678128455955250408
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4608301883174389365}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0eb9b423c1767e14c9a595b18b381e7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &-6433636871837572468
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4608301883174389365}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -139,9 +139,9 @@ public class Boss : Enemy, IEnemy
         locked = false;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        TriggerAttackPlayer(collision);
+        CollisionAttackPlayer(collision.gameObject);
     }
 
     public override void TakeDamage(int damage)
@@ -149,10 +149,7 @@ public class Boss : Enemy, IEnemy
         health -= damage;
         if (health <= 0)
         {
-            GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
-            SpawnPortal();
-            bossHp.gameObject.SetActive(false);
-            Destroy(gameObject);
+            EnemyHasBeenKilled();
         }
         bossHp.TakeDamage(damage);
     }
@@ -193,11 +190,12 @@ public class Boss : Enemy, IEnemy
         return animator.GetBool("isShooting");
     }
 
-    public void BossDie()
+    public override void EnemyHasBeenKilled()
     {
+        GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
         SpawnPortal();
         StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfMusicClips[Random.Range(0, StaticClass.mainScript.kindOfMusicClips.Count)]);
-        Destroy(bossHp);
+        bossHp.gameObject.SetActive(false);
         Destroy(gameObject);
     }
 }
