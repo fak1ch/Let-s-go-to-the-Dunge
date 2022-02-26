@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5890802837618066405}
   - component: {fileID: 10145298200545765}
   - component: {fileID: 4684271024443580576}
+  - component: {fileID: 3629672948893217945}
   m_Layer: 20
   m_Name: PF Props Barrel
   m_TagString: Ground
@@ -150,9 +151,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1806e93ef725fc4aaaa4e3795b8c60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mostPercent: 1
-  healHealth: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227,
+  _humberOfHits: 2
+  _mostPercent: 1
+  _healHealth: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227,
     type: 3}
+--- !u!60 &3629672948893217945
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055102311959635369}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.875, y: 1.125}
+    newSize: {x: 1, y: 0.96875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.20909715, y: 0.38799787}
+      - {x: -0.39110565, y: 0.2052517}
+      - {x: -0.1799748, y: 0.031404495}
+      - {x: 0.18768442, y: 0.032119513}
+      - {x: 0.37913442, y: 0.21854877}
+      - {x: 0.20543623, y: 0.38982868}
 --- !u!1 &2055102312182832482
 GameObject:
   m_ObjectHideFlags: 0

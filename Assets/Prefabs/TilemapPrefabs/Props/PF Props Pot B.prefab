@@ -233,8 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1806e93ef725fc4aaaa4e3795b8c60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mostPercent: 0
-  healHealth: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227,
+  _humberOfHits: 1
+  _mostPercent: 0
+  _healHealth: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227,
     type: 3}
 --- !u!60 &5954777979732572883
 PolygonCollider2D:

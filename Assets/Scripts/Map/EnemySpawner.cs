@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     public TypeOfWave type3;
     private Vector2[] points;
     private bool playerTrigger = false;
+    private bool _isOpen = false;
 
     public List<GameObject> enemy1 = new List<GameObject>();
     private List<GameObject> enemy2 = new List<GameObject>();
@@ -31,7 +32,6 @@ public class EnemySpawner : MonoBehaviour
     private bool FirstWaveEnd = false;
     private bool SecondWaveEnd = false;
     private bool ThirdWaveEnd = false;
-    [SerializeField]private BoxCollider2D _boxCollider2d;
 
     private MainScript mainScript;
     public enum TypeOfWave
@@ -62,11 +62,20 @@ public class EnemySpawner : MonoBehaviour
     {
         if (!boss)
         {
-            for (int i = 0; i < 10; i++) 
+            for (int i = 0; i < 15; i++) 
             {
-                enemy1.Add(mainScript.kindOfEnemies[Random.Range(0, mainScript.kindOfEnemies.Count)]);
-                enemy2.Add(mainScript.kindOfEnemies[Random.Range(0, mainScript.kindOfEnemies.Count)]);
-                enemy3.Add(mainScript.kindOfEnemies[Random.Range(0, mainScript.kindOfEnemies.Count)]);
+                if (numberOfWaves == 1)
+                {
+                    enemy1.Add(mainScript.kindOfEnemies1Wave[Random.Range(0, mainScript.kindOfEnemies1Wave.Count)]);
+                }
+                else if(numberOfWaves == 2)
+                {
+                    enemy2.Add(mainScript.kindOfEnemies2Wave[Random.Range(0, mainScript.kindOfEnemies2Wave.Count)]);
+                }
+                else if (numberOfWaves == 3)
+                {
+                    enemy3.Add(mainScript.kindOfEnemies3Wave[Random.Range(0, mainScript.kindOfEnemies3Wave.Count)]);
+                }
             }
         }
     }
@@ -141,7 +150,7 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(2f);
         for (int i = 0; i < points.GetLength(0); i++)
         {
-            if (enemy1.Count != 0 && enemy1.Count>=5)
+            if (enemy1.Count != 0)
             {
                 wave1.Add(Instantiate(enemy1[0], points[i], Quaternion.identity));
                 enemy1.RemoveAt(0);
@@ -260,7 +269,7 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int i = 0; i < points.GetLength(0); i++)
             {
-                points[i] = new Vector2(transform.root.localPosition.x + Random.Range(-1250, 550), transform.root.localPosition.y + Random.Range(361, -550));
+                points[i] = new Vector2(transform.root.localPosition.x + Random.Range(-1100, 550), transform.root.localPosition.y + Random.Range(361, -550));
                 enemyMarkers.Add(Instantiate(enemySpawnMarker, points[i], Quaternion.identity));
             }
         }
@@ -283,19 +292,22 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator DelayBeforeTriggerPlayer()
     {
         yield return new WaitForSeconds(1f);
-        _boxCollider2d.enabled = true;
+        _isOpen = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Destroy(GetComponent<BoxCollider2D>());
-            CloseDoors();
-            if (boss)
-            StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfBossMusic[Random.Range(0, StaticClass.mainScript.kindOfBossMusic.Count)]);
-            StartCoroutine(SpawnFirstWave());
-            playerTrigger = true;
+            if (_isOpen)
+            {
+                Destroy(GetComponent<BoxCollider2D>());
+                CloseDoors();
+                if (boss)
+                    StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfBossMusic[Random.Range(0, StaticClass.mainScript.kindOfBossMusic.Count)]);
+                StartCoroutine(SpawnFirstWave());
+                playerTrigger = true;
+            }
         }
     }
 }

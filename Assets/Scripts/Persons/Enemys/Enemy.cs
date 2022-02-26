@@ -5,22 +5,21 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IEntity
 {
-    public GameObject player;
-    public PlayerCharacteristic playerCharacteristic;
     public int health;
     public int damage;
     public float speed;
     public float timeBtwAttack;
-    public bool playerIsAlive = true;
-    public MainScript mainScript;
-    public Vector3 startPosition;
-    public Rigidbody2D rb;
-    public Animator animator;
-    public bool animHasBeenChanged = false;
     public NavMeshAgent navAgent;
-
-    public Vector3 targetForMove;
-    public bool lockerForAIMove = false;
+    [HideInInspector] public GameObject player;
+    [HideInInspector] public PlayerCharacteristic playerCharacteristic;
+    [HideInInspector] public bool playerIsAlive = true;
+    [HideInInspector] public MainScript mainScript;
+    [HideInInspector] public Vector3 startPosition;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public bool animHasBeenChanged = false;
+    [HideInInspector] public Vector3 targetForMove;
+    [HideInInspector] public bool lockerForAIMove;
 
     private Collider2D _collider;
     private bool _isOpen = false;

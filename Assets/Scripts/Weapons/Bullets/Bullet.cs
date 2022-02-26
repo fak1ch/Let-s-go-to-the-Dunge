@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public float lifetime;
     public int damage;
     public bool enemyBullet = false;
+    [SerializeField] private bool _allowMove = true;
     public AudioSoundAfterDestroy sound;
 
     private bool _isOpen = true;
@@ -42,6 +43,12 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    protected void BulletMove()
+    {
+        if(_allowMove)
+        transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+    }
+
     private void BulletTouch(IEntity script)
     {
         _isOpen = false;
@@ -61,13 +68,22 @@ public class Bullet : MonoBehaviour
         if (sound != null)
         {
             sound.PlaySoundAfterDestroy();
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else
+        {
+            DestroyBulletForChild();
+        }
     }
 
     private IEnumerator DestroyAfterTime()
     {
         yield return new WaitForSeconds(lifetime);
+        DestroyBulletForChild();
+    }
+
+    public virtual void DestroyBulletForChild()
+    {
         Destroy(transform.parent.gameObject);
     }
 }

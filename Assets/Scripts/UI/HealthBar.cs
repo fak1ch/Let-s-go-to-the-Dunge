@@ -6,53 +6,62 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private int health;
-    public int numberOfLives;
-    public Image[] lives;
-    public Sprite fullLive;
-    public Sprite halfLive;
-    public Sprite emptyLive;
+    [SerializeField] private Image[] _lives;
+    [SerializeField] private Sprite _fullLive;
+    [SerializeField] private Sprite _halfLive;
+    [SerializeField] private Sprite _emptyLive;
 
-    private PlayerCharacteristic playerCharacteristic;
-    void Start()
+    private int _health;
+    private int _numberOfLives;
+    private PlayerCharacteristic _playerCharacteristic;
+    void Awake()
     {
-        playerCharacteristic = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacteristic>();
+        _playerCharacteristic = FindObjectOfType<PlayerCharacteristic>();
+        UpdateHealthBar(_playerCharacteristic.health, _playerCharacteristic.maxHealth);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        health = playerCharacteristic.health;
-        numberOfLives = playerCharacteristic.maxHealth;
-        if (health > numberOfLives)
+        _playerCharacteristic.OnHealthChange += UpdateHealthBar;
+    }
+    private void OnDisable()
+    {
+        _playerCharacteristic.OnHealthChange -= UpdateHealthBar;
+    }
+
+    private void UpdateHealthBar(int health, int maxHealth)
+    {
+        _health = health;
+        _numberOfLives = maxHealth;
+        if (_health > _numberOfLives)
         {
-            playerCharacteristic.health = numberOfLives;
+            _playerCharacteristic.health = _numberOfLives;
         }
-        for(int i = 0; i < 2 * lives.Length; i++)
+        for (int i = 0; i < 2 * _lives.Length; i++)
         {
             int k = i % 2;
             double j = i / 2;
             Math.Floor(j);
             if (i < health)
             {
-                lives[(int)j].sprite = fullLive;
+                _lives[(int)j].sprite = _fullLive;
             }
-            if (i == health - 1 && k==0)
+            if (i == health - 1 && k == 0)
             {
-                lives[(int)j].sprite = halfLive;
+                _lives[(int)j].sprite = _halfLive;
             }
             if (i > health)
             {
-                lives[(int)j].sprite = emptyLive;
+                _lives[(int)j].sprite = _emptyLive;
             }
 
-            if (i < numberOfLives)
+            if (i < _numberOfLives)
             {
-                lives[(int)j].enabled = true;
+                _lives[(int)j].enabled = true;
             }
             else
             {
-                lives[(int)j].enabled = false;
+                _lives[(int)j].enabled = false;
             }
         }
     }

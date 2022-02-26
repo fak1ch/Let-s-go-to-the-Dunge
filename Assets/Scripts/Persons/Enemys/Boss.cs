@@ -48,7 +48,7 @@ public class Boss : Enemy, IEnemy
 
     private void SmartMenu()
     {
-        if (GetBoolRun())
+        if (GetBoolRun() || !playerIsAlive)
         {
             EnemyMove();
         }
@@ -81,8 +81,11 @@ public class Boss : Enemy, IEnemy
                 target = bossRoom.transform;
             }
             yield return new WaitForSeconds(i);
-            SetBoolShoot(true);
-            SetBoolRun(false);
+            if (playerIsAlive)
+            {
+                SetBoolShoot(true);
+                SetBoolRun(false);
+            }
             target = player.transform;
         }
     }
@@ -92,7 +95,6 @@ public class Boss : Enemy, IEnemy
         if (playerIsAlive)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            SetBoolShoot(false);
         }
         else
         {
@@ -102,16 +104,21 @@ public class Boss : Enemy, IEnemy
 
     public override void MoveToStartPosition()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        if (transform.position != startPosition)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, startPosition, speed * Time.deltaTime);
+        }
+        else
+        {
+            SetBoolShoot(false);
+            SetBoolRun(false);
+        }
     }
 
     private void Shoot()
     {
-        if (playerIsAlive)
-        {
-            locked = true;
-            StartCoroutine(Shoot1());
-        }
+        locked = true;
+        StartCoroutine(Shoot1());
     }
 
     private IEnumerator Shoot1()

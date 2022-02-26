@@ -8,9 +8,12 @@ public class MainScript : MonoBehaviour
     public bool cheats = false;
     public bool endSpawn = false;
     public List<GameObject> kindOfWeapons = new List<GameObject>();
-    public List<GameObject> kindOfEnemies = new List<GameObject>();
     public List<AudioClip> kindOfMusicClips = new List<AudioClip>();
     public List<AudioClip> kindOfBossMusic = new List<AudioClip>();
+
+    public List<GameObject> kindOfEnemies1Wave = new List<GameObject>();
+    public List<GameObject> kindOfEnemies2Wave = new List<GameObject>();
+    public List<GameObject> kindOfEnemies3Wave = new List<GameObject>();
 
     [Header("Now exists")]
     public List<GameObject> rooms = new List<GameObject>();
@@ -81,23 +84,14 @@ public class MainScript : MonoBehaviour
     {
         List<GameObject> rms1Doors = new List<GameObject>();
         GameObject roomForBoss = rooms[0];
-        int j = 0;
         GameObject roomForShop = null;
-        float maxDistance = 0;
         for(int i = 1; i < rooms.Count; i++)
         {
             if (rooms[i].GetComponentInChildren<EnemySpawner>().doors.Count == 1) { rms1Doors.Add(rooms[i]);}
         }
-        for (int i = 1; i < rms1Doors.Count; i++)
-        {
-            float distance = DistanceBetween2dPoints(rms1Doors[i].transform.position, rooms[0].transform.position);
-            if (maxDistance < distance)
-            {
-                maxDistance = distance;
-                roomForBoss = rms1Doors[i];
-                j = i;
-            }
-        }
+
+        int j = Random.Range(0, rms1Doors.Count);
+        roomForBoss = rms1Doors[j];
         rms1Doors.RemoveAt(j);
 
         if (rms1Doors.Count >= 1) { roomForShop = rms1Doors[Random.Range(0, rms1Doors.Count)]; }

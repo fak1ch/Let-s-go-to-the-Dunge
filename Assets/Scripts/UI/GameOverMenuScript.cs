@@ -26,6 +26,7 @@ public class GameOverMenuScript : MonoBehaviour
 
     public void OpenGameOverMenu()
     {
+        gameObject.SetActive(true);
         StartCoroutine(OpenGameOverMenuCoroutine());
     }
 

@@ -9,6 +9,7 @@ public class Robot : Enemy, IEnemy
     public float startTimeBtwShots;
 
     private float timeBtwShots;
+    private int _hitsSpeedAttack;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,17 @@ public class Robot : Enemy, IEnemy
             shotPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             if (timeBtwShots <= 0)
             {
-                Instantiate(bullet, shotPoint.position, shotPoint.rotation);
+                var b = Instantiate(bullet, shotPoint.position, shotPoint.rotation);
+                if (_hitsSpeedAttack == 5)
+                {
+                    _hitsSpeedAttack = 0;
+                    Bullet bulletScript = b.GetComponentInChildren<Bullet>();
+                    bulletScript.speed *= 2;
+                }
+                else
+                {
+                    _hitsSpeedAttack++;
+                }
 
                 timeBtwShots = startTimeBtwShots; 
             }

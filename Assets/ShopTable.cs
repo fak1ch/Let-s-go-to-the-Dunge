@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ShopTable : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _item;
+    [SerializeField] private SpriteRenderer _itemSprite;
     [SerializeField] private TypeOfItem _typeOfItem;
     [SerializeField] private GameObject _health;
     [SerializeField] private GameObject _mana;
@@ -14,38 +14,23 @@ public class ShopTable : MonoBehaviour
 
     private enum TypeOfItem { Health, Mana, Weapon }
     private GameObject _gameObjectItem;
-    private MainScript _mainScript;
     private bool _isLockerOpen = true;
     private WeaponsInventory _weaponsInventory;
     private int _price;
     private bool isOpen = true;
+    private GameObject _weapon;
 
     void Start()
     {
-        _mainScript = StaticClass.mainScript;
         _weaponsInventory = StaticClass.weaponsInventory;
+        _weapon = StaticClass.mainScript.kindOfWeapons[Random.Range(0, StaticClass.mainScript.kindOfWeapons.Count)];
+        _health.GetComponent<HealthForHeal>().HealValue = 4;
         if (_typeOfItem == TypeOfItem.Weapon)
-        {
-            _gameObjectItem = _mainScript.kindOfWeapons[Random.Range(0, _mainScript.kindOfWeapons.Count)];
-            _item.sprite = _gameObjectItem.GetComponent<SpriteRenderer>().sprite;
-            _item.transform.localScale = _gameObjectItem.transform.localScale / 200;
-            _price = 10;
-        }
-        else if (_typeOfItem == TypeOfItem.Health)
-        {
-            _gameObjectItem = _health;
-            _item.sprite = _gameObjectItem.GetComponent<SpriteRenderer>().sprite;
-            _item.transform.localScale = _gameObjectItem.transform.localScale / 100;
-            _gameObjectItem.GetComponent<HealthForHeal>().HealValue = 4;
-            _price = 5;
-        }
-        else if (_typeOfItem == TypeOfItem.Mana)
-        {
-            _gameObjectItem = _mana;
-            _item.sprite = _gameObjectItem.GetComponent<SpriteRenderer>().sprite;
-            _item.transform.localScale = _gameObjectItem.transform.localScale / 200;
-            _price = 5;
-        }
+            CreateSpriteItem(_weapon, 200, 10);
+        if (_typeOfItem == TypeOfItem.Health)
+            CreateSpriteItem(_health, 100, 5);
+        if (_typeOfItem == TypeOfItem.Mana)
+            CreateSpriteItem(_mana, 200, 5);
         _priceText.text = _price.ToString();
     }
 
@@ -53,18 +38,29 @@ public class ShopTable : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (_isLockerOpen && (_weaponsInventory.androidClickAction || Input.GetKeyDown(KeyCode.E)) && StaticClass.playerCharacteristic.Amethists >= _price)
+            if (_weaponsInventory.androidClickAction || Input.GetKeyDown(KeyCode.E))
             {
-                _isLockerOpen = false;
-                StaticClass.playerCharacteristic.TakeAmethyst(-_price);
-                var gm = Instantiate(_gameObjectItem, _item.gameObject.transform.position, Quaternion.identity);
-                if (_typeOfItem == TypeOfItem.Weapon) _weaponsInventory.PickGun(gm);
+                if (_isLockerOpen && StaticClass.playerCharacteristic.Amethists >= _price)
+                {
+                    _isLockerOpen = false;
+                    StaticClass.playerCharacteristic.TakeAmethyst(-_price);
+                    var gm = Instantiate(_gameObjectItem, _itemSprite.gameObject.transform.position, Quaternion.identity);
+                    if (_typeOfItem == TypeOfItem.Weapon) _weaponsInventory.PickGun(gm);
 
-                Destroy(GetComponent<CircleCollider2D>());
-                StaticClass.weaponsInventory.AllGunsGreenZoneState(false);
-                Destroy(_item.gameObject);
-                Destroy(_priceText.transform.parent.gameObject);
+                    Destroy(GetComponent<CircleCollider2D>());
+                    StaticClass.weaponsInventory.AllGunsGreenZoneState(false);
+                    Destroy(_itemSprite.gameObject);
+                    Destroy(_priceText.transform.parent.gameObject);
+                }
             }
         }
+    }
+
+    private void CreateSpriteItem(GameObject item, float scale, int price)
+    {
+        _gameObjectItem = item;
+        _itemSprite.sprite = item.GetComponent<SpriteRenderer>().sprite;
+        _itemSprite.transform.localScale = _gameObjectItem.transform.localScale / scale;
+        _price = price;
     }
 }

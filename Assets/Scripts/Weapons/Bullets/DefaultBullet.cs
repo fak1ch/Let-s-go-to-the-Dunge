@@ -11,7 +11,7 @@ public class DefaultBullet : Bullet
     }
     void Update()
     {
-        transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+        BulletMove();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,16 +10,14 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
     public int maxHealth;
     public GameObject gunPlace;
     public GameOverMenuScript gameOverMenuScript;
+    public event Action<int,int> OnHealthChange;
+    public event Action<int> OnAmethystChange;
 
     private Joystick _joystick;
     private bool _facingRight = false;
     private Camera _camera;
     private bool _immortalityOn = false;
-    private int _amethists;
-    private AmethystPanel _amethystPanel;
-
-    public int Amethists { get { return _amethists; } set { _amethists = value; } }
-    // Start is called before the first frame update
+    public int Amethists { get; set; }
 
     void Start()
     {
@@ -28,7 +27,6 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
         {
             _joystick = GameObject.FindGameObjectWithTag("JoystickMove").GetComponent<FixedJoystick>();
         }
-        _amethystPanel = GameObject.Find("AmethistsPanel").GetComponent<AmethystPanel>();
     }
 
     void FixedUpdate()
@@ -91,11 +89,11 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
         if (!_immortalityOn)
         {
             health -= damage;
+            OnHealthChange?.Invoke(health,maxHealth);
             if (health <= 0)
             {
                 health = 0;
                 StaticClass.mainScript.SetToAllEnemiesAlivePlayerOrDead(false);
-                gameOverMenuScript.gameObject.SetActive(true);
                 gameOverMenuScript.OpenGameOverMenu();
                 StartCoroutine(PlayerSetFalse(0.1f));
             }
@@ -122,7 +120,7 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
 
     public void TakeAmethyst(int value)
     {
-        _amethists += value;
-        _amethystPanel.ChangeAmethistValue(_amethists);
+        Amethists += value;
+        OnAmethystChange?.Invoke(Amethists);
     }
 }

@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 8804442991036403692}
   - component: {fileID: 8804442991036403695}
   - component: {fileID: 4355225377565264712}
+  - component: {fileID: 5758866072558556328}
   m_Layer: 20
   m_Name: ShopTable
   m_TagString: Ground
@@ -426,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e40ec2e9eedfd428915882af63459f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 8804442992301776241}
+  _itemSprite: {fileID: 8804442992301776241}
   _typeOfItem: 0
   _health: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227, type: 3}
   _mana: {fileID: 7166170418527372959, guid: b4fbf778241fee44d8fb34e4862e4412, type: 3}
@@ -444,6 +445,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider2d: {fileID: 8804442991036403692}
+--- !u!114 &5758866072558556328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8804442991036403681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8804442992301776247
 GameObject:
   m_ObjectHideFlags: 0

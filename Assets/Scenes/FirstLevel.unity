@@ -2129,7 +2129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 733345085}
-  _jump: -36
+  _jumpText: -36
 --- !u!1 &900171860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,7 +3264,7 @@ MonoBehaviour:
   - {fileID: 3657985077980651211, guid: e9f151e2c6dd09448b04fc24273841da, type: 3}
   bottomRooms:
   - {fileID: 5320211945938333522, guid: 79ff8d8db035d414282346158c78b457, type: 3}
-  - {fileID: 1238352567052854194, guid: c2769ea31a12cca4799e1761694615cb, type: 3}
+  - {fileID: 5321954981964231455, guid: 9b8b0837eaadae143b2783f15a567bb1, type: 3}
   - {fileID: 9069753869831929686, guid: 7d171ee82db3b1a40895b39b6367c596, type: 3}
   leftRooms:
   - {fileID: 5833693562084809936, guid: 189577ec93c96954fa066e8fb9a981f5, type: 3}
@@ -3404,16 +3404,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2f8a66affa4354ea3e03871cf3473e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfLives: 6
-  lives:
+  _lives:
   - {fileID: 223312648}
   - {fileID: 1135675944}
   - {fileID: 365703138}
   - {fileID: 846298859}
-  fullLive: {fileID: 4606908045521496030, guid: 09f0d02af4642ad46b81cd09124484be,
+  _fullLive: {fileID: 4606908045521496030, guid: 09f0d02af4642ad46b81cd09124484be,
     type: 3}
-  halfLive: {fileID: 21300000, guid: 1dd82a15cda1046468accfc9e57b2490, type: 3}
-  emptyLive: {fileID: 21300000, guid: e116b6edd733ed34f990cf583597f2a9, type: 3}
+  _halfLive: {fileID: 21300000, guid: 1dd82a15cda1046468accfc9e57b2490, type: 3}
+  _emptyLive: {fileID: 21300000, guid: e116b6edd733ed34f990cf583597f2a9, type: 3}
 --- !u!1 &1449111378
 GameObject:
   m_ObjectHideFlags: 0
@@ -3686,13 +3685,21 @@ MonoBehaviour:
   kindOfWeapons:
   - {fileID: 1263406142964017831, guid: c72a4386eb8889f438f25b6eb71cc2de, type: 3}
   - {fileID: 4384453756220291512, guid: 302f2a4bfbe28874e8d11518e8842c46, type: 3}
-  kindOfEnemies:
-  - {fileID: 6716826336580903018, guid: 90d20290acc66ff48941b06bcd82ba99, type: 3}
-  - {fileID: 5155852972798614352, guid: 3ab64cd6fad06a34eb20d196cc31e6f7, type: 3}
   kindOfMusicClips:
   - {fileID: 8300000, guid: 0e2c08548baaf6e4994bbab3c584612d, type: 3}
   kindOfBossMusic:
-  - {fileID: 8300000, guid: 69a724dd39fa0c34080d0620b747fbd1, type: 3}
+  - {fileID: 8300000, guid: d94aa2d92f9fc67448040633972a6af2, type: 3}
+  kindOfEnemies1Wave:
+  - {fileID: 5155852972798614352, guid: 3ab64cd6fad06a34eb20d196cc31e6f7, type: 3}
+  - {fileID: 6716826336580903018, guid: 90d20290acc66ff48941b06bcd82ba99, type: 3}
+  kindOfEnemies2Wave:
+  - {fileID: 5155852972798614352, guid: 3ab64cd6fad06a34eb20d196cc31e6f7, type: 3}
+  - {fileID: 6716826336580903018, guid: 90d20290acc66ff48941b06bcd82ba99, type: 3}
+  - {fileID: 4667866513540637179, guid: da8116a084d6e034e94ae0787ff4609d, type: 3}
+  kindOfEnemies3Wave:
+  - {fileID: 5155852972798614352, guid: 3ab64cd6fad06a34eb20d196cc31e6f7, type: 3}
+  - {fileID: 6716826336580903018, guid: 90d20290acc66ff48941b06bcd82ba99, type: 3}
+  - {fileID: 4667866513540637179, guid: da8116a084d6e034e94ae0787ff4609d, type: 3}
   rooms: []
   enemies: []
   camera: {fileID: 519420031}
