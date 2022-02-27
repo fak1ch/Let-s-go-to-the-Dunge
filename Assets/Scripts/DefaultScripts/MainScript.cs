@@ -85,30 +85,39 @@ public class MainScript : MonoBehaviour
         List<GameObject> rms1Doors = new List<GameObject>();
         GameObject roomForBoss = rooms[0];
         GameObject roomForShop = null;
+        float distance = 0;
+        float maxDistance = 0;
         for(int i = 1; i < rooms.Count; i++)
         {
-            if (rooms[i].GetComponentInChildren<EnemySpawner>().doors.Count == 1) { rms1Doors.Add(rooms[i]);}
+            if (rooms[i].GetComponentInChildren<EnemySpawner>().doors.Count == 1) 
+            { 
+                rms1Doors.Add(rooms[i]);
+                distance = Vector3.Distance(rooms[i].transform.position, rooms[0].transform.position);
+                if (distance > maxDistance)
+                {
+                    maxDistance = distance;
+                    roomForBoss = rooms[i];
+                }
+            }
         }
 
-        int j = Random.Range(0, rms1Doors.Count);
-        roomForBoss = rms1Doors[j];
-        rms1Doors.RemoveAt(j);
+        rms1Doors.Remove(roomForBoss);
 
-        if (rms1Doors.Count >= 1) { roomForShop = rms1Doors[Random.Range(0, rms1Doors.Count)]; }
-
-
-        rooms.Remove(roomForShop);
-        Destroy(roomForShop);
-        int k = roomForShop.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
-        Vector3 pos = roomForShop.transform.position;
-        var shop = Instantiate(variants.shopRooms[k - 1], pos, Quaternion.Euler(-90, 0, 0));
-
-        pos = roomForBoss.transform.position;
-        k = roomForBoss.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
+        Vector3 pos = roomForBoss.transform.position;
+        int k = roomForBoss.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
         rooms.Remove(roomForBoss);
         Destroy(roomForBoss);
         var obj = Instantiate(variants.bossRooms[k-1], pos, Quaternion.Euler(-90,0,0));
-        obj.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().OpenDoors();
+
+        if (rms1Doors.Count > 1) 
+        { 
+            roomForShop = rms1Doors[Random.Range(0, rms1Doors.Count)];
+            rooms.Remove(roomForShop);
+            Destroy(roomForShop);
+            k = roomForShop.transform.Find("EnemySpawner").gameObject.GetComponent<EnemySpawner>().doors[0].GetComponent<Door>().number;
+            pos = roomForShop.transform.position;
+            var shop = Instantiate(variants.shopRooms[k - 1], pos, Quaternion.Euler(-90, 0, 0));
+        }
     }
 
     public void SetToAllEnemiesAlivePlayerOrDead(bool value)

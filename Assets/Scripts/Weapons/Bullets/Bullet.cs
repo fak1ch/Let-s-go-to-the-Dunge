@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    protected void BulletMove()
+    protected virtual void BulletMove()
     {
         if(_allowMove)
         transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);

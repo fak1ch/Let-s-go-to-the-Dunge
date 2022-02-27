@@ -24,11 +24,10 @@ public class ShopTable : MonoBehaviour
     {
         _weaponsInventory = StaticClass.weaponsInventory;
         _weapon = StaticClass.mainScript.kindOfWeapons[Random.Range(0, StaticClass.mainScript.kindOfWeapons.Count)];
-        _health.GetComponent<HealthForHeal>().HealValue = 4;
         if (_typeOfItem == TypeOfItem.Weapon)
             CreateSpriteItem(_weapon, 200, 10);
         if (_typeOfItem == TypeOfItem.Health)
-            CreateSpriteItem(_health, 100, 5);
+            CreateSpriteItem(_health, 200, 5);
         if (_typeOfItem == TypeOfItem.Mana)
             CreateSpriteItem(_mana, 200, 5);
         _priceText.text = _price.ToString();
@@ -48,7 +47,6 @@ public class ShopTable : MonoBehaviour
                     if (_typeOfItem == TypeOfItem.Weapon) _weaponsInventory.PickGun(gm);
 
                     Destroy(GetComponent<CircleCollider2D>());
-                    StaticClass.weaponsInventory.AllGunsGreenZoneState(false);
                     Destroy(_itemSprite.gameObject);
                     Destroy(_priceText.transform.parent.gameObject);
                 }

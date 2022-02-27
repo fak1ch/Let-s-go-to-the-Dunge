@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 97230571}
   - component: {fileID: 97230570}
   - component: {fileID: 97230572}
+  - component: {fileID: 97230573}
   m_Layer: 5
   m_Name: ButtonRespawn
   m_TagString: Untagged
@@ -149,7 +150,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97230568}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -243,9 +244,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 476922471}
-        m_TargetAssemblyTypeName: GameOverMenuScript, Assembly-CSharp
-        m_MethodName: RespawnPlayerAfterAds
+      - m_Target: {fileID: 97230573}
+        m_TargetAssemblyTypeName: RewardedAdsButton, Assembly-CSharp
+        m_MethodName: ShowAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -255,6 +256,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &97230573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97230568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b0f140e22fc8444b0279989da9d13e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showAdButton: {fileID: 97230572}
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
 --- !u!1 &189572631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,7 +1318,7 @@ RectTransform:
   - {fileID: 1037456424}
   - {fileID: 97230569}
   m_Father: {fileID: 2109316400}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1360,6 +1376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cd8152cc027b5428b20b4877bb5775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 97230573}
 --- !u!1 &494800541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,7 +2785,7 @@ PrefabInstance:
     - target: {fileID: 943522806848519289, guid: 9e1488443b5df8540af3d22902d27db5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 943522806848519289, guid: 9e1488443b5df8540af3d22902d27db5,
         type: 3}
@@ -3661,6 +3678,7 @@ GameObject:
   - component: {fileID: 1696952115}
   - component: {fileID: 1696952114}
   - component: {fileID: 1696952116}
+  - component: {fileID: 1696952117}
   m_Layer: 0
   m_Name: MainScript
   m_TagString: MainScript
@@ -3815,6 +3833,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1696952117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696952113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85df4cadd4180174f9f05146e73d4d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 4633931
+  _iOSGameId: 4633930
+  _testMode: 0
 --- !u!1 &1901124663
 GameObject:
   m_ObjectHideFlags: 0
@@ -4225,8 +4258,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 792222777}
-  - {fileID: 1059132665}
   - {fileID: 476922467}
+  - {fileID: 1059132665}
   - {fileID: 1110879654}
   m_Father: {fileID: 0}
   m_RootOrder: 3

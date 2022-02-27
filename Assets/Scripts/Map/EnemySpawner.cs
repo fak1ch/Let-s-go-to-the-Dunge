@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public int secondsBetweenWaves = 2;
-    public int numberOfSpawnPoints = 5;
-    public int numberOfWaves = 2;
-    public TypeOfWave type1 = TypeOfWave.Single;
-    public TypeOfWave type2;
-    public TypeOfWave type3;
-    private Vector2[] points;
-    private bool playerTrigger = false;
-    private bool _isOpen = false;
-
-    public List<GameObject> enemy1 = new List<GameObject>();
-    private List<GameObject> enemy2 = new List<GameObject>();
-    private List<GameObject> enemy3 = new List<GameObject>();
-
-    private  List<GameObject> wave1 = new List<GameObject>();
-    private List<GameObject> wave2 = new List<GameObject>();
-    private List<GameObject> wave3 = new List<GameObject>();
-
     public List<GameObject> doors = new List<GameObject>();
+
+    [SerializeField] private int _secondsBetweenWaves = 2;
+    [SerializeField] private int _numberOfSpawnPoints = 5;
+    [SerializeField] private int _numberOfWaves = 2;
+    [SerializeField] private TypeOfWave _type1 = TypeOfWave.Single;
+    [SerializeField] private TypeOfWave _type2;
+    [SerializeField] private TypeOfWave _type3;
+    [SerializeField] private GameObject chest;
+    [SerializeField] private bool boss = false;
+    [SerializeField] private GameObject enemySpawnMarker;
+    private Vector2[] _points;
+    private bool _playerTrigger = false;
+    private bool _isOpen = false;
+    [SerializeField] private List<GameObject> _enemy1 = new List<GameObject>();
+    private List<GameObject> _enemy2 = new List<GameObject>();
+    private List<GameObject> _enemy3 = new List<GameObject>();
+    private List<GameObject> _wave1 = new List<GameObject>();
+    private List<GameObject> _wave2 = new List<GameObject>();
+    private List<GameObject> _wave3 = new List<GameObject>();
     private List<GameObject> enemyMarkers = new List<GameObject>();
-
-    public GameObject chest;
-    public bool boss = false;
-    public GameObject enemySpawnMarker;
-
-    private bool FirstWaveEnd = false;
-    private bool SecondWaveEnd = false;
-    private bool ThirdWaveEnd = false;
+    private bool _firstWaveEnd = false;
+    private bool _secondWaveEnd = false;
+    private bool _thirdWaveEnd = false;
 
     private MainScript mainScript;
     public enum TypeOfWave
@@ -44,15 +40,15 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
-        points = new Vector2[numberOfSpawnPoints];
+        mainScript = FindObjectOfType<MainScript>();
+        _points = new Vector2[_numberOfSpawnPoints];
         StartCoroutine(DelayBeforeTriggerPlayer());
         RandomEnemys();
     }
 
     private void Update()
     {
-        if (playerTrigger)
+        if (_playerTrigger)
         {
             Menu();
         }
@@ -62,19 +58,22 @@ public class EnemySpawner : MonoBehaviour
     {
         if (!boss)
         {
-            for (int i = 0; i < 15; i++) 
+            for (int i = 0; i < _numberOfSpawnPoints * 3; i++) 
             {
-                if (numberOfWaves == 1)
+                if (_numberOfWaves == 1)
                 {
-                    enemy1.Add(mainScript.kindOfEnemies1Wave[Random.Range(0, mainScript.kindOfEnemies1Wave.Count)]);
+                    _enemy1.Add(mainScript.kindOfEnemies1Wave[Random.Range(0, mainScript.kindOfEnemies1Wave.Count)]);
                 }
-                else if(numberOfWaves == 2)
+                else if(_numberOfWaves == 2)
                 {
-                    enemy2.Add(mainScript.kindOfEnemies2Wave[Random.Range(0, mainScript.kindOfEnemies2Wave.Count)]);
+                    _enemy1.Add(mainScript.kindOfEnemies2Wave[Random.Range(0, mainScript.kindOfEnemies2Wave.Count)]);
+                    _enemy2.Add(mainScript.kindOfEnemies2Wave[Random.Range(0, mainScript.kindOfEnemies2Wave.Count)]);
                 }
-                else if (numberOfWaves == 3)
+                else if (_numberOfWaves == 3)
                 {
-                    enemy3.Add(mainScript.kindOfEnemies3Wave[Random.Range(0, mainScript.kindOfEnemies3Wave.Count)]);
+                    _enemy1.Add(mainScript.kindOfEnemies3Wave[Random.Range(0, mainScript.kindOfEnemies3Wave.Count)]);
+                    _enemy2.Add(mainScript.kindOfEnemies3Wave[Random.Range(0, mainScript.kindOfEnemies3Wave.Count)]);
+                    _enemy3.Add(mainScript.kindOfEnemies3Wave[Random.Range(0, mainScript.kindOfEnemies3Wave.Count)]);
                 }
             }
         }
@@ -82,41 +81,41 @@ public class EnemySpawner : MonoBehaviour
 
     private void Menu()
     {
-        if (FirstWaveEnd)
+        if (_firstWaveEnd)
         {
-            DeleteNull(wave1);
-            if (wave1.Count == 0 && numberOfWaves !=1)
+            DeleteNull(_wave1);
+            if (_wave1.Count == 0 && _numberOfWaves !=1)
             {
                 StartCoroutine(SpawnSecondWave());
             }
-            else if (wave1.Count == 0 && numberOfWaves == 1)
+            else if (_wave1.Count == 0 && _numberOfWaves == 1)
             {
                 OpenDoors();
-                playerTrigger = true;
+                _playerTrigger = true;
                 Destroy(gameObject);  
             }
         }
-        else if (SecondWaveEnd)
+        else if (_secondWaveEnd)
         {
-            DeleteNull(wave2);
-            if (wave2.Count == 0 && numberOfWaves != 2)
+            DeleteNull(_wave2);
+            if (_wave2.Count == 0 && _numberOfWaves != 2)
             {
                 StartCoroutine(SpawnThirdWave());
             }
-            else if (wave2.Count == 0 && numberOfWaves == 2)
+            else if (_wave2.Count == 0 && _numberOfWaves == 2)
             {
                 OpenDoors();
-                playerTrigger = true;
+                _playerTrigger = true;
                 Destroy(gameObject);
             }
         }
-        else if (ThirdWaveEnd)
+        else if (_thirdWaveEnd)
         {
-            DeleteNull(wave3);
-            if (wave3.Count == 0)
+            DeleteNull(_wave3);
+            if (_wave3.Count == 0)
             {
                 OpenDoors();
-                playerTrigger = true;
+                _playerTrigger = true;
                 Instantiate(chest, transform.root.gameObject.transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
@@ -148,129 +147,129 @@ public class EnemySpawner : MonoBehaviour
     {
         RecreatePoints();
         yield return new WaitForSeconds(2f);
-        for (int i = 0; i < points.GetLength(0); i++)
+        for (int i = 0; i < _points.GetLength(0); i++)
         {
-            if (enemy1.Count != 0)
+            if (_enemy1.Count != 0)
             {
-                wave1.Add(Instantiate(enemy1[0], points[i], Quaternion.identity));
-                enemy1.RemoveAt(0);
+                _wave1.Add(Instantiate(_enemy1[0], _points[i], Quaternion.identity));
+                _enemy1.RemoveAt(0);
                 Destroy(enemyMarkers[i]);
             }
-            if (boss && enemy1.Count != 0)
+            if (boss && _enemy1.Count != 0)
             {
-                wave1.Add(Instantiate(enemy1[0], points[i], Quaternion.identity));
-                enemy1.RemoveAt(0);
+                _wave1.Add(Instantiate(_enemy1[0], _points[i], Quaternion.identity));
+                _enemy1.RemoveAt(0);
                 Destroy(enemyMarkers[i]);
             }
         }
-        FirstWaveEnd = true;
+        _firstWaveEnd = true;
     }
 
     IEnumerator SpawnSecondWave()
     {
         RecreatePoints();
-        FirstWaveEnd = false;
-        yield return new WaitForSeconds(secondsBetweenWaves);
-        for (int i = 0; i < points.GetLength(0); i++)
+        _firstWaveEnd = false;
+        yield return new WaitForSeconds(_secondsBetweenWaves);
+        for (int i = 0; i < _points.GetLength(0); i++)
         {
-            if (enemy2.Count != 0)
+            if (_enemy2.Count != 0)
             {
-                wave2.Add(Instantiate(enemy2[0], points[i], Quaternion.identity));
-                enemy2.RemoveAt(0);
+                _wave2.Add(Instantiate(_enemy2[0], _points[i], Quaternion.identity));
+                _enemy2.RemoveAt(0);
                 Destroy(enemyMarkers[i]);
             }
         }
-        if (type2 == TypeOfWave.Double)
+        if (_type2 == TypeOfWave.Double)
         {
             RecreatePoints();
             yield return new WaitForSeconds(1);
-            for (int i = 0; i < points.GetLength(0); i++)
+            for (int i = 0; i < _points.GetLength(0); i++)
             {
-                if (enemy2.Count != 0)
+                if (_enemy2.Count != 0)
                 {
-                    wave2.Add(Instantiate(enemy2[0], points[i], Quaternion.identity));
-                    enemy2.RemoveAt(0);
+                    _wave2.Add(Instantiate(_enemy2[0], _points[i], Quaternion.identity));
+                    _enemy2.RemoveAt(0);
                     Destroy(enemyMarkers[i]);
                 }
             }
         }
-        if (type2 == TypeOfWave.Triple)
+        if (_type2 == TypeOfWave.Triple)
         {
             RecreatePoints();
             yield return new WaitForSeconds(1);
-            for (int i = 0; i < points.GetLength(0); i++)
+            for (int i = 0; i < _points.GetLength(0); i++)
             {
-                if (enemy2.Count != 0)
+                if (_enemy2.Count != 0)
                 {
-                    wave2.Add(Instantiate(enemy2[0], points[i], Quaternion.identity));
-                    enemy2.RemoveAt(0);
+                    _wave2.Add(Instantiate(_enemy2[0], _points[i], Quaternion.identity));
+                    _enemy2.RemoveAt(0);
                     Destroy(enemyMarkers[i]);
                 }
             }
         }
-        SecondWaveEnd = true;
+        _secondWaveEnd = true;
     }
 
     IEnumerator SpawnThirdWave()
     {
         RecreatePoints();
-        SecondWaveEnd = false;
-        yield return new WaitForSeconds(secondsBetweenWaves);
-        for (int i = 0; i < points.GetLength(0); i++)
+        _secondWaveEnd = false;
+        yield return new WaitForSeconds(_secondsBetweenWaves);
+        for (int i = 0; i < _points.GetLength(0); i++)
         {
-            if (enemy3.Count != 0)
+            if (_enemy3.Count != 0)
             {
-                wave3.Add(Instantiate(enemy3[0], points[i], Quaternion.identity));
-                enemy3.RemoveAt(0);
+                _wave3.Add(Instantiate(_enemy3[0], _points[i], Quaternion.identity));
+                _enemy3.RemoveAt(0);
                 Destroy(enemyMarkers[i]);
             }
         }
-        if (type2 == TypeOfWave.Double)
+        if (_type2 == TypeOfWave.Double)
         {
             RecreatePoints();
             yield return new WaitForSeconds(1);
-            for (int i = 0; i < points.GetLength(0); i++)
+            for (int i = 0; i < _points.GetLength(0); i++)
             {
-                if (enemy3.Count != 0)
+                if (_enemy3.Count != 0)
                 {
-                    wave3.Add(Instantiate(enemy3[0], points[i], Quaternion.identity));
-                    enemy3.RemoveAt(0);
+                    _wave3.Add(Instantiate(_enemy3[0], _points[i], Quaternion.identity));
+                    _enemy3.RemoveAt(0);
                     Destroy(enemyMarkers[i]);
                 }
             }
         }
-        if (type2 == TypeOfWave.Triple)
+        if (_type2 == TypeOfWave.Triple)
         {
             RecreatePoints();
             yield return new WaitForSeconds(1);
-            for (int i = 0; i < points.GetLength(0); i++)
+            for (int i = 0; i < _points.GetLength(0); i++)
             {
-                if (enemy3.Count != 0)
+                if (_enemy3.Count != 0)
                 {
-                    wave3.Add(Instantiate(enemy3[0], points[i], Quaternion.identity));
-                    enemy3.RemoveAt(0);
+                    _wave3.Add(Instantiate(_enemy3[0], _points[i], Quaternion.identity));
+                    _enemy3.RemoveAt(0);
                     Destroy(enemyMarkers[i]);
                 }
             }
         }
-        ThirdWaveEnd = true;
+        _thirdWaveEnd = true;
     }
 
     private void RecreatePoints()
     {
         if (enemyMarkers.Count != 0) enemyMarkers.Clear();
-        if (points.Length == 1)
+        if (_points.Length == 1)
         {
-            points[0] = new Vector2(transform.root.localPosition.x -328, transform.root.localPosition.y);
-            enemyMarkers.Add(Instantiate(enemySpawnMarker, points[0], Quaternion.identity));
+            _points[0] = new Vector2(transform.root.localPosition.x -328, transform.root.localPosition.y);
+            enemyMarkers.Add(Instantiate(enemySpawnMarker, _points[0], Quaternion.identity));
             enemyMarkers[0].transform.localScale *= 2;
         }
         else
         {
-            for (int i = 0; i < points.GetLength(0); i++)
+            for (int i = 0; i < _points.GetLength(0); i++)
             {
-                points[i] = new Vector2(transform.root.localPosition.x + Random.Range(-1100, 550), transform.root.localPosition.y + Random.Range(361, -550));
-                enemyMarkers.Add(Instantiate(enemySpawnMarker, points[i], Quaternion.identity));
+                _points[i] = new Vector2(transform.root.localPosition.x + Random.Range(-1100, 550), transform.root.localPosition.y + Random.Range(361, -550));
+                enemyMarkers.Add(Instantiate(enemySpawnMarker, _points[i], Quaternion.identity));
             }
         }
     }
@@ -306,7 +305,7 @@ public class EnemySpawner : MonoBehaviour
                 if (boss)
                     StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfBossMusic[Random.Range(0, StaticClass.mainScript.kindOfBossMusic.Count)]);
                 StartCoroutine(SpawnFirstWave());
-                playerTrigger = true;
+                _playerTrigger = true;
             }
         }
     }

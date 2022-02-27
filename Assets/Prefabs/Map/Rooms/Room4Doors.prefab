@@ -2882,6 +2882,21 @@ PrefabInstance:
       propertyPath: type2
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2328791785623656187, guid: f1742a3c88176d44b9b7e86ac3296316,
+        type: 3}
+      propertyPath: _type2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328791785623656187, guid: f1742a3c88176d44b9b7e86ac3296316,
+        type: 3}
+      propertyPath: _type3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328791785623656187, guid: f1742a3c88176d44b9b7e86ac3296316,
+        type: 3}
+      propertyPath: _numberOfWaves
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5841492928028050438, guid: f1742a3c88176d44b9b7e86ac3296316,
         type: 3}
       propertyPath: m_RootOrder

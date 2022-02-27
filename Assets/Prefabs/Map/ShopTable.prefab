@@ -414,7 +414,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.234375}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.6
 --- !u!114 &8804442991036403695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemSprite: {fileID: 8804442992301776241}
   _typeOfItem: 0
-  _health: {fileID: 6489033390216242478, guid: 59a02585bf26015448fd6c04e3ce8227, type: 3}
+  _health: {fileID: 4797242653720433423, guid: 58ac47e9e7208144399e2cfee1dab075, type: 3}
   _mana: {fileID: 7166170418527372959, guid: b4fbf778241fee44d8fb34e4862e4412, type: 3}
   _priceText: {fileID: 7859337141499356269}
 --- !u!114 &4355225377565264712

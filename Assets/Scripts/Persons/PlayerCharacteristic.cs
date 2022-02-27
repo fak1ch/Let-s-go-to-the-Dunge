@@ -100,6 +100,26 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
         }
     }
 
+
+    public void TakeAmethyst(int value)
+    {
+        Amethists += value;
+        OnAmethystChange?.Invoke(Amethists);
+    }
+
+    public void HealHp(int hpCount)
+    {
+        if (health + hpCount <= maxHealth)
+        {
+            health += hpCount;
+        }
+        else
+        {
+            health = maxHealth;
+        }
+        OnHealthChange?.Invoke(health, maxHealth);
+    }
+
     public void OnImmortality(float i)
     {
         StartCoroutine(ImmortalityCoroutine(i));
@@ -116,11 +136,5 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
     {
         yield return new WaitForSeconds(i);
         gameObject.SetActive(false);
-    }
-
-    public void TakeAmethyst(int value)
-    {
-        Amethists += value;
-        OnAmethystChange?.Invoke(Amethists);
     }
 }
