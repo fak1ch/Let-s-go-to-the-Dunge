@@ -120,14 +120,6 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    public void SetToAllEnemiesAlivePlayerOrDead(bool value)
-    {
-        foreach(Enemy enemy in enemies)
-        {
-            enemy.SetPlayerIsAlive(value);
-        }
-    }
-
      private float DistanceBetween2dPoints(Vector2 vec1, Vector2 vec2)
     {
         float distance;

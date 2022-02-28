@@ -33,7 +33,6 @@ public class GameOverMenuScript : MonoBehaviour
     public void RespawnPlayerAfterAds()
     {
         Destroy(_button);
-        StaticClass.mainScript.SetToAllEnemiesAlivePlayerOrDead(true);
         CloseGameOverMenuCoroutineAfterAds();
         StaticClass.playerCharacteristic.gameObject.SetActive(true);
         StaticClass.playerCharacteristic.HealHp(999);

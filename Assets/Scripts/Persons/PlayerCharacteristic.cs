@@ -93,7 +93,6 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
             if (health <= 0)
             {
                 health = 0;
-                StaticClass.mainScript.SetToAllEnemiesAlivePlayerOrDead(false);
                 gameOverMenuScript.OpenGameOverMenu();
                 StartCoroutine(PlayerSetFalse(0.1f));
             }

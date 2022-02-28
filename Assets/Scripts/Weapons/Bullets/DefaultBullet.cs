@@ -14,8 +14,8 @@ public class DefaultBullet : Bullet
         BulletMove();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        OnCollisionEnter2DMethod(collision.gameObject);
+        OnTriggerEnter2DMethod(collision.gameObject);
     }
 }

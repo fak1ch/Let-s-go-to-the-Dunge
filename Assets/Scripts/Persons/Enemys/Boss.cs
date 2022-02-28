@@ -2,31 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : Enemy, IEnemy
+public class Boss : Enemy
 {
-    private GameObject bossRoom;
-    private Transform target;
-    public GameObject bullet;
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private GameObject _portal;
+    [SerializeField] private Transform _bulletPoint;
+    [SerializeField] private Transform _bulletPoint2;
+    [SerializeField] private int _bulletCount;
+    [SerializeField] private AudioClip _shootClip;
+    [SerializeField] private AudioClip _runClip;
 
-    public int bulletCount;
-    public Transform bulletPoint;
-    public Transform bulletPoint2;
-    private float angle;
-
-    private bool locked = false;
-    private bool lockedChoose = false;
-
-    public GameObject portal;
-    public UIBossHp bossHp;
+    private GameObject _bossRoom;
+    private Transform _target;
+    private float _angle;
+    private bool _locked = false;
+    private bool _lockedChoose = false;
+    private UIBossHp _bossHp;
 
     void Start()
     {
         StartMethod();
-        bossHp = GameObject.FindGameObjectWithTag("BossHp").GetComponent<UIBossHp>();
-        bossHp.StartHealth(health);
-        bossRoom = GameObject.FindWithTag("BossRoom");
-        target = player.transform;
-        if (!lockedChoose)
+        _bossHp = FindObjectOfType<UIBossHp>();
+        _bossHp.StartHealth(health);
+        _bossRoom = GameObject.FindWithTag("BossRoom");
+        _target = _player.transform;
+        if (!_lockedChoose)
         {
             StartCoroutine(ChooseAction());
         }
@@ -40,21 +40,21 @@ public class Boss : Enemy, IEnemy
 
     private void SpawnPortal()
     {
-        Vector3 vec = bossRoom.transform.position;
+        Vector3 vec = _bossRoom.transform.position;
         vec.x = vec.x - 325;
         vec.y = vec.y - 100;
-        Instantiate(portal, vec, Quaternion.identity);
+        Instantiate(_portal, vec, Quaternion.identity);
     }
 
     private void SmartMenu()
     {
-        if (GetBoolRun() || !playerIsAlive)
+        if (GetBoolRun() || !_player.activeInHierarchy)
         {
             EnemyMove();
         }
         else if (GetBoolShoot())
         {
-            if (!locked)
+            if (!_locked)
             {
                 Shoot();
             }
@@ -67,7 +67,7 @@ public class Boss : Enemy, IEnemy
 
     IEnumerator ChooseAction()
     {
-        lockedChoose = true;
+        _lockedChoose = true;
         yield return new WaitForSeconds(1);
         SetBoolRun(false);
         SetBoolShoot(true);
@@ -78,23 +78,23 @@ public class Boss : Enemy, IEnemy
             int k = Random.Range(0, 25);
             if(k==0)
             {
-                target = bossRoom.transform;
+                _target = _bossRoom.transform;
             }
             yield return new WaitForSeconds(i);
-            if (playerIsAlive)
+            if (_player.activeInHierarchy)
             {
                 SetBoolShoot(true);
                 SetBoolRun(false);
             }
-            target = player.transform;
+            _target = _player.transform;
         }
     }
 
     public override void EnemyMove()
     {
-        if (playerIsAlive)
+        if (_player.activeInHierarchy)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _target.position, speed * Time.deltaTime);
         }
         else
         {
@@ -104,9 +104,9 @@ public class Boss : Enemy, IEnemy
 
     public override void MoveToStartPosition()
     {
-        if (transform.position != startPosition)
+        if (transform.position != _startPosition)
         {
-            transform.position = Vector2.MoveTowards(transform.position, startPosition, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _startPosition, speed * Time.deltaTime);
         }
         else
         {
@@ -117,33 +117,33 @@ public class Boss : Enemy, IEnemy
 
     private void Shoot()
     {
-        locked = true;
+        _locked = true;
         StartCoroutine(Shoot1());
     }
 
     private IEnumerator Shoot1()
     {
         float timeBtwShots = 0.1f;
-        bulletCount = Random.Range(8, 49);
-        float plusAngle = 360 / bulletCount;
+        _bulletCount = Random.Range(8, 49);
+        float plusAngle = 360 / _bulletCount;
 
-        for (int i = bulletCount; i >= 0; i--)
+        for (int i = _bulletCount; i >= 0; i--)
         {
-            var b = Instantiate(bullet, bulletPoint.transform.position, Quaternion.identity);
-            var a = Instantiate(bullet, bulletPoint2.transform.position, Quaternion.identity);
+            var b = Instantiate(_bullet, _bulletPoint.transform.position, Quaternion.identity);
+            var a = Instantiate(_bullet, _bulletPoint2.transform.position, Quaternion.identity);
             a.GetComponentInChildren<Bullet>().speed = b.GetComponentInChildren<Bullet>().speed / 2;
-            b.transform.Rotate(0.0f, 0.0f, angle);
+            b.transform.Rotate(0.0f, 0.0f, _angle);
             b.GetComponentInChildren<Bullet>().speed = b.GetComponentInChildren<Bullet>().speed / 1.5f;
-            a.transform.Rotate(0.0f, 0.0f, angle);
+            a.transform.Rotate(0.0f, 0.0f, _angle);
             
-            angle -= plusAngle;
-            if (bulletCount >= 40) { timeBtwAttack /= 2; }
+            _angle -= plusAngle;
+            if (_bulletCount >= 40) { timeBtwAttack /= 2; }
 
             yield return new WaitForSeconds(timeBtwShots);
         }
         SetBoolShoot(false);
         SetBoolRun(true);
-        locked = false;
+        _locked = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -158,19 +158,22 @@ public class Boss : Enemy, IEnemy
         {
             EnemyHasBeenKilled();
         }
-        bossHp.TakeDamage(damage);
+        _bossHp.TakeDamage(damage);
     }
 
     private void SetBoolRun(bool value)
     {
         if (value)
         {
-            animator.SetBool("isRunning", true);
-            animator.SetBool("isShooting", false);
+            _audioSource.Stop();
+            _audioSource.clip = _runClip;
+            _audioSource.Play();
+            _animator.SetBool("isRunning", true);
+            _animator.SetBool("isShooting", false);
         }
         else if (!value)
         {
-            animator.SetBool("isRunning", false);
+            _animator.SetBool("isRunning", false);
         }
     }
 
@@ -178,23 +181,26 @@ public class Boss : Enemy, IEnemy
     {
         if (value)
         {
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isShooting", true);
+            _audioSource.Stop();
+            _audioSource.clip = _shootClip;
+            _audioSource.Play();
+            _animator.SetBool("isRunning", false);
+            _animator.SetBool("isShooting", true);
         }
         else if (!value)
         {
-            animator.SetBool("isShooting", false);
+            _animator.SetBool("isShooting", false);
         }
     }
 
     private bool GetBoolRun()
     {
-        return animator.GetBool("isRunning");
+        return _animator.GetBool("isRunning");
     }
 
     private bool GetBoolShoot()
     {
-        return animator.GetBool("isShooting");
+        return _animator.GetBool("isShooting");
     }
 
     public override void EnemyHasBeenKilled()
@@ -202,7 +208,7 @@ public class Boss : Enemy, IEnemy
         GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
         SpawnPortal();
         StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfMusicClips[Random.Range(0, StaticClass.mainScript.kindOfMusicClips.Count)]);
-        bossHp.gameObject.SetActive(false);
+        _bossHp.gameObject.SetActive(false);
         Destroy(gameObject);
     }
 }

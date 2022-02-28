@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Skeleton : Enemy, IEnemy
+public class Skeleton : Enemy
 {
     void Start()
     {

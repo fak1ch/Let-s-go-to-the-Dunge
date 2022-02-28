@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,29 +9,31 @@ public class Enemy : MonoBehaviour, IEntity
     public float speed;
     public float timeBtwAttack;
     public NavMeshAgent navAgent;
-    [HideInInspector] public GameObject player;
-    [HideInInspector] public PlayerCharacteristic playerCharacteristic;
-    [HideInInspector] public bool playerIsAlive = true;
-    [HideInInspector] public MainScript mainScript;
-    [HideInInspector] public Vector3 startPosition;
-    [HideInInspector] public Rigidbody2D rb;
-    [HideInInspector] public Animator animator;
-    [HideInInspector] public bool animHasBeenChanged = false;
-    [HideInInspector] public Vector3 targetForMove;
-    [HideInInspector] public bool lockerForAIMove;
+
+    protected GameObject _player;
+    protected PlayerCharacteristic _playerCharacteristic;
+    protected MainScript _mainScript;
+    protected Vector3 _startPosition;
+    protected Rigidbody2D _rb;
+    protected Animator _animator;
+    protected bool _animHasBeenChanged = false;
+    protected Vector3 _targetForMove;
+    protected bool _lockerForAIMove;
+    protected AudioSource _audioSource;
 
     private Collider2D _collider;
     private bool _isOpen = false;
 
     public void StartMethod()
     {
-        player = StaticClass.player;
-        playerCharacteristic = StaticClass.playerCharacteristic;
-        mainScript = StaticClass.mainScript;
-        startPosition = transform.position;
-        StaticClass.mainScript.enemies.Add(GetComponent<Enemy>());
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        TryGetComponent(out animator);
+        _player = StaticClass.player;
+        _playerCharacteristic = StaticClass.playerCharacteristic;
+        _mainScript = StaticClass.mainScript;
+        _startPosition = transform.position;
+        StaticClass.mainScript.enemies.Add(this);
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+        TryGetComponent(out _animator);
+        TryGetComponent(out _audioSource);
         navAgent.updateRotation = false;
         navAgent.updateUpAxis = false;
         StartCoroutine(TimeBeforeAttackAfterSpawn());
@@ -67,7 +68,7 @@ public class Enemy : MonoBehaviour, IEntity
 
     private IEnumerator AttackThePlayer(Collider2D collider)
     {
-        playerCharacteristic.TakeDamage(damage);
+        _playerCharacteristic.TakeDamage(damage);
         yield return new WaitForSeconds(timeBtwAttack);
         collider.enabled = true;
     }
@@ -89,12 +90,12 @@ public class Enemy : MonoBehaviour, IEntity
 
     public void UpdateRotateSprite()
     {
-        if (player.transform.position.x > transform.position.x)
+        if (_player.transform.position.x > transform.position.x)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
         else
-        if (player.transform.position.x < transform.position.x)
+        if (_player.transform.position.x < transform.position.x)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
@@ -106,17 +107,17 @@ public class Enemy : MonoBehaviour, IEntity
 
     public virtual void EnemyMove()
     {
-        if (!lockerForAIMove)
+        if (!_lockerForAIMove)
         {
             StartCoroutine(TargetForMovePos());
         }
-        if (playerIsAlive)
+        if (_player.activeInHierarchy)
         {
-            navAgent.SetDestination(targetForMove);
-            if (!animHasBeenChanged && animator != null)
+            navAgent.SetDestination(_targetForMove);
+            if (!_animHasBeenChanged && _animator != null)
             {
-                animHasBeenChanged = !animHasBeenChanged;
-                animator.SetBool("isRun", true);
+                _animHasBeenChanged = !_animHasBeenChanged;
+                _animator.SetBool("isRun", true);
             }
         }
         else
@@ -127,26 +128,21 @@ public class Enemy : MonoBehaviour, IEntity
 
     public IEnumerator TargetForMovePos()
     {
-        lockerForAIMove = true;
-        targetForMove = player.transform.position;
-        float time = DistanceBetween2dPoints(player.transform.position, transform.position)/1500;
+        _lockerForAIMove = true;
+        _targetForMove = _player.transform.position;
+        float time = DistanceBetween2dPoints(_player.transform.position, transform.position)/1500;
         yield return new WaitForSeconds(time);
-        lockerForAIMove = false;
+        _lockerForAIMove = false;
     }
 
     public virtual void MoveToStartPosition()
     {
-        navAgent.SetDestination(startPosition);
-        if (animHasBeenChanged && transform.position == startPosition && animator != null)
+        navAgent.SetDestination(_startPosition);
+        if (_animHasBeenChanged && transform.position == _startPosition && _animator != null)
         {
-            animHasBeenChanged = !animHasBeenChanged;
-            animator.SetBool("isRun", false);
+            _animHasBeenChanged = !_animHasBeenChanged;
+            _animator.SetBool("isRun", false);
         }
-    }
-
-    public void SetPlayerIsAlive(bool value)
-    {
-        playerIsAlive = value;
     }
 
     public virtual void EnemyHasBeenKilled()

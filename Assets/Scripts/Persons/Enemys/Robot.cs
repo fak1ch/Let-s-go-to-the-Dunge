@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot : Enemy, IEnemy
+public class Robot : Enemy
 {
     public GameObject bullet;
     public Transform shotPoint;
@@ -10,7 +10,7 @@ public class Robot : Enemy, IEnemy
 
     private float timeBtwShots;
     private int _hitsSpeedAttack;
-    // Start is called before the first frame update
+
     void Start()
     {
         StartMethod();
@@ -21,18 +21,31 @@ public class Robot : Enemy, IEnemy
     void Update()
     {
         UpdateMethod();
+        GunRotateToTarget();
+        Shoot();
+    }
 
-        if (playerIsAlive)
+    private void GunRotateToTarget()
+    {
+        if (_player.activeInHierarchy)
         {
-            Vector3 vec = mainScript.camera.WorldToScreenPoint(player.transform.position);
-            Vector3 objectPos = mainScript.camera.WorldToScreenPoint(shotPoint.position);
+            Vector3 vec = _mainScript.camera.WorldToScreenPoint(_player.transform.position);
+            Vector3 objectPos = _mainScript.camera.WorldToScreenPoint(shotPoint.position);
             vec.x = vec.x - objectPos.x;
             vec.y = vec.y - objectPos.y;
 
             float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
             shotPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
+    }
+
+    private void Shoot()
+    {
+        if (_player.activeInHierarchy)
+        {
             if (timeBtwShots <= 0)
             {
+                ShotAudioPlay();
                 var b = Instantiate(bullet, shotPoint.position, shotPoint.rotation);
                 if (_hitsSpeedAttack == 5)
                 {
@@ -45,13 +58,19 @@ public class Robot : Enemy, IEnemy
                     _hitsSpeedAttack++;
                 }
 
-                timeBtwShots = startTimeBtwShots; 
+                timeBtwShots = startTimeBtwShots;
             }
             else
             {
                 timeBtwShots -= Time.deltaTime;
             }
         }
+    }
+
+    private void ShotAudioPlay()
+    {
+        _audioSource.Stop();
+        _audioSource.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

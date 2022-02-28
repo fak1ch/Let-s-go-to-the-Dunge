@@ -18,22 +18,22 @@ public class Bullet : MonoBehaviour
         StartCoroutine(DestroyAfterTime());
     }
 
-    protected void OnCollisionEnter2DMethod(GameObject entity)
+    protected void OnTriggerEnter2DMethod(GameObject entity)
     {
         if (_isOpen)
         {
             if (!enemyBullet)
             {
-                if (entity.CompareTag("Enemy") || entity.CompareTag("Boss"))
+                if (entity.TryGetComponent(out Enemy script))
                 {
-                    BulletTouch(entity.GetComponent<Enemy>());
+                    BulletTouch(script);
                 }
             }
             else if (enemyBullet)
             {
-                if (entity.CompareTag("Player"))
+                if (entity.TryGetComponent(out PlayerCharacteristic script))
                 {
-                    BulletTouch(entity.GetComponent<PlayerCharacteristic>());
+                    BulletTouch(script);
                 }
             }
             if (entity.CompareTag("Ground") || entity.CompareTag("Wall") || entity.CompareTag("Door"))

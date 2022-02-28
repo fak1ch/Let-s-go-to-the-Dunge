@@ -2,23 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriangleEnemy : Enemy, IEnemy
+public class TriangleEnemy : Enemy
 {
     [SerializeField] private GameObject _bullet;
     [SerializeField] private Transform _shotPoint;
     [SerializeField] private Transform _bulletSpawnPoint;
     [SerializeField] private float _startTimeBtwShots;
     [SerializeField] private float _timeBeforeShoot;
+    [SerializeField] private RunAwayPlayer _runScript;
 
     private float _timeBtwShots;
     private bool _allowShoot = true;
-    private Vector3 targetPos;
     // Start is called before the first frame update
     void Start()
     {
         StartMethod();
-        StartCoroutine(NewPosForAIMove());
-        _startTimeBtwShots = Random.Range(_startTimeBtwShots, _startTimeBtwShots + 0.5f);
+        _startTimeBtwShots = Random.Range(_startTimeBtwShots - 1f, _startTimeBtwShots + 1f);
         _timeBtwShots = _startTimeBtwShots;
     }
 
@@ -26,10 +25,10 @@ public class TriangleEnemy : Enemy, IEnemy
     {
         UpdateMethod();
 
-        if (playerIsAlive)
+        if (_player.activeInHierarchy)
         {
-            Vector3 vec = mainScript.camera.WorldToScreenPoint(player.transform.position);
-            Vector3 objectPos = mainScript.camera.WorldToScreenPoint(_shotPoint.position);
+            Vector3 vec = _mainScript.camera.WorldToScreenPoint(_player.transform.position);
+            Vector3 objectPos = _mainScript.camera.WorldToScreenPoint(_shotPoint.position);
             vec.x = vec.x - objectPos.x;
             vec.y = vec.y - objectPos.y;
 
@@ -38,6 +37,7 @@ public class TriangleEnemy : Enemy, IEnemy
             if (_timeBtwShots <= 0 && _allowShoot)
             {
                 _allowShoot = false;
+                _runScript.enabled = false;
                 StartCoroutine(WaitTimeBeforeShoot());
             }
             else
@@ -49,23 +49,7 @@ public class TriangleEnemy : Enemy, IEnemy
 
     public override void EnemyMove()
     {
-        if (playerIsAlive)
-        {
-            if (_timeBtwShots > 0)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, targetPos , speed * Time.deltaTime);
-                if (animHasBeenChanged && animator != null)
-                {
-                    animHasBeenChanged = !animHasBeenChanged;
-                    animator.SetBool("isAttack", false);
-                    animator.SetBool("isRun", true);
-                }
-            }
-        }
-        else
-        {
-            MoveToStartPosition();
-        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -75,35 +59,35 @@ public class TriangleEnemy : Enemy, IEnemy
 
     private IEnumerator WaitTimeBeforeShoot()
     {
-        if (!animHasBeenChanged && animator != null)
-        {
-            animHasBeenChanged = !animHasBeenChanged;
-            animator.SetBool("isRun", false);
-            animator.SetBool("isAttack", true);
-        }
-        yield return new WaitForSeconds(_timeBeforeShoot);
         Instantiate(_bullet, _bulletSpawnPoint.position, _shotPoint.rotation);
+        ShotAudioPlay();
+        AnimationChange();
+        yield return new WaitForSeconds(_timeBeforeShoot);
+        AnimationChange();
         _allowShoot = true;
+        _runScript.enabled = true;
         _timeBtwShots = _startTimeBtwShots;
     }
 
-    private IEnumerator NewPosForAIMove()
+    private void AnimationChange()
     {
-        float distance = DistanceBetween2dPoints(transform.position, player.transform.position);
-        if (distance >= 500) { targetPos = player.transform.position; }
-        else { targetPos = -player.transform.position; }
-        targetPos.x += Random.Range(-200, +200);
-        targetPos.y += Random.Range(-200, +200);
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(NewPosForAIMove());
+        if (!_animHasBeenChanged && _animator != null)
+        {
+            _animHasBeenChanged = !_animHasBeenChanged;
+            _animator.SetBool("isRun", false);
+            _animator.SetBool("isAttack", true);
+        }
+        else if (_animHasBeenChanged && _animator != null)
+        {
+            _animHasBeenChanged = !_animHasBeenChanged;
+            _animator.SetBool("isRun", true);
+            _animator.SetBool("isAttack", false);
+        }
     }
 
-    private float DistanceBetween2dPoints(Vector2 vec1, Vector2 vec2)
+    private void ShotAudioPlay()
     {
-        float distance;
-
-        distance = Mathf.Pow(Mathf.Pow(vec2.x - vec1.x, 2) + Mathf.Pow(vec2.y - vec1.y, 2), 0.5f);
-
-        return distance;
+        _audioSource.Stop();
+        _audioSource.Play();
     }
 }

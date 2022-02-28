@@ -50,6 +50,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5540746877597236982}
   - component: {fileID: 5540746877597236977}
+  - component: {fileID: 1062138591821190449}
   m_Layer: 0
   m_Name: TriangleBullet
   m_TagString: Untagged
@@ -84,14 +85,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09e66fe58319374f83104e6cd7bfe61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 250
+  speed: 350
   lifetime: 10
   damage: 0
   enemyBullet: 1
   _allowMove: 1
   sound: {fileID: 0}
   _rotateBullet: {fileID: 5540746877017850021}
-  _rotateSpeed: 1.2
+  _rotateSpeed: 2
+--- !u!95 &1062138591821190449
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5540746877597236983}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d648cb53d586114ea2d7b34bc5c49ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &5540746876167185729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99,6 +119,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -179,6 +204,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -259,6 +289,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -339,6 +374,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -419,6 +459,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -499,6 +544,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -579,6 +629,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -659,6 +714,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -739,6 +799,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
@@ -819,6 +884,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5540746877017850020}
     m_Modifications:
+    - target: {fileID: 1439876336548512293, guid: 239aea93406e2514d86cc6ae164a5957,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2483723282154813617, guid: 239aea93406e2514d86cc6ae164a5957,
         type: 3}
       propertyPath: _allowMove
