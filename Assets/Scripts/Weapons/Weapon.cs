@@ -5,76 +5,69 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    public float startTimeBtwShots;
-    public int manacoast;
-    public GameObject bullet;
-    public Transform shotPoint;
-    public AudioSource audioSource;
-    public bool greenZone = false;
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private float _startTimeBtwShots;
+    [SerializeField] private int _manacoast;
+    [SerializeField] private Transform _shotPoint;
+    [SerializeField] private GameObject _whoseWeapon;
 
-    public bool IsDropped { get { return isDropped; } set { isDropped = value; } }
+    private AudioSource _audioSource;
+    private bool _greenZone = false;
+    private Joystick _joystick;
+    private float _timeBtwShots;
+    private MainScript _mainScript;
+    private PlayerCharacteristic _playerCharacteristic;
+    private bool _isFlipped = true;
 
-    private bool isDropped = true;
-    private Joystick joystick;
-    private Image image;
-    private Text manaText;
-    private float timeBtwShots;
-    private MainScript mainScript;
-    private GameObject player;
-    private PlayerCharacteristic playerCharacteristic;
-    private bool isFlipped = true;
+    public bool IsDropped { get; set; } = true;
+    public bool GreenZone { set { _greenZone = value; } }
 
-    public void StartMethod()
+    protected void StartMethod()
     {
-        mainScript = StaticClass.mainScript;
-        player = StaticClass.player;
-        playerCharacteristic = StaticClass.playerCharacteristic;
-        joystick = mainScript.attackJoystick;
-        manaText = GameObject.FindGameObjectWithTag("ManaText").GetComponent<Text>();
-        image = GameObject.Find("Mana123").GetComponent<Image>();
-        manaText.text = $"{playerCharacteristic.mana}/{playerCharacteristic.maxMana}";
+        _mainScript = FindObjectOfType<MainScript>();
+        _playerCharacteristic = FindObjectOfType<PlayerCharacteristic>();
+        _joystick = _mainScript.JoystickAttack;
+        TryGetComponent(out _audioSource);
     }
 
     protected void UpdateMethod()
     {
         RotateWeapon();
         ClickButtonAttack();
-
     }
 
-    protected void FixedUpdateMethod()
+    private void ClickButtonAttack()
     {
-    }
-
-    protected void ClickButtonAttack()
-    {
-        if (!isDropped)
+        if (!IsDropped)
         {
-            if (timeBtwShots <= 0 && !greenZone)
+            if (_timeBtwShots <= 0 && !_greenZone)
             {
-                if ((joystick.Direction != Vector2.zero) && playerCharacteristic.mana >= manacoast)
+                if ((_joystick.Direction != Vector2.zero) && _playerCharacteristic.Mana >= _manacoast)
                 {
                     AttackFromWeapon();
                 }
             }
             else
             {
-                timeBtwShots -= Time.deltaTime;
+                _timeBtwShots -= Time.deltaTime;
             }
         }
     }
 
     public virtual void AttackFromWeapon()
     {
-        timeBtwShots = startTimeBtwShots;
+        _timeBtwShots = _startTimeBtwShots;
         ShootPlay();
-        Instantiate(bullet, shotPoint.position, shotPoint.rotation);
-        ChangeManaBar(-manacoast);
+        var bullet = Instantiate(_bullet, _shotPoint.position, _shotPoint.rotation);
+        bullet.GetComponentInChildren<Bullet>().SetWhoseBullet(_whoseWeapon);
+        if(_manacoast>0)
+        _playerCharacteristic.ChangeManaBar(-_manacoast);
+        _whoseWeapon.GetComponent<PlayerStatistics>().AddShot();
     }
 
-    public void RotateWeapon()
+    private void RotateWeapon()
     {
-        if (!isDropped)
+        if (!IsDropped)
         {
             float angle;
             if (StaticClass.typeOfDevice == StaticClass.TypeOfDevice.PC)
@@ -82,7 +75,7 @@ public class Weapon : MonoBehaviour
                 Vector3 mousePos = Input.mousePosition;
                 mousePos.z = 5.23f;
 
-                Vector3 objectPos = mainScript.camera.WorldToScreenPoint(transform.position);
+                Vector3 objectPos = _mainScript.GetComponent<Camera>().WorldToScreenPoint(transform.position);
                 mousePos.x = mousePos.x - objectPos.x;
                 mousePos.y = mousePos.y - objectPos.y;
 
@@ -90,57 +83,57 @@ public class Weapon : MonoBehaviour
             }
             else
             {
-                angle = Mathf.Atan2(joystick.Vertical, joystick.Horizontal) * Mathf.Rad2Deg;
+                angle = Mathf.Atan2(_joystick.Vertical, _joystick.Horizontal) * Mathf.Rad2Deg;
             }
 
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
             if (angle >= 90 && angle <= 180 || angle <= -90 && angle >= -180)
             {
-                if (isFlipped)
+                if (_isFlipped)
                 {
                     Vector3 vec = gameObject.transform.localScale;
                     vec.y *= -1;
 
                     gameObject.transform.localScale = vec;
-                    isFlipped = !isFlipped;
+                    _isFlipped = !_isFlipped;
                 }
             }
             else
             if (angle >= 0 && angle < 90 || angle < 0 && angle > -90)
             {
-                if (!isFlipped)
+                if (!_isFlipped)
                 {
                     Vector3 vec = gameObject.transform.localScale;
                     vec.y *= -1;
 
                     gameObject.transform.localScale = vec;
-                    isFlipped = !isFlipped;
+                    _isFlipped = !_isFlipped;
                 }
             }
         }
     }
 
-    public void ChangeManaBar(int manac)
+    public void TakeWeapon(GameObject gunPlace)
     {
-        if (playerCharacteristic.mana + manac > playerCharacteristic.maxMana)
-        {
-            playerCharacteristic.mana = playerCharacteristic.maxMana;
-        }
-        else
-        {
-            playerCharacteristic.mana += manac;
-        }
-        manaText.text = $"{playerCharacteristic.mana}/{playerCharacteristic.maxMana}";
-        float k = playerCharacteristic.mana;
-        float j = playerCharacteristic.maxMana;
-        float z = k / j;
-        image.fillAmount = z;
+        _whoseWeapon = gunPlace.transform.root.gameObject;
+        transform.position = gunPlace.transform.position;
+        transform.SetParent(gunPlace.transform);
+        IsDropped = false;
+        GetComponent<SpriteRenderer>().sortingOrder = 3;
     }
 
-    public void ShootPlay()
+    public void DropWeapon()
     {
-        audioSource.Stop();
-        audioSource.Play();
+        _whoseWeapon = null;
+        transform.SetParent(default);
+        IsDropped = true;
+        GetComponent<SpriteRenderer>().sortingOrder = 1;
+    }
+
+    private void ShootPlay()
+    {
+        _audioSource.Stop();
+        _audioSource.Play();
     }
 }

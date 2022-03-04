@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    public GameObject block;
+    [SerializeField] private GameObject _block;
+    private Door _door;
+
+    private void Start()
+    {
+        _door = _block.GetComponent<Door>();
+    }
 
     public void ActivationDoor()
     {
-        if (!block.GetComponent<Door>().mainRoom) 
+        if (!_door.MainRoomFlag) 
         {
-            block.SetActive(true);
+            _block.SetActive(true);
             gameObject.SetActive(false);
         }
     }

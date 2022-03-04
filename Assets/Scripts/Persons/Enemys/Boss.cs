@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Boss : Enemy
 {
+    [SerializeField] private int _maxHealth;
     [SerializeField] private GameObject _bullet;
     [SerializeField] private GameObject _portal;
     [SerializeField] private Transform _bulletPoint;
@@ -12,35 +14,47 @@ public class Boss : Enemy
     [SerializeField] private AudioClip _shootClip;
     [SerializeField] private AudioClip _runClip;
 
-    private GameObject _bossRoom;
+    private Transform _bossRoomTransform;
     private Transform _target;
     private float _angle;
     private bool _locked = false;
     private bool _lockedChoose = false;
     private UIBossHp _bossHp;
 
-    void Start()
+    protected override void Start()
     {
-        StartMethod();
+        base.Start();
+        _bossRoomTransform = GameObject.FindGameObjectWithTag("BossRoom").transform;
         _bossHp = FindObjectOfType<UIBossHp>();
-        _bossHp.StartHealth(health);
-        _bossRoom = GameObject.FindWithTag("BossRoom");
+        _bossHp.BossSpawned(_health, _maxHealth);
         _target = _player.transform;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         if (!_lockedChoose)
         {
             StartCoroutine(ChooseAction());
         }
     }
 
-    void FixedUpdate()
+    protected override void Update()
     {
-        UpdateRotateSprite();
+        RotateSprite();
         SmartMenu();
+    }
+
+    public override void TakeDamage(int damage, GameObject whoKill)
+    {
+        _health -= damage;
+        _bossHp.TakeDamage(_health, _maxHealth);
+        if (_health <= 0)
+        {
+            whoKill.GetComponent<PlayerStatistics>().AddCountEnemyDestroyed();
+            EnemyHasBeenKilled();
+        }
     }
 
     private void SpawnPortal()
     {
-        Vector3 vec = _bossRoom.transform.position;
+        Vector3 vec = _bossRoomTransform.position;
         vec.x = vec.x - 325;
         vec.y = vec.y - 100;
         Instantiate(_portal, vec, Quaternion.identity);
@@ -78,7 +92,7 @@ public class Boss : Enemy
             int k = Random.Range(0, 25);
             if(k==0)
             {
-                _target = _bossRoom.transform;
+                _target = _bossRoomTransform;
             }
             yield return new WaitForSeconds(i);
             if (_player.activeInHierarchy)
@@ -94,7 +108,7 @@ public class Boss : Enemy
     {
         if (_player.activeInHierarchy)
         {
-            transform.position = Vector2.MoveTowards(transform.position, _target.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
         }
         else
         {
@@ -106,7 +120,7 @@ public class Boss : Enemy
     {
         if (transform.position != _startPosition)
         {
-            transform.position = Vector2.MoveTowards(transform.position, _startPosition, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _startPosition, _speed * Time.deltaTime);
         }
         else
         {
@@ -131,13 +145,15 @@ public class Boss : Enemy
         {
             var b = Instantiate(_bullet, _bulletPoint.transform.position, Quaternion.identity);
             var a = Instantiate(_bullet, _bulletPoint2.transform.position, Quaternion.identity);
-            a.GetComponentInChildren<Bullet>().speed = b.GetComponentInChildren<Bullet>().speed / 2;
+            Bullet aBullet = a.GetComponentInChildren<Bullet>();
+            Bullet bBullet = b.GetComponentInChildren<Bullet>();
+            aBullet.Speed = aBullet.Speed / 2;
             b.transform.Rotate(0.0f, 0.0f, _angle);
-            b.GetComponentInChildren<Bullet>().speed = b.GetComponentInChildren<Bullet>().speed / 1.5f;
+            bBullet.Speed = bBullet.Speed / 2;
             a.transform.Rotate(0.0f, 0.0f, _angle);
             
             _angle -= plusAngle;
-            if (_bulletCount >= 40) { timeBtwAttack /= 2; }
+            if (_bulletCount >= 40) { _timeBtwAttack /= 2; }
 
             yield return new WaitForSeconds(timeBtwShots);
         }
@@ -146,26 +162,12 @@ public class Boss : Enemy
         _locked = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        CollisionAttackPlayer(collision.gameObject);
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            EnemyHasBeenKilled();
-        }
-        _bossHp.TakeDamage(damage);
-    }
-
     private void SetBoolRun(bool value)
     {
         if (value)
         {
             _audioSource.Stop();
+            _audioSource.volume = 1f;
             _audioSource.clip = _runClip;
             _audioSource.Play();
             _animator.SetBool("isRunning", true);
@@ -182,6 +184,7 @@ public class Boss : Enemy
         if (value)
         {
             _audioSource.Stop();
+            _audioSource.volume = 0.7f;
             _audioSource.clip = _shootClip;
             _audioSource.Play();
             _animator.SetBool("isRunning", false);
@@ -205,10 +208,11 @@ public class Boss : Enemy
 
     public override void EnemyHasBeenKilled()
     {
+        _health = 0;
+        _bossHp.BossDie();
         GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
         SpawnPortal();
-        StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfMusicClips[Random.Range(0, StaticClass.mainScript.kindOfMusicClips.Count)]);
-        _bossHp.gameObject.SetActive(false);
+        _mainScript.MusicPlay(_mainScript.GetRandomMusic());
         Destroy(gameObject);
     }
 }

@@ -5,71 +5,77 @@ using UnityEngine.Tilemaps;
 
 public class Door : MonoBehaviour
 {
-    public GameObject block;
-    private bool changed = false;
-    public bool mainRoom = false;
-    public bool bossRoom = false;
-    public int number;
-    private GameObject otherRoom = null;
+    [SerializeField] private GameObject _block;
+    [SerializeField] private bool _mainRoom = false;
+    [SerializeField] private bool _bossRoom = false;
+    [SerializeField] private int _number;
+
+    private bool _changed = false;
+    private GameObject _otherRoom = null;
+    private EnemySpawner _enemySpawner;
+
+    public bool MainRoomFlag => _mainRoom;
+    public int GetNumber => _number;
 
     private void Start()
     {
+        _enemySpawner = transform.root.GetComponentInChildren<EnemySpawner>();
         StartCoroutine(ChangeDoor());
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!changed)
+        if (!_changed)
         {
-            if (collision.CompareTag("Door"))
+            if (collision.TryGetComponent(out Door door))
             {
-                changed = true;
-                otherRoom = collision.gameObject.transform.root.gameObject;
+                _changed = true;
+                _otherRoom = door.transform.root.gameObject;
             }
             else if (collision.CompareTag("Wall"))
             {
                 collision.gameObject.transform.parent.GetComponent<Wall>().ActivationDoor();
-                changed = true;
-                otherRoom = collision.gameObject.transform.root.gameObject;
+                _changed = true;
+                _otherRoom = collision.gameObject.transform.root.gameObject;
             }
         }
     }
 
     private void CreateDoor()
     {
-        block.SetActive(false);
+        _block.SetActive(false);
         gameObject.SetActive(true);
     }
 
     private void DeleteDoor()
     {
-        block.SetActive(true);
+        _block.SetActive(true);
         gameObject.SetActive(false);
     }
 
     IEnumerator ChangeDoor()
     {
-        yield return new WaitForSeconds(1.5f);
-        if (changed == false && !bossRoom)
+        yield return new WaitForSeconds(1f);
+        if (_changed == false && !_bossRoom)
         {
-            changed = true;
+            _changed = true;
             DeleteDoor();
         }
-        if (otherRoom == null && !bossRoom)
+        if (_otherRoom == null && !_bossRoom)
         {
             DeleteDoor();
         }
-        else if (mainRoom)
+        else if (_mainRoom)
         {
             CreateDoor();
             gameObject.SetActive(false);
         }
         else
         {
-            if (!bossRoom)
+            if (!_bossRoom)
             {
-                gameObject.transform.root.gameObject.GetComponentInChildren<EnemySpawner>().AddDoorsToList(gameObject);
-                gameObject.transform.root.gameObject.GetComponentInChildren<EnemySpawner>().OpenDoors();
+                _enemySpawner.AddDoorsToList(gameObject);
+                _enemySpawner.OpenDoors();
             }
         }
     }

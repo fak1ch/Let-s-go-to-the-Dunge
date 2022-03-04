@@ -1,4 +1,3 @@
-using Assets.Scripts;
 using DungeonHeroes;
 using System;
 using System.Collections;
@@ -7,29 +6,23 @@ using UnityEngine;
 
 public class AnimationTrigger : MonoBehaviour
 {
-    private Animator animator;
-    private IScript pc;
+    private Animator _animator;
+    private PlayerController _playerController;
     void Start()
     {
-        pc = GetComponent<PlayerController>();
-        if (pc == null)
-        {
-            pc = GetComponent<StartScene>();
-        }
-
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
+        _playerController = GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (pc.MoveInput.x !=0 || pc.MoveInput.y != 0)
+        if (_playerController.MoveInput.x !=0 || _playerController.MoveInput.y != 0)
         {
-            animator.SetBool("isRunning", true);
+            _animator.SetBool("isRunning", true);
         }
-        else if (pc.MoveInput.x == 0 && pc.MoveInput.y == 0)
+        else if (_playerController.MoveInput.x == 0 && _playerController.MoveInput.y == 0)
         {
-            animator.SetBool("isRunning", false);
+            _animator.SetBool("isRunning", false);
         }
     }
 }

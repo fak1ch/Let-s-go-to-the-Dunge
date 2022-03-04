@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BazukaBullet : Bullet
 {
-    public GameObject bullet;
+    [SerializeField] private GameObject _bullet;
 
     private void Start()
     {
         StartMethod();
     }
     // Update is called once per frame
-    void Update()  
+    private void Update()  
     {
         BulletMove();
     }
@@ -23,7 +23,7 @@ public class BazukaBullet : Bullet
 
     public override void ExtraEffect()
     {
-        transform.Translate(new Vector3(-2, 0, 0) * speed * Time.deltaTime);
+        transform.Translate(new Vector3(-2, 0, 0) * Speed * Time.deltaTime);
         Boom();
     }
 
@@ -32,8 +32,8 @@ public class BazukaBullet : Bullet
         float angle = 0;
         for(int i = 0; i<=8; i++)
         {
-            var b = Instantiate(bullet, transform.position, transform.rotation);
-            b.GetComponentInChildren<Bullet>().speed = b.GetComponentInChildren<Bullet>().speed / 2;
+            var b = Instantiate(_bullet, transform.position, transform.rotation);
+            b.GetComponentInChildren<Bullet>().Speed = b.GetComponentInChildren<Bullet>().Speed / 2;
             b.transform.Rotate(0.0f, 0.0f, angle);
             angle += 45;
         }

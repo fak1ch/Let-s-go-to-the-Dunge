@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DropManaAndAmethistsAfterDeath : MonoBehaviour
 {
-    [SerializeField]private GameObject _manaParticle;
-    [SerializeField]private GameObject _amethyst;
+    [SerializeField] private GameObject _manaParticle;
+    [SerializeField] private GameObject _amethyst;
 
     public void DropManaAndAmethystAfterDead()
     {
@@ -13,12 +13,9 @@ public class DropManaAndAmethistsAfterDeath : MonoBehaviour
         {
             int i = Random.Range(1, 4);
 
-            Vector2 vec = transform.position;
             for (int k = 0; k < i; k++)
             {
-                vec.x += Random.Range(-50, 51);
-                vec.y += Random.Range(-50, 51);
-                Instantiate(_manaParticle, vec, Quaternion.identity);
+                Instantiate(_manaParticle, GetRandomSpawnPoint(-50,50), Quaternion.identity);
             }
         }
 
@@ -26,15 +23,21 @@ public class DropManaAndAmethistsAfterDeath : MonoBehaviour
         {
             int i = Random.Range(1, 4);
 
-            Vector2 vec = transform.position;
             for (int k = 0; k < i; k++)
             {
-                vec.x += Random.Range(-70, 71);
-                vec.y += Random.Range(-70, 71);
-                Instantiate(_amethyst, vec, Quaternion.identity);
+                Instantiate(_amethyst, GetRandomSpawnPoint(-70, 70), Quaternion.identity);
             }
         }
 
         Destroy(gameObject);
+    }
+
+    private Vector2 GetRandomSpawnPoint(int from, int before)
+    {
+        Vector2 vec = transform.position;
+        vec.x += Random.Range(from, before);
+        vec.y += Random.Range(from, before);
+
+        return vec;
     }
 }

@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public enum TypeOfDevice { PC, Phone }
-    public TypeOfDevice typeOfDevice;
-
-    public GameObject settingsMenu;
+    [SerializeField] private enum TypeOfDevice { PC, Phone }
+    [SerializeField] private TypeOfDevice _typeOfDevice;
+    [SerializeField] private GameObject _settingsMenu;
 
     private void Start()
     {
-        StaticClass.typeOfDevice = (StaticClass.TypeOfDevice)typeOfDevice;
+        StaticClass.typeOfDevice = (StaticClass.TypeOfDevice)_typeOfDevice;
     }
 
     public void SetActiveSettings()
     {
-        settingsMenu.SetActive(true);
+        _settingsMenu.SetActive(true);
     }
 }

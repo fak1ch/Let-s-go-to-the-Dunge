@@ -164,21 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165fd5e466f5143488683aed48c27c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerCharacteristic: {fileID: 0}
-  health: 2
-  damage: 2
-  speed: 320
-  timeBtwAttack: 1
-  playerIsAlive: 1
-  mainScript: {fileID: 0}
-  startPosition: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
-  animator: {fileID: 0}
-  animHasBeenChanged: 0
-  navAgent: {fileID: 7768505107567575271}
-  targetForMove: {x: 0, y: 0, z: 0}
-  lockerForAIMove: 0
+  _health: 2
+  _damage: 2
+  _speed: 320
+  _timeBtwAttack: 1
+  _navAgent: {fileID: 7768505107567575271}
 --- !u!95 &774100251817429271
 Animator:
   serializedVersion: 3

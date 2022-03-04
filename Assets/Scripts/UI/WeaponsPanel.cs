@@ -5,39 +5,50 @@ using UnityEngine.UI;
 
 public class WeaponsPanel : MonoBehaviour
 {
-    private Image image;
-    private WeaponsInventory weaponsInventory;
-    void Start()
+    private Image _image;
+    private WeaponsInventory _weaponsInventory;
+
+    private void OnEnable()
     {
-        image = gameObject.GetComponent<Image>();
-        weaponsInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponsInventory>();
+        _weaponsInventory.OnWeaponChange += ChangeSprite;
+    }
+
+    private void OnDisable()
+    {
+        _weaponsInventory.OnWeaponChange -= ChangeSprite;
+    }
+
+    void Awake()
+    {
+        _image = gameObject.GetComponent<Image>();
+        _weaponsInventory = FindObjectOfType<WeaponsInventory>();
     }
 
     public void ChangeSprite(Sprite sprite)
     {
         if (sprite != null)
         {
-            image.enabled = true;
-            image.sprite = sprite;
+            _image.enabled = true;
+            _image.sprite = sprite;
         }
         else
         {
-            image.enabled = false;
+            _image.enabled = false;
         }
     }
 
     public void ChangeGun()
     {
-        if (weaponsInventory.weapons.Count == 2)
+        if (_weaponsInventory.WeaponsCount == 2)
         {
-            if (weaponsInventory.activeGun == 1)
+            if (_weaponsInventory.ActiveGun == 1)
             {
-                weaponsInventory.SelectGun(1);
+                _weaponsInventory.SelectGun(1);
             }
             else
-            if (weaponsInventory.activeGun == 0)
+            if (_weaponsInventory.ActiveGun == 0)
             {
-                weaponsInventory.SelectGun(2);
+                _weaponsInventory.SelectGun(2);
             }
         }
     }

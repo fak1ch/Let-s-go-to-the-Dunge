@@ -1988,6 +1988,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2328791785623656187, guid: f1742a3c88176d44b9b7e86ac3296316,
         type: 3}
+      propertyPath: _type3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328791785623656187, guid: f1742a3c88176d44b9b7e86ac3296316,
+        type: 3}
       propertyPath: numberOfWaves
       value: 2
       objectReference: {fileID: 0}

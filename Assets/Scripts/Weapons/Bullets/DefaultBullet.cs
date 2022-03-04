@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class DefaultBullet : Bullet
 {
-
     private void Start()
     {
         StartMethod();
     }
-    void Update()
+    private void Update()
     {
         BulletMove();
     }

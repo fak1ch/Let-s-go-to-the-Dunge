@@ -98,12 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36e46bee4acbea4784d2b10aa9ab6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 400
-  lifetime: 20
-  damage: 5
-  enemyBullet: 0
-  sound: {fileID: 2703380438312204065}
-  bullet: {fileID: 2638028711620255204, guid: b5a623751c5743e4c81ba01614f50273, type: 3}
+  _speed: 500
+  _lifetime: 20
+  _damage: 5
+  _enemyBullet: 0
+  _allowMove: 1
+  _sound: {fileID: 2703380438312204065}
+  _bullet: {fileID: 2638028711620255204, guid: b5a623751c5743e4c81ba01614f50273, type: 3}
 --- !u!61 &4944134463637050661
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.89032745, y: -0.1128695}

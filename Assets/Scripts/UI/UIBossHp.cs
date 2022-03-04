@@ -5,29 +5,62 @@ using UnityEngine.UI;
 
 public class UIBossHp : MonoBehaviour
 {
-    private GameObject image;
-    public float health = 0;
-    private float maxHealth;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Image _image;
+
+    private void Start()
     {
-        image = transform.GetChild(0).gameObject;
-        image.GetComponent<Image>().enabled = false;
-        GetComponent<Image>().enabled = false;
+        StartCoroutine(HideBossHp());
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int health, int maxHealth)
     {
-        health -= damage;
-        image.GetComponent<Image>().fillAmount = health / maxHealth;
+        _image.fillAmount = (float)health / (float)maxHealth;
     }
 
-    public void StartHealth(int health)
+    public void BossSpawned(int health, int maxHealth)
     {
-        maxHealth = health;
-        this.health = maxHealth;
-        image.GetComponent<Image>().fillAmount = 1;
-        image.GetComponent<Image>().enabled = true;
-        GetComponent<Image>().enabled = true;
+        TakeDamage(health, maxHealth);
+        StartCoroutine(ShowBossHp());
+    }
+
+    public void BossDie()
+    {
+        StartCoroutine(HideBossHp());
+    }
+
+    private IEnumerator ShowBossHp()
+    {
+        Image imageStroke = GetComponent<Image>();
+
+        Color color = imageStroke.color;
+        color.a = 0f;
+        imageStroke.color = color;
+
+        color = _image.color;
+        color.a = 0f;
+        _image.color = color;
+
+        for (float i = 0f; i < 1; i += 0.05f)
+        {
+            color.a += i;
+            imageStroke.color = color;
+            _image.color = color;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    private IEnumerator HideBossHp()
+    {
+        Image imageStroke = GetComponent<Image>();
+
+        Color color = imageStroke.color;
+
+        for (float i = 0f; i < 1; i += 0.05f)
+        {
+            color.a -= i;
+            imageStroke.color = color;
+            _image.color = color;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }

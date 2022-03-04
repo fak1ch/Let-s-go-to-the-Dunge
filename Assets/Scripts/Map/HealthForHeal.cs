@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class HealthForHeal : MonoBehaviour
 {
-    [SerializeField]private int _healValue = 2;
+    [SerializeField] private int _healValue = 2;
     private bool _lockerOpen = true;
+    private PlayerCharacteristic _playerCharacteristic;
+
+    private void Start()
+    {
+        _playerCharacteristic = StaticClass.playerCharacteristic;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,7 +18,7 @@ public class HealthForHeal : MonoBehaviour
             if (collision.CompareTag("Player"))
             {
                 _lockerOpen = false;
-                StaticClass.playerCharacteristic.HealHp(_healValue);
+                _playerCharacteristic.HealHp(_healValue);
                 Destroy(gameObject);
             }
         }
@@ -20,18 +26,9 @@ public class HealthForHeal : MonoBehaviour
 
     private void Update()
     {
-        if (DistanceBetween2dPoints(StaticClass.player.transform.position, gameObject.transform.position) < 100)
+        if (Vector3.Distance(_playerCharacteristic.transform.position, transform.position) < 100)
         {
-            transform.position = Vector3.Lerp(transform.position, StaticClass.player.transform.position, 6 * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, _playerCharacteristic.transform.position, 6 * Time.deltaTime);
         }
-    }
-
-    private float DistanceBetween2dPoints(Vector2 vec1, Vector2 vec2)
-    {
-        float distance;
-
-        distance = Mathf.Pow(Mathf.Pow(vec2.x - vec1.x, 2) + Mathf.Pow(vec2.y - vec1.y, 2), 0.5f);
-
-        return distance;
     }
 }

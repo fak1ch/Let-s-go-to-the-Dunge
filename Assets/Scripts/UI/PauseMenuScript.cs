@@ -6,27 +6,41 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuScript : MonoBehaviour
 {
-    public GameObject pauseMenu;
-    public GameObject settings;
+    [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _settings;
+    [SerializeField] private GameObject _control;
 
-    void Update()
+    private void Update()
     {
-        if (!pauseMenu.activeSelf)
+        if (!_pauseMenu.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Time.timeScale = 0;
-                pauseMenu.SetActive(true);
+                _pauseMenu.SetActive(true);
             }
         }
         else
         {
-            if (!settings.activeSelf)
+            if (!_settings.activeSelf && !_control.activeSelf)
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    Time.timeScale = 1;
-                    pauseMenu.SetActive(false);
+                    ButtonResumeGame();
+                }
+            }
+            else if (_control.activeSelf && !_settings.activeSelf)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    _control.SetActive(false);
+                }
+            }
+            else if (!_control.activeSelf && _settings.activeSelf)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    _settings.SetActive(false);
                 }
             }
         }
@@ -34,22 +48,27 @@ public class PauseMenuScript : MonoBehaviour
 
     public void ButtonOpenPauseMenu()
     {
-        if (!pauseMenu.activeSelf)
+        if (!_pauseMenu.activeSelf)
         {
             Time.timeScale = 0;
-            pauseMenu.SetActive(true);
+            _pauseMenu.SetActive(true);
         }
     }
 
     public void ButtonResumeGame()
     {
         Time.timeScale = 1;
-        pauseMenu.SetActive(false);
+        _pauseMenu.SetActive(false);
+    }
+
+    public void ButtonControl()
+    {
+        _control.SetActive(true);
     }
 
     public void ButtonSettings()
     {
-        settings.SetActive(true);
+        _settings.SetActive(true);
     }
 
     public void ButtonMainMenu()

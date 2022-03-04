@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Robot : Enemy
 {
-    public GameObject bullet;
-    public Transform shotPoint;
-    public float startTimeBtwShots;
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private Transform _shotPoint;
+    [SerializeField] private float _startTimeBtwShots;
 
-    private float timeBtwShots;
+    private float _timeBtwShots;
     private int _hitsSpeedAttack;
 
-    void Start()
+    protected override void Start()
     {
-        StartMethod();
-        startTimeBtwShots = Random.Range(startTimeBtwShots, startTimeBtwShots + 0.5f);
-        timeBtwShots = startTimeBtwShots;
+        base.Start();
+        _startTimeBtwShots = Random.Range(_startTimeBtwShots - 0.5f, _startTimeBtwShots + 0.5f);
+        _timeBtwShots = _startTimeBtwShots;
     }
 
-    void Update()
+    protected override void Update()
     {
-        UpdateMethod();
+        base.Update();
         GunRotateToTarget();
         Shoot();
     }
@@ -29,13 +29,13 @@ public class Robot : Enemy
     {
         if (_player.activeInHierarchy)
         {
-            Vector3 vec = _mainScript.camera.WorldToScreenPoint(_player.transform.position);
-            Vector3 objectPos = _mainScript.camera.WorldToScreenPoint(shotPoint.position);
+            Vector3 vec = _mainScript.MainCamera.WorldToScreenPoint(_player.transform.position);
+            Vector3 objectPos = _mainScript.MainCamera.WorldToScreenPoint(_shotPoint.position);
             vec.x = vec.x - objectPos.x;
             vec.y = vec.y - objectPos.y;
 
             float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
-            shotPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            _shotPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
 
@@ -43,26 +43,26 @@ public class Robot : Enemy
     {
         if (_player.activeInHierarchy)
         {
-            if (timeBtwShots <= 0)
+            if (_timeBtwShots <= 0)
             {
                 ShotAudioPlay();
-                var b = Instantiate(bullet, shotPoint.position, shotPoint.rotation);
+                var b = Instantiate(_bullet, _shotPoint.position, _shotPoint.rotation);
                 if (_hitsSpeedAttack == 5)
                 {
                     _hitsSpeedAttack = 0;
                     Bullet bulletScript = b.GetComponentInChildren<Bullet>();
-                    bulletScript.speed *= 2;
+                    bulletScript.Speed *= 2;
                 }
                 else
                 {
                     _hitsSpeedAttack++;
                 }
 
-                timeBtwShots = startTimeBtwShots;
+                _timeBtwShots = _startTimeBtwShots;
             }
             else
             {
-                timeBtwShots -= Time.deltaTime;
+                _timeBtwShots -= Time.deltaTime;
             }
         }
     }
@@ -71,10 +71,5 @@ public class Robot : Enemy
     {
         _audioSource.Stop();
         _audioSource.Play();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        CollisionAttackPlayer(collision.gameObject);
     }
 }

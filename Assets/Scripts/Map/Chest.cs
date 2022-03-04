@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    public GameObject openChest;
-    private WeaponsInventory weaponsInventory;
-    private MainScript mainScript;
-    private bool locked = false;
-    // Start is called before the first frame update
+    [SerializeField] private GameObject _openChest;
+    private WeaponsInventory _weaponsInventory;
+    private MainScript _mainScript;
+    private bool _locked = false;
+
     void Start()
     {
-        weaponsInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponsInventory>();
-        mainScript = GameObject.FindGameObjectWithTag("MainScript").GetComponent<MainScript>();
+        _mainScript = FindObjectOfType<MainScript>();
+        _weaponsInventory = FindObjectOfType<WeaponsInventory>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     { 
-        if (!locked)
+        if (!_locked)
         {
             if (collision.CompareTag("Player"))
             {
-                if (Input.GetKey(KeyCode.E) || weaponsInventory.androidClickAction)
+                if (Input.GetKey(KeyCode.E) || _weaponsInventory.AndroidClickAction)
                 {
-                    locked = true;
-                    Instantiate(openChest, transform.position, Quaternion.identity);
-                    Destroy(GetComponent<CircleCollider2D>());
+                    _locked = true;
+                    Instantiate(_openChest, transform.position, Quaternion.identity);
                     SpawnWeapon();
+                    Destroy(gameObject);
                 }
             }
         }
@@ -36,15 +36,7 @@ public class Chest : MonoBehaviour
     {
         Vector3 vec = transform.position;
         vec.y -= 10;
-        Instantiate(mainScript.kindOfWeapons[Random.Range(0, mainScript.kindOfWeapons.Count)], vec,Quaternion.identity);
-        StartCoroutine(AllowPick());
-    }
-
-    IEnumerator AllowPick()
-    {
-        weaponsInventory.allowPick = false;
-        yield return new WaitForSeconds(0.2f);
-        weaponsInventory.allowPick = true;
-        Destroy(gameObject);
+        Instantiate(_mainScript.GetRandomWeapon(), vec, Quaternion.identity);
+        _weaponsInventory.AllowPiclStartCorutine(0.2f);
     }
 }

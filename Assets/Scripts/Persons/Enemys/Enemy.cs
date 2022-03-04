@@ -4,48 +4,49 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IEntity
 {
-    public int health;
-    public int damage;
-    public float speed;
-    public float timeBtwAttack;
-    public NavMeshAgent navAgent;
+    [SerializeField] protected int _health;
+    [SerializeField] protected int _damage;
+    [SerializeField] protected float _speed;
+    [SerializeField] protected float _timeBtwAttack;
+    [SerializeField] protected NavMeshAgent _navAgent;
 
     protected GameObject _player;
     protected PlayerCharacteristic _playerCharacteristic;
     protected MainScript _mainScript;
     protected Vector3 _startPosition;
-    protected Rigidbody2D _rb;
     protected Animator _animator;
     protected bool _animHasBeenChanged = false;
-    protected Vector3 _targetForMove;
-    protected bool _lockerForAIMove;
     protected AudioSource _audioSource;
 
+    private Vector3 _targetForMove;
+    private bool _lockerForAIMove;
     private Collider2D _collider;
     private bool _isOpen = false;
 
-    public void StartMethod()
+    protected virtual void Start()
     {
         _player = StaticClass.player;
         _playerCharacteristic = StaticClass.playerCharacteristic;
         _mainScript = StaticClass.mainScript;
+        _mainScript.AddEnemyToList(this);
         _startPosition = transform.position;
-        StaticClass.mainScript.enemies.Add(this);
-        _rb = gameObject.GetComponent<Rigidbody2D>();
         TryGetComponent(out _animator);
         TryGetComponent(out _audioSource);
-        navAgent.updateRotation = false;
-        navAgent.updateUpAxis = false;
         StartCoroutine(TimeBeforeAttackAfterSpawn());
     }
 
-    protected void UpdateMethod()
+    protected virtual void Update()
     {
         EnemyMove();
-        UpdateRotateSprite();
+        RotateSprite();
     }
 
-    public void CollisionAttackPlayer(GameObject entity)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        OnCollisionWithEntity(collision.gameObject);
+    }
+
+    protected void OnCollisionWithEntity(GameObject entity)
     {
         if (entity.CompareTag("Player"))
         {
@@ -68,16 +69,17 @@ public class Enemy : MonoBehaviour, IEntity
 
     private IEnumerator AttackThePlayer(Collider2D collider)
     {
-        _playerCharacteristic.TakeDamage(damage);
-        yield return new WaitForSeconds(timeBtwAttack);
+        _playerCharacteristic.TakeDamage(_damage, null);
+        yield return new WaitForSeconds(_timeBtwAttack);
         collider.enabled = true;
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, GameObject whoKill)
     {
-        health -= damage;
-        if (health <= 0)
+        _health -= damage;
+        if (_health <= 0)
         {
+            whoKill.GetComponent<PlayerStatistics>().AddCountEnemyDestroyed();
             EnemyHasBeenKilled();
         }
     }
@@ -88,7 +90,7 @@ public class Enemy : MonoBehaviour, IEntity
         _isOpen = true;
     }
 
-    public void UpdateRotateSprite()
+    public void RotateSprite()
     {
         if (_player.transform.position.x > transform.position.x)
         {
@@ -113,7 +115,7 @@ public class Enemy : MonoBehaviour, IEntity
         }
         if (_player.activeInHierarchy)
         {
-            navAgent.SetDestination(_targetForMove);
+            _navAgent.SetDestination(_targetForMove);
             if (!_animHasBeenChanged && _animator != null)
             {
                 _animHasBeenChanged = !_animHasBeenChanged;
@@ -137,7 +139,7 @@ public class Enemy : MonoBehaviour, IEntity
 
     public virtual void MoveToStartPosition()
     {
-        navAgent.SetDestination(_startPosition);
+        _navAgent.SetDestination(_startPosition);
         if (_animHasBeenChanged && transform.position == _startPosition && _animator != null)
         {
             _animHasBeenChanged = !_animHasBeenChanged;
@@ -147,9 +149,10 @@ public class Enemy : MonoBehaviour, IEntity
 
     public virtual void EnemyHasBeenKilled()
     {
-        StaticClass.mainScript.enemies.Remove(GetComponent<Enemy>());
+        _health = 0;
+        StaticClass.mainScript.RemoveEnemyFromList(this);
         GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
-        Destroy(gameObject);
+        Destroy(gameObject.transform.root.gameObject);
     }
 
     private float DistanceBetween2dPoints(Vector3 vec11, Vector3 vec22)

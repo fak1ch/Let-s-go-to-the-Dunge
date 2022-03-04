@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8748864194938506651}
   - component: {fileID: 8748864194938506649}
-  - component: {fileID: 8748864194938506650}
   - component: {fileID: 6072830903811172973}
+  - component: {fileID: 5478656071444874174}
   m_Layer: 0
   m_Name: RoomMoverLeft
   m_TagString: RoomMover
@@ -59,20 +59,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.20528412, y: 0.9116745}
   m_EdgeRadius: 0
---- !u!114 &8748864194938506650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8748864194938506644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af34ab0a8f71b94897f8724863c193d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraChangePos: {x: -1915, y: 0, z: 0}
-  playerChangePos: {x: -100, y: 0, z: 0}
 --- !u!50 &6072830903811172973
 Rigidbody2D:
   serializedVersion: 4
@@ -94,3 +80,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5478656071444874174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8748864194938506644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d81f92b65a3d140811ffe250e57c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainRoom: 0

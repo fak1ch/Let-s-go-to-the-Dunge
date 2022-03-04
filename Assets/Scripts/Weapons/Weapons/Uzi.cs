@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Uzi : Weapon, IWeapon
+public class Uzi : Weapon
 {
     void Start()
     {
@@ -11,7 +11,6 @@ public class Uzi : Weapon, IWeapon
 
     private void Update()
     {
-        RotateWeapon();
-        ClickButtonAttack();
+        UpdateMethod();
     }
 }

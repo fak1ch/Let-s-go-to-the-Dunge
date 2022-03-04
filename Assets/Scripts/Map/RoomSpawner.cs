@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public Direction direction;
-    public RoomVariants variants;
+    [SerializeField] private Direction _direction;
 
+    private RoomVariants _variants;
+    private bool _spawned = false;
+    private float _waitTime = 3f;
     public enum Direction
     {
         None,
@@ -14,46 +16,43 @@ public class RoomSpawner : MonoBehaviour
         Left
     }
 
-    public bool spawned = false;
-    private float waitTime = 3f;
-
     void Start()
     {
-        variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomVariants>();
-        Destroy(gameObject, waitTime);
+        _variants = FindObjectOfType<RoomVariants>();
+        Destroy(gameObject, _waitTime);
         float i = Random.Range(0.150000000000f, 0.200000000000f);
         Invoke("Spawn", i);
     }
 
     public void Spawn()
     {
-        if (!spawned)
+        if (!_spawned)
         {
-            int k = variants.numberOfMassive;
-            if (direction == Direction.Top && variants.massiveVariants[k,0].Count !=0)
+            int k = _variants.NumberOfMassive;
+            if (_direction == Direction.Top && _variants.MassiveVariants[k,0].Count !=0)
             {
-                Instantiate(variants.massiveVariants[k, 0][0], RoundVector3(transform.position), variants.massiveVariants[k, 0][0].transform.rotation);
-                variants.massiveVariants[k, 0].RemoveAt(0);
+                Instantiate(_variants.MassiveVariants[k, 0][0], RoundVector3(transform.position), _variants.MassiveVariants[k, 0][0].transform.rotation);
+                _variants.MassiveVariants[k, 0].RemoveAt(0);
             }
             else 
-            if (direction == Direction.Right && variants.massiveVariants[k, 1].Count != 0)
+            if (_direction == Direction.Right && _variants.MassiveVariants[k, 1].Count != 0)
             {
-                Instantiate(variants.massiveVariants[k, 1][0], RoundVector3(transform.position), variants.massiveVariants[k, 1][0].transform.rotation);
-                variants.massiveVariants[k, 1].RemoveAt(0);
+                Instantiate(_variants.MassiveVariants[k, 1][0], RoundVector3(transform.position), _variants.MassiveVariants[k, 1][0].transform.rotation);
+                _variants.MassiveVariants[k, 1].RemoveAt(0);
             }
             else
-            if (direction == Direction.Bottom && variants.massiveVariants[k, 2].Count != 0)
+            if (_direction == Direction.Bottom && _variants.MassiveVariants[k, 2].Count != 0)
             {
-                Instantiate(variants.massiveVariants[k, 2][0], RoundVector3(transform.position), variants.massiveVariants[k, 2][0].transform.rotation);
-                variants.massiveVariants[k, 2].RemoveAt(0);
+                Instantiate(_variants.MassiveVariants[k, 2][0], RoundVector3(transform.position), _variants.MassiveVariants[k, 2][0].transform.rotation);
+                _variants.MassiveVariants[k, 2].RemoveAt(0);
             }
             else
-            if (direction == Direction.Left && variants.massiveVariants[k, 3].Count != 0)
+            if (_direction == Direction.Left && _variants.MassiveVariants[k, 3].Count != 0)
             {
-                Instantiate(variants.massiveVariants[k, 3][0], RoundVector3(transform.position), variants.massiveVariants[k, 3][0].transform.rotation);
-                variants.massiveVariants[k, 3].RemoveAt(0);
+                Instantiate(_variants.MassiveVariants[k, 3][0], RoundVector3(transform.position), _variants.MassiveVariants[k, 3][0].transform.rotation);
+                _variants.MassiveVariants[k, 3].RemoveAt(0);
             }
-            spawned = true;
+            _spawned = true;
         }
     }
 
@@ -67,9 +66,14 @@ public class RoomSpawner : MonoBehaviour
         return result;
     }
 
+    public bool GetFlagSpawned()
+    {
+        return _spawned;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("RoomPoint") && collision.GetComponent<RoomSpawner>().spawned)
+        if(collision.gameObject.CompareTag("RoomPoint") && collision.GetComponent<RoomSpawner>().GetFlagSpawned())
         {
             Destroy(gameObject);
         }

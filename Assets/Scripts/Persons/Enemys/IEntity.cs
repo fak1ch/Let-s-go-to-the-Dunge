@@ -1,4 +1,6 @@
-﻿public interface IEntity
+﻿using UnityEngine;
+
+public interface IEntity
 {
-    public void TakeDamage(int damage);
+    public void TakeDamage(int damage, GameObject whoKill);
 }

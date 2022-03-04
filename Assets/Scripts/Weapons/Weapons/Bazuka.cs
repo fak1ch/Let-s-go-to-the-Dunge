@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bazuka : Weapon, IWeapon
+public class Bazuka : Weapon
 {
     void Start() 
     {
@@ -11,7 +11,6 @@ public class Bazuka : Weapon, IWeapon
 
     private void Update()
     {
-        RotateWeapon();
-        ClickButtonAttack();
+        UpdateMethod();
     }
 }

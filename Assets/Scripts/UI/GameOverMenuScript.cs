@@ -8,6 +8,7 @@ using UnityEngine.Advertisements;
 public class GameOverMenuScript : MonoBehaviour
 {
     [SerializeField] private RewardedAdsButton _button;
+
     private Image[] _imageChildren;
 
     private void OnEnable()

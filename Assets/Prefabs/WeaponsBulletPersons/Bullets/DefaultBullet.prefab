@@ -145,12 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc113e447e075041809aa7c8e654f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 650
-  lifetime: 10
-  damage: 1
-  enemyBullet: 0
+  _speed: 700
+  _lifetime: 20
+  _damage: 1
+  _enemyBullet: 0
   _allowMove: 1
-  sound: {fileID: 9030348639900636588}
+  _sound: {fileID: 9030348639900636588}
 --- !u!1 &2638028711620255204
 GameObject:
   m_ObjectHideFlags: 0

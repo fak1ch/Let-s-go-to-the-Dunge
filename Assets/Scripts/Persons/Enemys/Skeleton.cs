@@ -7,18 +7,5 @@ using UnityEngine;
 
 public class Skeleton : Enemy
 {
-    void Start()
-    {
-        StartMethod();
-    }
 
-    private void Update()
-    {
-        UpdateMethod();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        CollisionAttackPlayer(collision.gameObject);
-    }
 }

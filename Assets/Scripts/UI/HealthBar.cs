@@ -17,7 +17,6 @@ public class HealthBar : MonoBehaviour
     void Awake()
     {
         _playerCharacteristic = FindObjectOfType<PlayerCharacteristic>();
-        UpdateHealthBar(_playerCharacteristic.health, _playerCharacteristic.maxHealth);
     }
 
     private void OnEnable()
@@ -33,10 +32,6 @@ public class HealthBar : MonoBehaviour
     {
         _health = health;
         _numberOfLives = maxHealth;
-        if (_health > _numberOfLives)
-        {
-            _playerCharacteristic.health = _numberOfLives;
-        }
         for (int i = 0; i < 2 * _lives.Length; i++)
         {
             int k = i % 2;

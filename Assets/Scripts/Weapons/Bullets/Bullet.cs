@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed;
-    public float lifetime;
-    public int damage;
-    public bool enemyBullet = false;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _lifetime;
+    [SerializeField] private int _damage;
+    [SerializeField] private bool _enemyBullet = false;
     [SerializeField] private bool _allowMove = true;
-    public AudioSoundAfterDestroy sound;
+    [SerializeField] private AudioSoundAfterDestroy _sound;
 
     private bool _isOpen = true;
+    private GameObject _whoseBullet;
+
+    public float Speed { get => _speed; set => _speed = value; }
 
     protected void StartMethod()
     {
@@ -22,14 +25,15 @@ public class Bullet : MonoBehaviour
     {
         if (_isOpen)
         {
-            if (!enemyBullet)
+            if (!_enemyBullet)
             {
                 if (entity.TryGetComponent(out Enemy script))
                 {
+                    _whoseBullet.GetComponent<PlayerStatistics>().AddDealtDamage(_damage);
                     BulletTouch(script);
                 }
             }
-            else if (enemyBullet)
+            else if (_enemyBullet)
             {
                 if (entity.TryGetComponent(out PlayerCharacteristic script))
                 {
@@ -46,14 +50,14 @@ public class Bullet : MonoBehaviour
     protected virtual void BulletMove()
     {
         if(_allowMove)
-        transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+        transform.Translate(new Vector3(1, 0, 0) * Speed * Time.deltaTime);
     }
 
     private void BulletTouch(IEntity script)
     {
         _isOpen = false;
         if (script != null)
-        script.TakeDamage(damage);
+        script.TakeDamage(_damage, _whoseBullet);
         ExtraEffect();
         DestroyBullet();
     }
@@ -63,11 +67,16 @@ public class Bullet : MonoBehaviour
 
     }
 
+    public void SetWhoseBullet(GameObject player)
+    {
+        _whoseBullet = player;
+    }
+
     private void DestroyBullet()
     {
-        if (sound != null)
+        if (_sound != null)
         {
-            sound.PlaySoundAfterDestroy();
+            _sound.PlaySoundAfterDestroy();
             Destroy(gameObject);
         }
         else
@@ -78,7 +87,7 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator DestroyAfterTime()
     {
-        yield return new WaitForSeconds(lifetime);
+        yield return new WaitForSeconds(_lifetime);
         DestroyBulletForChild();
     }
 

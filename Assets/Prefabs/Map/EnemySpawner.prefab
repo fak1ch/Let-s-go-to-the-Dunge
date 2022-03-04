@@ -45,17 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf046fff945ae424c80b19737b66a0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsBetweenWaves: 2
-  numberOfSpawnPoints: 5
-  numberOfWaves: 3
-  type1: 1
-  type2: 2
-  type3: 1
-  enemy1: []
-  doors: []
-  chest: {fileID: 7325475035663237667, guid: a3b2458bf97ec00408cbad2a26a2b3b4, type: 3}
-  boss: 0
-  enemySpawnMarker: {fileID: 4963510263631163911, guid: 7892cdc22bf1cef4da4097d07adda00c,
+  _doors: []
+  _secondsBetweenWaves: 2
+  _numberOfSpawnPoints: 5
+  _numberOfWaves: 2
+  _type1: 1
+  _type2: 1
+  _type3: 1
+  _chest: {fileID: 7325475035663237667, guid: a3b2458bf97ec00408cbad2a26a2b3b4, type: 3}
+  _boss: 0
+  _enemySpawnMarker: {fileID: 4963510263631163911, guid: 7892cdc22bf1cef4da4097d07adda00c,
     type: 3}
 --- !u!61 &3970266162154952217
 BoxCollider2D:

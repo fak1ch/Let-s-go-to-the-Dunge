@@ -219,6 +219,11 @@ PrefabInstance:
       propertyPath: mainRoom
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5967484996823369500, guid: fea3d56b7e9a4ac41bf5e96992487052,
+        type: 3}
+      propertyPath: _mainRoom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6483708288754889115, guid: fea3d56b7e9a4ac41bf5e96992487052,
         type: 3}
       propertyPath: m_Name
@@ -324,14 +329,29 @@ PrefabInstance:
       propertyPath: mainRoom
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 680919612003755959, guid: d161cc216e45df646a9a48fb8ed46bfc,
+        type: 3}
+      propertyPath: _mainRoom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 936827543704542663, guid: d161cc216e45df646a9a48fb8ed46bfc,
+        type: 3}
+      propertyPath: mainRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 936827543704542663, guid: d161cc216e45df646a9a48fb8ed46bfc,
+        type: 3}
+      propertyPath: _mainRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286566786186693863, guid: d161cc216e45df646a9a48fb8ed46bfc,
         type: 3}
       propertyPath: mainRoom
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1286566786186693863, guid: d161cc216e45df646a9a48fb8ed46bfc,
         type: 3}
-      propertyPath: mainRoom
+      propertyPath: _mainRoom
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1681865558517729083, guid: d161cc216e45df646a9a48fb8ed46bfc,
@@ -347,6 +367,11 @@ PrefabInstance:
     - target: {fileID: 2454292225816071164, guid: d161cc216e45df646a9a48fb8ed46bfc,
         type: 3}
       propertyPath: mainRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2454292225816071164, guid: d161cc216e45df646a9a48fb8ed46bfc,
+        type: 3}
+      propertyPath: _mainRoom
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2847358290476654711, guid: d161cc216e45df646a9a48fb8ed46bfc,

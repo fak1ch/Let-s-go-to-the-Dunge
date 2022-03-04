@@ -155,12 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97406f66acbcb804a90198d2a81ce54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimeBtwShots: 2
-  manacoast: 5
-  bullet: {fileID: 6625505950047504366, guid: f3e39e0306285d04b85faee92161600e, type: 3}
-  shotPoint: {fileID: 1263406141545101707}
-  audioSource: {fileID: 3228477430584943966}
-  greenZone: 0
+  _bullet: {fileID: 6625505950047504366, guid: f3e39e0306285d04b85faee92161600e, type: 3}
+  _startTimeBtwShots: 2
+  _manacoast: 5
+  _shotPoint: {fileID: 1263406141545101707}
 --- !u!82 &3228477430584943966
 AudioSource:
   m_ObjectHideFlags: 0

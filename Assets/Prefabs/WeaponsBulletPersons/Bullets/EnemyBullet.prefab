@@ -175,9 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc113e447e075041809aa7c8e654f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
-  lifetime: 10
-  damage: 1
-  enemyBullet: 1
+  _speed: 450
+  _lifetime: 20
+  _damage: 1
+  _enemyBullet: 1
   _allowMove: 1
-  sound: {fileID: 0}
+  _sound: {fileID: 0}

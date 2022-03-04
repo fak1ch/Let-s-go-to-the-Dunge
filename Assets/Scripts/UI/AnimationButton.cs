@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class AnimationButton : MonoBehaviour
 {
-    private Animator animator;
+    private Animator _animator;
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     public void ClickAtButtonPlay()
@@ -30,23 +30,23 @@ public class AnimationButton : MonoBehaviour
 
     IEnumerator EventPlay()
     {
-        animator.SetBool("isClick", true);
+        _animator.SetBool("isClick", true);
         yield return new WaitForSeconds(0.01f);
         SceneManager.LoadScene("FirstLevel");
     }
 
     IEnumerator EventSettings()
     {
-        animator.SetBool("isClick", true);
+        _animator.SetBool("isClick", true);
         yield return new WaitForSeconds(0.01f);
         GameObject.Find("MainMenuScript").GetComponent<MainMenu>().SetActiveSettings();
         yield return new WaitForSeconds(0.5f);
-        animator.SetBool("isClick", false);
+        _animator.SetBool("isClick", false);
     }
 
     IEnumerator EventExit()
     {
-        animator.SetBool("isClick", true);
+        _animator.SetBool("isClick", true);
         yield return new WaitForSeconds(0.01f);
         Application.Quit();
     }

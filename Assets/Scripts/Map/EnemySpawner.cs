@@ -4,32 +4,37 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public List<GameObject> doors = new List<GameObject>();
-
+    [SerializeField] private List<GameObject> _doors = new List<GameObject>();
     [SerializeField] private int _secondsBetweenWaves = 2;
     [SerializeField] private int _numberOfSpawnPoints = 5;
     [SerializeField] private int _numberOfWaves = 2;
     [SerializeField] private TypeOfWave _type1 = TypeOfWave.Single;
-    [SerializeField] private TypeOfWave _type2;
-    [SerializeField] private TypeOfWave _type3;
-    [SerializeField] private GameObject chest;
-    [SerializeField] private bool boss = false;
-    [SerializeField] private GameObject enemySpawnMarker;
-    private Vector2[] _points;
-    private bool _playerTrigger = false;
-    private bool _isOpen = false;
-    [SerializeField] private List<GameObject> _enemy1 = new List<GameObject>();
+    [SerializeField] private TypeOfWave _type2 = TypeOfWave.Single;
+    [SerializeField] private TypeOfWave _type3 = TypeOfWave.Single;
+    [SerializeField] private GameObject _chest;
+    [SerializeField] private bool _boss = false;
+    [SerializeField] private GameObject _enemySpawnMarker;
+
+    private List<GameObject> _enemy1 = new List<GameObject>();
     private List<GameObject> _enemy2 = new List<GameObject>();
     private List<GameObject> _enemy3 = new List<GameObject>();
     private List<GameObject> _wave1 = new List<GameObject>();
     private List<GameObject> _wave2 = new List<GameObject>();
     private List<GameObject> _wave3 = new List<GameObject>();
     private List<GameObject> enemyMarkers = new List<GameObject>();
+
+    private Vector2[] _points;
+
+    private bool _playerTrigger = false;
+    private bool _isOpen = false;
     private bool _firstWaveEnd = false;
     private bool _secondWaveEnd = false;
     private bool _thirdWaveEnd = false;
 
-    private MainScript mainScript;
+    private MainScript _mainScript;
+
+    public int FirstDoor => _doors[0].GetComponent<Door>().GetNumber;
+    public int DoorsCount => _doors.Count;
     public enum TypeOfWave
     {
         None,
@@ -40,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainScript = FindObjectOfType<MainScript>();
+        _mainScript = FindObjectOfType<MainScript>();
         _points = new Vector2[_numberOfSpawnPoints];
         StartCoroutine(DelayBeforeTriggerPlayer());
         RandomEnemys();
@@ -56,24 +61,24 @@ public class EnemySpawner : MonoBehaviour
 
     private void RandomEnemys()
     {
-        if (!boss)
+        if (!_boss)
         {
             for (int i = 0; i < _numberOfSpawnPoints * 3; i++) 
             {
                 if (_numberOfWaves == 1)
                 {
-                    _enemy1.Add(mainScript.kindOfEnemies1Wave[Random.Range(0, mainScript.kindOfEnemies1Wave.Count)]);
+                    _enemy1.Add(_mainScript.GetRandomEnemyWave1());
                 }
                 else if(_numberOfWaves == 2)
                 {
-                    _enemy1.Add(mainScript.kindOfEnemies2Wave[Random.Range(0, mainScript.kindOfEnemies2Wave.Count)]);
-                    _enemy2.Add(mainScript.kindOfEnemies2Wave[Random.Range(0, mainScript.kindOfEnemies2Wave.Count)]);
+                    _enemy1.Add(_mainScript.GetRandomEnemyWave2());
+                    _enemy2.Add(_mainScript.GetRandomEnemyWave2());
                 }
                 else if (_numberOfWaves == 3)
                 {
-                    _enemy1.Add(mainScript.kindOfEnemies3Wave[Random.Range(0, mainScript.kindOfEnemies3Wave.Count)]);
-                    _enemy2.Add(mainScript.kindOfEnemies3Wave[Random.Range(0, mainScript.kindOfEnemies3Wave.Count)]);
-                    _enemy3.Add(mainScript.kindOfEnemies3Wave[Random.Range(0, mainScript.kindOfEnemies3Wave.Count)]);
+                    _enemy1.Add(_mainScript.GetRandomEnemyWave3());
+                    _enemy2.Add(_mainScript.GetRandomEnemyWave3());
+                    _enemy3.Add(_mainScript.GetRandomEnemyWave3());
                 }
             }
         }
@@ -116,7 +121,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 OpenDoors();
                 _playerTrigger = true;
-                Instantiate(chest, transform.root.gameObject.transform.position, Quaternion.identity);
+                Instantiate(_chest, transform.root.gameObject.transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }
@@ -124,22 +129,22 @@ public class EnemySpawner : MonoBehaviour
 
     public void AddDoorsToList(GameObject gm)
     {
-        doors.Add(gm);
+        _doors.Add(gm);
     }
 
     private void CloseDoors()
     {
-        for (int i = 0; i < doors.Count; i++)
+        for (int i = 0; i < _doors.Count; i++)
         {
-            doors[i].SetActive(true);
+            _doors[i].SetActive(true);
         }
     }
 
     public void OpenDoors()
     {
-        for (int i = 0; i < doors.Count; i++)
+        for (int i = 0; i < _doors.Count; i++)
         {
-            doors[i].gameObject.SetActive(false);
+            _doors[i].gameObject.SetActive(false);
         }
     }
 
@@ -153,22 +158,21 @@ public class EnemySpawner : MonoBehaviour
             {
                 _wave1.Add(Instantiate(_enemy1[0], _points[i], Quaternion.identity));
                 _enemy1.RemoveAt(0);
-                Destroy(enemyMarkers[i]);
             }
-            if (boss && _enemy1.Count != 0)
+            else
+            if (_boss)
             {
-                _wave1.Add(Instantiate(_enemy1[0], _points[i], Quaternion.identity));
-                _enemy1.RemoveAt(0);
-                Destroy(enemyMarkers[i]);
+                _wave1.Add(Instantiate(_mainScript.GetFirstBoss(), _points[i], Quaternion.identity));
             }
+            Destroy(enemyMarkers[i]);
         }
         _firstWaveEnd = true;
     }
 
     IEnumerator SpawnSecondWave()
     {
-        RecreatePoints();
         _firstWaveEnd = false;
+        RecreatePoints();
         yield return new WaitForSeconds(_secondsBetweenWaves);
         for (int i = 0; i < _points.GetLength(0); i++)
         {
@@ -212,8 +216,8 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnThirdWave()
     {
-        RecreatePoints();
         _secondWaveEnd = false;
+        RecreatePoints();
         yield return new WaitForSeconds(_secondsBetweenWaves);
         for (int i = 0; i < _points.GetLength(0); i++)
         {
@@ -261,7 +265,7 @@ public class EnemySpawner : MonoBehaviour
         if (_points.Length == 1)
         {
             _points[0] = new Vector2(transform.root.localPosition.x -328, transform.root.localPosition.y);
-            enemyMarkers.Add(Instantiate(enemySpawnMarker, _points[0], Quaternion.identity));
+            enemyMarkers.Add(Instantiate(_enemySpawnMarker, _points[0], Quaternion.identity));
             enemyMarkers[0].transform.localScale *= 2;
         }
         else
@@ -269,7 +273,7 @@ public class EnemySpawner : MonoBehaviour
             for (int i = 0; i < _points.GetLength(0); i++)
             {
                 _points[i] = new Vector2(transform.root.localPosition.x + Random.Range(-1100, 550), transform.root.localPosition.y + Random.Range(361, -550));
-                enemyMarkers.Add(Instantiate(enemySpawnMarker, _points[i], Quaternion.identity));
+                enemyMarkers.Add(Instantiate(_enemySpawnMarker, _points[i], Quaternion.identity));
             }
         }
     }
@@ -300,10 +304,11 @@ public class EnemySpawner : MonoBehaviour
         {
             if (_isOpen)
             {
+                _isOpen = false;
                 Destroy(GetComponent<BoxCollider2D>());
                 CloseDoors();
-                if (boss)
-                    StaticClass.mainScript.MusicPlay(StaticClass.mainScript.kindOfBossMusic[Random.Range(0, StaticClass.mainScript.kindOfBossMusic.Count)]);
+                if (_boss)
+                    _mainScript.MusicPlay(_mainScript.GetRandomBossMusic());
                 StartCoroutine(SpawnFirstWave());
                 _playerTrigger = true;
             }

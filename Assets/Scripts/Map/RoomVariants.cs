@@ -4,46 +4,63 @@ using UnityEngine;
 
 public class RoomVariants : MonoBehaviour
 {
-    public bool mainRoomSpawn = true;
+    [SerializeField] private bool _mainRoomSpawn = true;
 
-    public List<GameObject> topRooms;
-    public List<GameObject> rightRooms;
-    public List<GameObject> bottomRooms;
-    public List<GameObject> leftRooms;
+    [SerializeField] private List<GameObject> _topRooms;
+    [SerializeField] private List<GameObject> _rightRooms;
+    [SerializeField] private List<GameObject> _bottomRooms;
+    [SerializeField] private List<GameObject> _leftRooms;
 
-    public List<GameObject> topRooms1;
-    public List<GameObject> rightRooms1;
-    public List<GameObject> bottomRooms1;
-    public List<GameObject> leftRooms1;
+    [SerializeField] private List<GameObject> _topRooms1;
+    [SerializeField] private List<GameObject> _rightRooms1;
+    [SerializeField] private List<GameObject> _bottomRooms1;
+    [SerializeField] private List<GameObject> _leftRooms1;
 
-    public List<GameObject> mainRooms;
-    public List<GameObject> bossRooms;
-    public List<GameObject> shopRooms;
+    [SerializeField] private List<GameObject> _mainRooms;
+    [SerializeField] private List<GameObject> _bossRooms;
+    [SerializeField] private List<GameObject> _shopRooms;
 
-    public List<GameObject>[,] massiveVariants = new List<GameObject>[2, 4];
+    private List<GameObject>[,] _massiveVariants = new List<GameObject>[2, 4];
+    private int _numberOfMassive;
 
-    [HideInInspector]public int numberOfMassive;
+    public List<GameObject>[,] MassiveVariants => _massiveVariants;
+    public int NumberOfMassive => _numberOfMassive;
 
     private void Start()
     {
-        massiveVariants[0, 0] = topRooms;
-        massiveVariants[0, 1] = rightRooms;
-        massiveVariants[0, 2] = bottomRooms;
-        massiveVariants[0, 3] = leftRooms;
-        massiveVariants[1, 0] = topRooms1;
-        massiveVariants[1, 1] = rightRooms1;
-        massiveVariants[1, 2] = bottomRooms1;
-        massiveVariants[1, 3] = leftRooms1;
-        numberOfMassive = Random.Range(0, massiveVariants.GetLength(0));
+        _massiveVariants[0, 0] = _topRooms;
+        _massiveVariants[0, 1] = _rightRooms;
+        _massiveVariants[0, 2] = _bottomRooms;
+        _massiveVariants[0, 3] = _leftRooms;
+        _massiveVariants[1, 0] = _topRooms1;
+        _massiveVariants[1, 1] = _rightRooms1;
+        _massiveVariants[1, 2] = _bottomRooms1;
+        _massiveVariants[1, 3] = _leftRooms1;
+        _numberOfMassive = Random.Range(0, _massiveVariants.GetLength(0));
         CreateMainRoom();
     }
 
     private void CreateMainRoom()
     {
-        if (mainRoomSpawn)
+        if (_mainRoomSpawn)
         {
-            int i = Random.Range(0, mainRooms.Count);
-            var obj = Instantiate(mainRooms[i], new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
+            int i = Random.Range(0, _mainRooms.Count);
+            Instantiate(_mainRooms[i], new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
         }
+    }
+
+    public GameObject GetMainRoomByIndex(int index)
+    {
+        return _mainRooms[index];
+    }
+
+    public GameObject GetBossRoomByIndex(int index)
+    {
+        return _bossRooms[index];
+    }
+
+    public GameObject GetShopRoomByIndex(int index)
+    {
+        return _shopRooms[index];
     }
 }

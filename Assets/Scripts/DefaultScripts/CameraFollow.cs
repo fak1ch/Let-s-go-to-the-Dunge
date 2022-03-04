@@ -7,26 +7,25 @@ namespace DungeonHeroes
     //let camera follow target
     public class CameraFollow : MonoBehaviour
     {
-        public Transform target;
-        public float lerpSpeed = 1.0f;
+        [SerializeField] private Transform _target;
+        [SerializeField] private float _lerpSpeed = 1.0f;
 
-        private Vector3 offset;
-
-        private Vector3 targetPos;
+        private Vector3 _offset;
+        private Vector3 _targetPos;
 
         private void Start()
         {
-            if (target == null) return;
+            if (_target == null) return;
 
-            offset = transform.position - target.position;
+            _offset = transform.position - _target.position;
         }
 
         private void Update()
         {
-            if (target == null) return;
+            if (_target == null) return;
 
-            targetPos = target.position + offset;
-            transform.position = Vector3.Lerp(transform.position, targetPos, lerpSpeed * Time.deltaTime);
+            _targetPos = _target.position + _offset;
+            transform.position = Vector3.Lerp(transform.position, _targetPos, _lerpSpeed * Time.deltaTime);
         }
 
     }

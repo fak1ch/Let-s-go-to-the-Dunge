@@ -760,7 +760,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.07
 --- !u!1 &6940805586531758447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.07
 --- !u!1 &6940805587089270062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1545,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 7
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6940805587179002859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2178,11 +2178,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734cc5cb8b99323459aca8f36f7cfc22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24300002, guid: d6760cbe6c00a914ea0d00f6c6f9cd2a, type: 2}
-  masterSlider: {fileID: 6940805587654105967}
-  musicSlider: {fileID: 6940805587026981011}
-  menuMusicSlider: {fileID: 1924240483388501044}
-  soundsSlider: {fileID: 6940805587214408529}
+  _mixer: {fileID: 24300002, guid: d6760cbe6c00a914ea0d00f6c6f9cd2a, type: 2}
+  _masterSlider: {fileID: 6940805587654105967}
+  _musicSlider: {fileID: 6940805587026981011}
+  _menuMusicSlider: {fileID: 1924240483388501044}
+  _soundsSlider: {fileID: 6940805587214408529}
 --- !u!1 &6940805587804950435
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,7 +2257,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.07
 --- !u!1 &7093566383436429621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,7 +2433,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.07
 --- !u!1 &7693542422807364092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 7
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1973800073976425291
 MonoBehaviour:
   m_ObjectHideFlags: 0
