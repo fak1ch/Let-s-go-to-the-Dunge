@@ -30,10 +30,13 @@ public class BazukaBullet : Bullet
     private void Boom()
     {
         float angle = 0;
+        List<Bullet> list = new List<Bullet>();
         for(int i = 0; i<=8; i++)
         {
             var b = Instantiate(_bullet, transform.position, transform.rotation);
-            b.GetComponentInChildren<Bullet>().Speed = b.GetComponentInChildren<Bullet>().Speed / 2;
+            list.Add(b.GetComponentInChildren<Bullet>());
+            list[i].Speed /= 2;
+            list[i].SetWhoseBullet(WhoseBullet);
             b.transform.Rotate(0.0f, 0.0f, angle);
             angle += 45;
         }

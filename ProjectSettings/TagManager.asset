@@ -30,6 +30,7 @@ TagManager:
   - JoystickAttack
   - GameOverMenu
   - bullet
+  - EndGameScreen
   layers:
   - Default
   - TransparentFX

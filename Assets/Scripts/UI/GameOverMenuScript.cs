@@ -37,6 +37,7 @@ public class GameOverMenuScript : MonoBehaviour
         CloseGameOverMenuCoroutineAfterAds();
         StaticClass.playerCharacteristic.gameObject.SetActive(true);
         StaticClass.playerCharacteristic.HealHp(999);
+        StaticClass.playerCharacteristic.ChangeManaBar(999);
         StaticClass.playerCharacteristic.OnImmortality(2);
     }
 

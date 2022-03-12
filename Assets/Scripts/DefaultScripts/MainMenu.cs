@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 120;
         StaticClass.typeOfDevice = (StaticClass.TypeOfDevice)_typeOfDevice;
     }
 

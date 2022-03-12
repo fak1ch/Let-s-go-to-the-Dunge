@@ -42,9 +42,12 @@ public class Weapon : MonoBehaviour
         {
             if (_timeBtwShots <= 0 && !_greenZone)
             {
-                if ((_joystick.Direction != Vector2.zero) && _playerCharacteristic.Mana >= _manacoast)
+                if (_joystick != null)
                 {
-                    AttackFromWeapon();
+                    if ((_joystick.Direction != Vector2.zero) && _playerCharacteristic.Mana >= _manacoast)
+                    {
+                        AttackFromWeapon();
+                    }
                 }
             }
             else
@@ -69,7 +72,7 @@ public class Weapon : MonoBehaviour
     {
         if (!IsDropped)
         {
-            float angle;
+            float angle = 0;
             if (StaticClass.typeOfDevice == StaticClass.TypeOfDevice.PC)
             {
                 Vector3 mousePos = Input.mousePosition;
@@ -81,7 +84,7 @@ public class Weapon : MonoBehaviour
 
                 angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
             }
-            else
+            else if (_joystick != null)
             {
                 angle = Mathf.Atan2(_joystick.Vertical, _joystick.Horizontal) * Mathf.Rad2Deg;
             }

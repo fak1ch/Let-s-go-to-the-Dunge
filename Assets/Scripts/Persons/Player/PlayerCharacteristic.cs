@@ -20,10 +20,14 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
     public int Amethists { get; set; }
     public int Mana { get { return _mana; } }
 
-    void Start()
+    private void Start()
     {
         _mana = _maxMana;
         OnHealthChange?.Invoke(_health, _maxHealth);
+    }
+     
+    private void Update()
+    {
     }
 
     public void TakeDamage(int damage, GameObject whoKill)

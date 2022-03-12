@@ -23,8 +23,13 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
         if (StaticClass.typeOfDevice == StaticClass.TypeOfDevice.Phone)
         {
-            _joystickMove = GameObject.FindGameObjectWithTag("JoystickMove").GetComponent<FixedJoystick>();
-            _joystickAttack = GameObject.FindGameObjectWithTag("JoystickAttack").GetComponent<FixedJoystick>();
+            GameObject gm = GameObject.FindGameObjectWithTag("JoystickMove");
+            if (gm != null)
+                gm.TryGetComponent(out _joystickMove);
+
+            gm = GameObject.FindGameObjectWithTag("JoystickAttack");
+            if (gm != null)
+                gm.TryGetComponent(out _joystickAttack);
         }
     }
     private void Start()
@@ -39,7 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             _moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
-        else
+        else if (_joystickMove != null)
         {
             _moveInput = new Vector2(_joystickMove.Horizontal, _joystickMove.Vertical);
         }
@@ -57,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     private void FlipMethod()
     {
-        float angle;
+        float angle = 0;
         if (StaticClass.typeOfDevice == StaticClass.TypeOfDevice.PC)
         {
             Vector3 mousePos = Input.mousePosition;
@@ -69,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
             angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         }
-        else
+        else if (_joystickMove != null)
         {
             angle = Mathf.Atan2(_joystickMove.Vertical, _joystickMove.Horizontal) * Mathf.Rad2Deg;
         }

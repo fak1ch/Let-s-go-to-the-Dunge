@@ -41,8 +41,13 @@ public class MainScript : MonoBehaviour
 
         if(StaticClass.typeOfDevice == StaticClass.TypeOfDevice.Phone)
         {
-            _joystickMove = GameObject.FindGameObjectWithTag("JoystickMove").GetComponent<FixedJoystick>();
-            _joystickAttack = GameObject.FindGameObjectWithTag("JoystickAttack").GetComponent<FixedJoystick>();
+            GameObject gm = GameObject.FindGameObjectWithTag("JoystickMove");
+            if (gm != null)
+                gm.TryGetComponent(out _joystickMove);
+
+            gm = GameObject.FindGameObjectWithTag("JoystickAttack");
+            if (gm != null)
+                gm.TryGetComponent(out _joystickAttack);
         }
 
         if (StaticClass.player == null)

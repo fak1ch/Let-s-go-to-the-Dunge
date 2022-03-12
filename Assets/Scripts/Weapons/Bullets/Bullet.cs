@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     private GameObject _whoseBullet;
 
     public float Speed { get => _speed; set => _speed = value; }
+    public GameObject WhoseBullet => _whoseBullet;
 
     protected void StartMethod()
     {

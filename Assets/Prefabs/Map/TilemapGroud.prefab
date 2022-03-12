@@ -9100,7 +9100,7 @@ Tilemap:
   - m_RefCount: 902
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
-  m_AnimationFrameRate: 1
+  m_AnimationFrameRate: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -31, y: -15, z: -50}
   m_Size: {x: 47, y: 28, z: 51}
@@ -9168,8 +9168,8 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
-  m_Mode: 1
-  m_DetectChunkCullingBounds: 0
+  m_Mode: 0
+  m_DetectChunkCullingBounds: 1
   m_MaskInteraction: 0
 --- !u!114 &539620375843110521
 MonoBehaviour:
