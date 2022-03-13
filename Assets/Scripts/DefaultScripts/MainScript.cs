@@ -67,6 +67,8 @@ public class MainScript : MonoBehaviour
 
     private void Update()
     {
+        if (Application.targetFrameRate != 120)
+            Application.targetFrameRate = 120;
         Cheats();
     }
 

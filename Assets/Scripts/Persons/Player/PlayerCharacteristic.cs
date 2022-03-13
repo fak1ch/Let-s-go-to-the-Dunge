@@ -25,10 +25,6 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
         _mana = _maxMana;
         OnHealthChange?.Invoke(_health, _maxHealth);
     }
-     
-    private void Update()
-    {
-    }
 
     public void TakeDamage(int damage, GameObject whoKill)
     {
