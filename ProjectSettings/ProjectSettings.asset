@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: fak1ch
-  productName: Dungeon Heroes
+  productName: Let's go to the Dunge
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1
+  bundleVersion: 0.1beta
   preloadedAssets:
   - {fileID: 4562857662616815221, guid: 141d85e975cfe6d4280096f0014f3d41, type: 2}
   metroInputSource: 0
@@ -154,14 +154,14 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DungeonHeroes
+    Android: com.LetsGoToTheDunge
     Standalone: com.fak1chCompany.DungeonHeroes
   buildNumber:
     Standalone: 0
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
@@ -272,7 +272,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 45ba0468eb7e55b4784c1031b5ab43f1, type: 3}
+      m_Icon: {fileID: 2800000, guid: 3cab79d8bfa9675408961b0f4348f0de, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -712,7 +712,7 @@ PlayerSettings:
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
-    Android: 0
+    Android: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
@@ -809,7 +809,7 @@ PlayerSettings:
   cloudProjectId: dadd29ff-f26f-4704-b4af-22f251534feb
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Dungeon Heroes
+  projectName: Let's go to the Dunge
   organizationId: fak1chcompany
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

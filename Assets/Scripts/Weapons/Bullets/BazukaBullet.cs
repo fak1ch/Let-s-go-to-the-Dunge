@@ -23,7 +23,6 @@ public class BazukaBullet : Bullet
 
     public override void ExtraEffect()
     {
-        transform.Translate(new Vector3(-2, 0, 0) * Speed * Time.deltaTime);
         Boom();
     }
 
