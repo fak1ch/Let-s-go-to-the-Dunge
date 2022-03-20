@@ -7,5 +7,9 @@ using UnityEngine;
 
 public class Skeleton : Enemy
 {
-
+    protected override void Start()
+    {
+        base.Start();
+        SetMoveBehaviour(new NavMeshMoveToTarget(_navAgent, GetComponent<Animator>(), transform.position));
+    }
 }

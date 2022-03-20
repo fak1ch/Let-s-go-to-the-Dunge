@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
     public bool IsDropped { get; set; } = true;
     public bool GreenZone { set { _greenZone = value; } }
 
-    protected void StartMethod()
+    protected virtual void Start()
     {
         _mainScript = FindObjectOfType<MainScript>();
         _playerCharacteristic = FindObjectOfType<PlayerCharacteristic>();
@@ -30,7 +30,7 @@ public class Weapon : MonoBehaviour
         TryGetComponent(out _audioSource);
     }
 
-    protected void UpdateMethod()
+    protected virtual void Update()
     {
         RotateWeapon();
         ClickButtonAttack();

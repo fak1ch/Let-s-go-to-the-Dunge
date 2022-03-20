@@ -264,7 +264,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemyMarkers.Count != 0) enemyMarkers.Clear();
         if (_points.Length == 1)
         {
-            _points[0] = new Vector2(transform.root.localPosition.x -328, transform.root.localPosition.y);
+            _points[0] = new Vector2(transform.root.localPosition.x -328, transform.root.localPosition.y - 200);
             enemyMarkers.Add(Instantiate(_enemySpawnMarker, _points[0], Quaternion.identity));
             enemyMarkers[0].transform.localScale *= 2;
         }

@@ -17,12 +17,22 @@ public class Bullet : MonoBehaviour
     public float Speed { get => _speed; set => _speed = value; }
     public GameObject WhoseBullet => _whoseBullet;
 
-    protected void StartMethod()
+    protected virtual void Start() 
     {
         StartCoroutine(DestroyAfterTime());
     }
 
-    protected void OnTriggerEnter2DMethod(GameObject entity)
+    protected virtual void Update()
+    {
+        BulletMove();
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        OnTriggerEnter2DMethod(collision.gameObject);
+    }
+
+    private void OnTriggerEnter2DMethod(GameObject entity)
     {
         if (_isOpen)
         {
@@ -54,7 +64,7 @@ public class Bullet : MonoBehaviour
         transform.Translate(new Vector3(1, 0, 0) * Speed * Time.deltaTime);
     }
 
-    private void BulletTouch(IEntity script)
+    private void BulletTouch(Entity script)
     {
         _isOpen = false;
         if (script != null)
@@ -63,7 +73,7 @@ public class Bullet : MonoBehaviour
         DestroyBullet();
     }
 
-    public virtual void ExtraEffect()
+    protected virtual void ExtraEffect()
     {
 
     }

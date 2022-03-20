@@ -20,12 +20,7 @@ public class RunAwayPlayer : MonoBehaviour
         StartCoroutine(GetDistanceBetweenPlayerAndEnemy());
     }
 
-    private void FixedUpdate()
-    {
-        EnemyMove();
-    }
-
-    void Update()
+    private void Update()
     {
         Vector3 vec = _mainScript.MainCamera.WorldToScreenPoint(_player.transform.position);
         Vector3 objectPos = _mainScript.MainCamera.WorldToScreenPoint(transform.position);
@@ -38,14 +33,6 @@ public class RunAwayPlayer : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         else
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 180));
-    }
-
-    public void EnemyMove()
-    {
-        if (_player.activeInHierarchy)
-        {
-            transform.root.position = Vector2.MoveTowards(transform.root.position, _pointMove.position, _speed * Time.deltaTime);
-        }
     }
 
     private IEnumerator GetDistanceBetweenPlayerAndEnemy()

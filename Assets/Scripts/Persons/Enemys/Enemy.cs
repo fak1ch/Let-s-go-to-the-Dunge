@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IEntity
+public class Enemy : Entity
 {
     [SerializeField] protected int _health;
     [SerializeField] protected int _damage;
@@ -13,24 +13,20 @@ public class Enemy : MonoBehaviour, IEntity
     protected GameObject _player;
     protected PlayerCharacteristic _playerCharacteristic;
     protected MainScript _mainScript;
-    protected Vector3 _startPosition;
-    protected Animator _animator;
-    protected bool _animHasBeenChanged = false;
     protected AudioSource _audioSource;
 
-    private Vector3 _targetForMove;
+    private Vector3 _target;
     private bool _lockerForAIMove;
     private Collider2D _collider;
     private bool _isOpen = false;
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         _player = StaticClass.player;
         _playerCharacteristic = StaticClass.playerCharacteristic;
         _mainScript = StaticClass.mainScript;
         _mainScript.AddEnemyToList(this);
-        _startPosition = transform.position;
-        TryGetComponent(out _animator);
         TryGetComponent(out _audioSource);
         StartCoroutine(TimeBeforeAttackAfterSpawn());
     }
@@ -43,14 +39,10 @@ public class Enemy : MonoBehaviour, IEntity
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        OnCollisionWithEntity(collision.gameObject);
-    }
-
-    protected void OnCollisionWithEntity(GameObject entity)
-    {
-        if (entity.CompareTag("Player"))
+        if (_isOpen)
         {
-            if (_isOpen)
+            var entity = collision.gameObject;
+            if (entity.TryGetComponent(out _playerCharacteristic))
             {
                 if (_collider == null)
                 {
@@ -74,7 +66,7 @@ public class Enemy : MonoBehaviour, IEntity
         collider.enabled = true;
     }
 
-    public virtual void TakeDamage(int damage, GameObject whoKill)
+    public override void TakeDamage(int damage, GameObject whoKill)
     {
         _health -= damage;
         if (_health <= 0)
@@ -109,42 +101,20 @@ public class Enemy : MonoBehaviour, IEntity
 
     public virtual void EnemyMove()
     {
+        Move(_target, _player.activeInHierarchy);
         if (!_lockerForAIMove)
         {
             StartCoroutine(TargetForMovePos());
-        }
-        if (_player.activeInHierarchy)
-        {
-            _navAgent.SetDestination(_targetForMove);
-            if (!_animHasBeenChanged && _animator != null)
-            {
-                _animHasBeenChanged = !_animHasBeenChanged;
-                _animator.SetBool("isRun", true);
-            }
-        }
-        else
-        {
-            MoveToStartPosition();
         }
     }
 
     public IEnumerator TargetForMovePos()
     {
         _lockerForAIMove = true;
-        _targetForMove = _player.transform.position;
-        float time = DistanceBetween2dPoints(_player.transform.position, transform.position)/1500;
+        _target = _player.transform.position;
+        float time = Vector2.Distance(_player.transform.position, transform.position)/1500;
         yield return new WaitForSeconds(time);
         _lockerForAIMove = false;
-    }
-
-    public virtual void MoveToStartPosition()
-    {
-        _navAgent.SetDestination(_startPosition);
-        if (_animHasBeenChanged && transform.position == _startPosition && _animator != null)
-        {
-            _animHasBeenChanged = !_animHasBeenChanged;
-            _animator.SetBool("isRun", false);
-        }
     }
 
     public virtual void EnemyHasBeenKilled()
@@ -153,17 +123,5 @@ public class Enemy : MonoBehaviour, IEntity
         StaticClass.mainScript.RemoveEnemyFromList(this);
         GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
         Destroy(gameObject.transform.root.gameObject);
-    }
-
-    private float DistanceBetween2dPoints(Vector3 vec11, Vector3 vec22)
-    {
-        Vector2 vec1 = new Vector2(vec11.x, vec11.y);
-        Vector2 vec2 = new Vector2(vec22.x, vec22.y);
-
-        float distance;
-
-        distance = Mathf.Pow(Mathf.Pow(vec2.x - vec1.x, 2) + Mathf.Pow(vec2.y - vec1.y, 2), 0.5f);
-
-        return distance;
     }
 }

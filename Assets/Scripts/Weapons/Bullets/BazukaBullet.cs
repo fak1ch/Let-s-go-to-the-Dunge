@@ -6,22 +6,21 @@ public class BazukaBullet : Bullet
 {
     [SerializeField] private GameObject _bullet;
 
-    private void Start()
+    protected override void Start()
     {
-        StartMethod();
+        base.Start();
     }
-    // Update is called once per frame
-    private void Update()  
+    protected override void Update()
     {
-        BulletMove();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        OnTriggerEnter2DMethod(collision.gameObject);
+        base.Update();
     }
 
-    public override void ExtraEffect()
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+    }
+
+    protected override void ExtraEffect()
     {
         Boom();
     }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Uzi : Weapon
 {
-    void Start()
+    protected override void Start()
     {
-        StartMethod();
+        base.Start();
     }
 
-    private void Update()
+    protected override void Update()
     {
-        UpdateMethod();
+        base.Update();
     }
 }

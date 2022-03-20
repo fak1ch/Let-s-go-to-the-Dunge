@@ -14,6 +14,7 @@ public class Robot : Enemy
     protected override void Start()
     {
         base.Start();
+        SetMoveBehaviour(new NavMeshMoveToTarget(_navAgent, GetComponent<Animator>(), transform.position));
         _startTimeBtwShots = Random.Range(_startTimeBtwShots - 0.5f, _startTimeBtwShots + 0.5f);
         _timeBtwShots = _startTimeBtwShots;
     }
@@ -69,7 +70,10 @@ public class Robot : Enemy
 
     private void ShotAudioPlay()
     {
-        _audioSource.Stop();
-        _audioSource.Play();
+        if (_audioSource != null)
+        {
+            _audioSource.Stop();
+            _audioSource.Play();
+        }
     }
 }

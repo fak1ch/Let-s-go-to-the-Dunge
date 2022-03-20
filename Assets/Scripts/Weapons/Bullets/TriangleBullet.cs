@@ -10,14 +10,14 @@ public class TriangleBullet : Bullet
     private GameObject _player;
     private MainScript _mainScript;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _player = StaticClass.player;
         _mainScript = StaticClass.mainScript;
         StartCoroutine(AnimationStop());
-        StartMethod();
     }
-    void Update()
+    protected override void Update()
     {
         if (_allowMove)
         {

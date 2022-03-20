@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BadPistol : Weapon
 {
-    void Start()
+    protected override void Start()
     {
         IsDropped = false;
-        StartMethod();
+        base.Start();
     }
 
-    private void Update()
+    protected override void Update()
     {
-        UpdateMethod();
+        base.Update();
     }
 }

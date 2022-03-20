@@ -24,6 +24,7 @@ public class Boss : Enemy
     protected override void Start()
     {
         base.Start();
+        SetMoveBehaviour(new MoveToTarget(transform, _speed, transform.position));
         _bossRoomTransform = GameObject.FindGameObjectWithTag("BossRoom").transform;
         _bossHp = FindObjectOfType<UIBossHp>();
         _bossHp.BossSpawned(_health, _maxHealth);
@@ -37,7 +38,6 @@ public class Boss : Enemy
 
     protected override void Update()
     {
-        RotateSprite();
         SmartMenu();
     }
 
@@ -101,31 +101,6 @@ public class Boss : Enemy
                 SetBoolRun(false);
             }
             _target = _player.transform;
-        }
-    }
-
-    public override void EnemyMove()
-    {
-        if (_player.activeInHierarchy)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
-        }
-        else
-        {
-            MoveToStartPosition();
-        }
-    }
-
-    public override void MoveToStartPosition()
-    {
-        if (transform.position != _startPosition)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, _startPosition, _speed * Time.deltaTime);
-        }
-        else
-        {
-            SetBoolShoot(false);
-            SetBoolRun(false);
         }
     }
 

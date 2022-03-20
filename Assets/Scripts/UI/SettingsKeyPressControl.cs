@@ -12,22 +12,28 @@ public class SettingsKeyPressControl : MonoBehaviour
     [SerializeField] private Slider _menuMusicSlider;
     [SerializeField] private Slider _soundsSlider;
 
+    private Storage _storage;
+    private SettingsGameData _gameData;
+
     private void Start()
     {
-        ApplySaveSettings();
+        _storage = new Storage();
+        _gameData = (SettingsGameData)_storage.Load(new SettingsGameData());
+
+        LoadSettings();
     }
 
-    private void ApplySaveSettings()
+    private void LoadSettings()
     {
-        _mixer.audioMixer.SetFloat("masterVolume", PlayerPrefs.GetFloat("masterVolume"));
-        _mixer.audioMixer.SetFloat("musicVolume", PlayerPrefs.GetFloat("musicVolume"));
-        _mixer.audioMixer.SetFloat("menuMusicVolume", PlayerPrefs.GetFloat("menuMusicVolume"));
-        _mixer.audioMixer.SetFloat("soundsVolume", PlayerPrefs.GetFloat("soundsVolume"));
+        _masterSlider.value = _gameData.MasterSlider;
+        _musicSlider.value = _gameData.MusicSlider;
+        _menuMusicSlider.value = _gameData.MenuMusicSlider;
+        _soundsSlider.value = _gameData.SoundsSlider;
 
-        _masterSlider.value = (PlayerPrefs.GetFloat("masterVolume") + 80) / 80;
-        _musicSlider.value = (PlayerPrefs.GetFloat("musicVolume") + 80) / 80;
-        _menuMusicSlider.value = (PlayerPrefs.GetFloat("menuMusicVolume") + 80) / 80;
-        _soundsSlider.value = (PlayerPrefs.GetFloat("soundsVolume") + 80) / 80;
+        _mixer.audioMixer.SetFloat("masterVolume", (80 * _masterSlider.value) - 80);
+        _mixer.audioMixer.SetFloat("musicVolume", (80 * _musicSlider.value) - 80);
+        _mixer.audioMixer.SetFloat("menuMusicVolume", (80 * _menuMusicSlider.value) - 80);
+        _mixer.audioMixer.SetFloat("soundsVolume", (80 * _soundsSlider.value) - 80);
 
         Vector3 vec = GetComponent<RectTransform>().position;
         vec.z = 0;
@@ -76,17 +82,19 @@ public class SettingsKeyPressControl : MonoBehaviour
         _soundsSlider.value = 1f;
     }
 
-    private void CloseSettings()
+    public void CloseSettings()
     {
-        SaveFieldsToStaticClass();
+        SaveSettings();
         gameObject.SetActive(false);
     }
 
-    private void SaveFieldsToStaticClass()
+    private void SaveSettings()
     {
-        PlayerPrefs.SetFloat("masterVolume", (80 * _masterSlider.value) - 80);
-        PlayerPrefs.SetFloat("musicVolume", (80 * _musicSlider.value) - 80);
-        PlayerPrefs.SetFloat("menuMusicVolume", (80 * _menuMusicSlider.value) - 80);
-        PlayerPrefs.SetFloat("soundsVolume", (80 * _soundsSlider.value) - 80);
+        _gameData.MasterSlider = _masterSlider.value;
+        _gameData.MusicSlider = _musicSlider.value;
+        _gameData.MenuMusicSlider = _menuMusicSlider.value;
+        _gameData.SoundsSlider = _soundsSlider.value;
+
+        _storage.Save(_gameData);
     }
 }

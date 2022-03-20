@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerCharacteristic : MonoBehaviour, IEntity
+public class PlayerCharacteristic : Entity
 {
     public event Action<int, int> OnHealthChange;
     public event Action<int> OnHealthMinus;
@@ -26,7 +26,7 @@ public class PlayerCharacteristic : MonoBehaviour, IEntity
         OnHealthChange?.Invoke(_health, _maxHealth);
     }
 
-    public void TakeDamage(int damage, GameObject whoKill)
+    public override void TakeDamage(int damage, GameObject whoKill)
     {
         if (!_immortalityOn)
         {

@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 8804442991036403692}
   - component: {fileID: 5758866072558556328}
   - component: {fileID: 5216258286664547262}
+  - component: {fileID: 41372362134526236}
   m_Layer: 20
   m_Name: ShopTable
   m_TagString: Ground
@@ -447,6 +448,19 @@ MonoBehaviour:
   _health: {fileID: 4797242653720433423, guid: 58ac47e9e7208144399e2cfee1dab075, type: 3}
   _mana: {fileID: 7166170418527372959, guid: b4fbf778241fee44d8fb34e4862e4412, type: 3}
   _priceText: {fileID: 7859337141499356269}
+--- !u!114 &41372362134526236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8804442991036403681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5316e1312936924c958905b6bbd77e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider2d: {fileID: 8804442991036403692}
 --- !u!1 &8804442992301776247
 GameObject:
   m_ObjectHideFlags: 0

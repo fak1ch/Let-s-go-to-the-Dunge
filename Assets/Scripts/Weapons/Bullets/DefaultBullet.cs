@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class DefaultBullet : Bullet
 {
-    private void Start()
+    protected override void Start()
     {
-        StartMethod();
+        base.Start();
     }
-    private void Update()
+    protected override void Update()
     {
-        BulletMove();
+        base.Update();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        OnTriggerEnter2DMethod(collision.gameObject);
+        base.OnTriggerEnter2D(collision);
     }
 }
