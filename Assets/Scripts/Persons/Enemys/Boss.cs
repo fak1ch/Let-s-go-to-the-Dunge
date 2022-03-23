@@ -38,6 +38,7 @@ public class Boss : Enemy
 
     protected override void Update()
     {
+        base.Update();
         SmartMenu();
     }
 
@@ -79,7 +80,7 @@ public class Boss : Enemy
         }
     }
 
-    IEnumerator ChooseAction()
+    private IEnumerator ChooseAction()
     {
         _lockedChoose = true;
         yield return new WaitForSeconds(1);
@@ -181,13 +182,12 @@ public class Boss : Enemy
         return _animator.GetBool("isShooting");
     }
 
-    public override void EnemyHasBeenKilled()
+    protected override void EnemyHasBeenKilled()
     {
-        _health = 0;
         _bossHp.BossDie();
-        GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
         SpawnPortal();
         _mainScript.MusicPlay(_mainScript.GetRandomMusic());
-        Destroy(gameObject);
+
+        base.EnemyHasBeenKilled();
     }
 }

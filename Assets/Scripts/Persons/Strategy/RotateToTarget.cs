@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
-public class RotateToTarget : IRotate
+public class RotateToTarget
 {
     private Camera _camera;
 

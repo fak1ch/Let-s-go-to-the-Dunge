@@ -17,17 +17,17 @@ public class TriangleEnemy : Enemy
     private float _distance;
     private float _timeBtwShots;
     private bool _allowShoot = true;
+    private RotateToTarget _rotateToTarget;
 
     protected override void Start()
     {
         base.Start();
-        _startTimeBtwShots = Random.Range(_startTimeBtwShots - 1f, _startTimeBtwShots + 1f);
-        _timeBtwShots = _startTimeBtwShots;
-
 
         SetMoveBehaviour(new MoveToTarget(transform.root, _speed, transform.position));
-        SetRotateBehaviour(new RotateToTarget(_mainScript.MainCamera));
+        _rotateToTarget = new RotateToTarget(_mainScript.MainCamera);
 
+        _startTimeBtwShots = Random.Range(_startTimeBtwShots - 1f, _startTimeBtwShots + 1f);
+        _timeBtwShots = _startTimeBtwShots;
         StartCoroutine(GetDistanceBetweenPlayerAndEnemy());
     }
 
@@ -42,8 +42,8 @@ public class TriangleEnemy : Enemy
     {
         if (_player.activeInHierarchy)
         {
-            Rotate(_player.transform.position, _shotPoint);
-            float angle = Rotate(_player.transform.position, _pointRotate);
+            _rotateToTarget.Rotate(_player.transform.position, _shotPoint);
+            float angle = _rotateToTarget.Rotate(_player.transform.position, _pointRotate);
             if (_distance < _distanceWhenEnemyMoveToPlayer)
                 _pointRotate.rotation = Quaternion.Euler(0, 0, angle - 180);
         }
@@ -65,7 +65,7 @@ public class TriangleEnemy : Enemy
         }
     }
 
-    public override void EnemyMove()
+    protected override void EnemyMove()
     {
         if (_allowShoot)
         Move(_pointMove.transform.position, _player.activeInHierarchy);

@@ -66,13 +66,13 @@ public class GameOverMenuScript : MonoBehaviour
 
         color = gameObject.GetComponent<Image>().color;
 
-        for (float i=0f; i < 1; i += 0.05f)
+        for (float i = 0f; i < 1; i += 0.05f)
         {
             color.a += i;
-            for(int k =0;k< _imageChildren.Length; k++)
+            for (int k = 0; k < _imageChildren.Length; k++)
             {
                 _imageChildren[k].color = color;
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.005f);
             }
         }
     }

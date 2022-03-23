@@ -5,30 +5,27 @@ using UnityEngine.AI;
 public class Enemy : Entity
 {
     [SerializeField] protected int _health;
-    [SerializeField] protected int _damage;
+    [SerializeField] protected int _damage = 1;
+    [SerializeField] protected float _timeBtwAttack = 1;
     [SerializeField] protected float _speed;
-    [SerializeField] protected float _timeBtwAttack;
     [SerializeField] protected NavMeshAgent _navAgent;
 
-    protected GameObject _player;
-    protected PlayerCharacteristic _playerCharacteristic;
-    protected MainScript _mainScript;
     protected AudioSource _audioSource;
 
-    private Vector3 _target;
-    private bool _lockerForAIMove;
     private Collider2D _collider;
     private bool _isOpen = false;
+    private Vector3 _target;
+    private Vector3 _startPosition;
 
     protected override void Start()
     {
         base.Start();
-        _player = StaticClass.player;
-        _playerCharacteristic = StaticClass.playerCharacteristic;
-        _mainScript = StaticClass.mainScript;
+        _startPosition = transform.position;
+        _navAgent.speed = _speed;
         _mainScript.AddEnemyToList(this);
         TryGetComponent(out _audioSource);
         StartCoroutine(TimeBeforeAttackAfterSpawn());
+        StartCoroutine(TargetForMovePos());
     }
 
     protected virtual void Update()
@@ -59,19 +56,12 @@ public class Enemy : Entity
         }
     }
 
-    private IEnumerator AttackThePlayer(Collider2D collider)
-    {
-        _playerCharacteristic.TakeDamage(_damage, null);
-        yield return new WaitForSeconds(_timeBtwAttack);
-        collider.enabled = true;
-    }
-
-    public override void TakeDamage(int damage, GameObject whoKill)
+    public override void TakeDamage(int damage, GameObject killer)
     {
         _health -= damage;
         if (_health <= 0)
         {
-            whoKill.GetComponent<PlayerStatistics>().AddCountEnemyDestroyed();
+            killer.GetComponent<PlayerStatistics>().AddCountEnemyDestroyed();
             EnemyHasBeenKilled();
         }
     }
@@ -82,7 +72,7 @@ public class Enemy : Entity
         _isOpen = true;
     }
 
-    public void RotateSprite()
+    private void RotateSprite()
     {
         if (_player.transform.position.x > transform.position.x)
         {
@@ -99,29 +89,41 @@ public class Enemy : Entity
         transform.position = vec;
     }
 
-    public virtual void EnemyMove()
+    protected virtual void EnemyMove()
     {
+        if (transform.position != _startPosition)
         Move(_target, _player.activeInHierarchy);
-        if (!_lockerForAIMove)
-        {
-            StartCoroutine(TargetForMovePos());
-        }
     }
 
-    public IEnumerator TargetForMovePos()
+    private IEnumerator TargetForMovePos()
     {
-        _lockerForAIMove = true;
         _target = _player.transform.position;
-        float time = Vector2.Distance(_player.transform.position, transform.position)/1500;
+        float time = Vector2.Distance(_player.transform.position, transform.position) / 1500;
         yield return new WaitForSeconds(time);
-        _lockerForAIMove = false;
     }
 
-    public virtual void EnemyHasBeenKilled()
+    protected virtual void EnemyHasBeenKilled()
     {
         _health = 0;
         StaticClass.mainScript.RemoveEnemyFromList(this);
         GetComponent<DropManaAndAmethistsAfterDeath>().DropManaAndAmethystAfterDead();
-        Destroy(gameObject.transform.root.gameObject);
+        Destroy(transform.root.gameObject);
+    }
+
+    private IEnumerator AttackThePlayer(Collider2D collider)
+    {
+        _playerCharacteristic.TakeDamage(_damage, null);
+        yield return new WaitForSeconds(_timeBtwAttack);
+        collider.enabled = true;
+    }
+
+    
+    protected virtual void ShotAudioPlay()
+    {
+        if (_audioSource != null)
+        {
+            _audioSource.Stop();
+            _audioSource.Play();
+        }
     }
 }

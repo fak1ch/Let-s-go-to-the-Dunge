@@ -2745,9 +2745,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b0f140e22fc8444b0279989da9d13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showAdButton: {fileID: 980663857}
-  _androidAdUnitId: Rewarded_Android
-  _iOSAdUnitId: Rewarded_iOS
   _textError: {fileID: 804046874}
 --- !u!224 &980663856
 RectTransform:
@@ -6028,6 +6025,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482534062621582662, guid: d8622ab3167da1d4ea4859a07007615b,
+        type: 3}
+      propertyPath: _button
+      value: 
+      objectReference: {fileID: 980663855}
+    - target: {fileID: 2482534062621582662, guid: d8622ab3167da1d4ea4859a07007615b,
+        type: 3}
+      propertyPath: _adUnitId
+      value: ca-app-pub-4798620459420498/1867321685
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8622ab3167da1d4ea4859a07007615b, type: 3}

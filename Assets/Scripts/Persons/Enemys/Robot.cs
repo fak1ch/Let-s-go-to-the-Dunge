@@ -6,17 +6,18 @@ public class Robot : Enemy
 {
     [SerializeField] private GameObject _bullet;
     [SerializeField] private Transform _shotPoint;
-    [SerializeField] private float _startTimeBtwShots;
+    [SerializeField] private float _timeBtwShots;
 
-    private float _timeBtwShots;
+    private RotateToTarget _rotateToTarget;
     private int _hitsSpeedAttack;
+    private bool _allowShoot = false;
 
     protected override void Start()
     {
         base.Start();
         SetMoveBehaviour(new NavMeshMoveToTarget(_navAgent, GetComponent<Animator>(), transform.position));
-        _startTimeBtwShots = Random.Range(_startTimeBtwShots - 0.5f, _startTimeBtwShots + 0.5f);
-        _timeBtwShots = _startTimeBtwShots;
+        _rotateToTarget = new RotateToTarget(_mainScript.MainCamera);
+        _timeBtwShots = Random.Range(_timeBtwShots - 0.5f, _timeBtwShots + 0.5f);
     }
 
     protected override void Update()
@@ -30,13 +31,7 @@ public class Robot : Enemy
     {
         if (_player.activeInHierarchy)
         {
-            Vector3 vec = _mainScript.MainCamera.WorldToScreenPoint(_player.transform.position);
-            Vector3 objectPos = _mainScript.MainCamera.WorldToScreenPoint(_shotPoint.position);
-            vec.x = vec.x - objectPos.x;
-            vec.y = vec.y - objectPos.y;
-
-            float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
-            _shotPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            _rotateToTarget.Rotate(_player.transform.position, transform);
         }
     }
 
@@ -44,36 +39,27 @@ public class Robot : Enemy
     {
         if (_player.activeInHierarchy)
         {
-            if (_timeBtwShots <= 0)
+            if (_allowShoot)
             {
+                StartCoroutine(ShootCooldown());
                 ShotAudioPlay();
                 var b = Instantiate(_bullet, _shotPoint.position, _shotPoint.rotation);
+                _hitsSpeedAttack++;
+
                 if (_hitsSpeedAttack == 5)
                 {
                     _hitsSpeedAttack = 0;
                     Bullet bulletScript = b.GetComponentInChildren<Bullet>();
                     bulletScript.Speed *= 2;
                 }
-                else
-                {
-                    _hitsSpeedAttack++;
-                }
-
-                _timeBtwShots = _startTimeBtwShots;
-            }
-            else
-            {
-                _timeBtwShots -= Time.deltaTime;
             }
         }
     }
 
-    private void ShotAudioPlay()
+    private IEnumerator ShootCooldown()
     {
-        if (_audioSource != null)
-        {
-            _audioSource.Stop();
-            _audioSource.Play();
-        }
+        _allowShoot = false;
+        yield return new WaitForSeconds(_timeBtwShots);
+        _allowShoot = true;
     }
 }

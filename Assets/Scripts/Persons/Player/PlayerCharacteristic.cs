@@ -20,7 +20,7 @@ public class PlayerCharacteristic : Entity
     public int Amethists { get; set; }
     public int Mana { get { return _mana; } }
 
-    private void Start()
+    protected override void Start()
     {
         _mana = _maxMana;
         OnHealthChange?.Invoke(_health, _maxHealth);

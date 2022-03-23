@@ -156,12 +156,6 @@ public class MainScript : MonoBehaviour
                 {
                     Destroy(obj[i].transform.root.gameObject);
                 }
-
-                GameObject gm = GameObject.FindGameObjectWithTag("Boss");
-                if (gm != null)
-                {
-                    gm.GetComponent<Boss>().EnemyHasBeenKilled();
-                }
             }
         }
     }
