@@ -29,7 +29,7 @@ public abstract class Entity : MonoBehaviour
         _moveBehaviour = moveBehaviour;
     }
 
-    protected void Move(Vector3 target, bool playerAlive)
+    public void Move(Vector3 target, bool playerAlive)
     {
         if (_moveBehaviour != null)
             _moveBehaviour.Move(target, playerAlive);

@@ -23,35 +23,35 @@ public class NavMeshMoveToTarget : IMove
         if (playerAlive)
         {
             _navMeshAgent.SetDestination(target);
-            ChangeAnimation(_animHasBeenChanged);
+            //ChangeAnimation(_animHasBeenChanged);
         }
         else
         {
             MoveToStartPosition();
-            ChangeAnimation(_animHasBeenChanged);
+            //ChangeAnimation(_animHasBeenChanged);
         }
     }
 
     private void MoveToStartPosition()
     {
         _navMeshAgent.SetDestination(_startPosition);
-        ChangeAnimation(_animHasBeenChanged);
+        //ChangeAnimation(_animHasBeenChanged);
     }
 
-    private void ChangeAnimation(bool animHasBeenChanged)
-    {
-        if (_animator != null)
-        {
-            if (!_animHasBeenChanged)
-            {
-                _animator.SetBool("isRun", true);
-            }
-            else
-            {
-                _animator.SetBool("isRun", false);
-            }
+    //private void ChangeAnimation(bool animHasBeenChanged)
+    //{
+    //    if (_animator != null)
+    //    {
+    //        if (!_animHasBeenChanged)
+    //        {
+    //            _animator.SetBool("isRun", true);
+    //        }
+    //        else
+    //        {
+    //            _animator.SetBool("isRun", false);
+    //        }
 
-            _animHasBeenChanged = !_animHasBeenChanged;
-        }
-    }
+    //        _animHasBeenChanged = !_animHasBeenChanged;
+    //    }
+    //}
 }

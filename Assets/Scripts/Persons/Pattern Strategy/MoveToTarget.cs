@@ -29,7 +29,7 @@ public class MoveToTarget : IMove
     {
         if (position != _startPosition)
         {
-            _transform.position = Vector3 .MoveTowards(_transform.position, _startPosition, _speed * Time.fixedDeltaTime);
+            _transform.position = Vector3.MoveTowards(_transform.position, _startPosition, _speed * Time.fixedDeltaTime);
         }
     }
 }

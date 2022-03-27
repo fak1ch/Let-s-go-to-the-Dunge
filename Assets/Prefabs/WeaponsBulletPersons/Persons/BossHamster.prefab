@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 5751698171708781820}
   - component: {fileID: 7525296749406538555}
   - component: {fileID: 4069480482280858133}
-  - component: {fileID: 5045536371841986352}
   - component: {fileID: 6990069107504587917}
   - component: {fileID: 4903814089137420786}
+  - component: {fileID: 6218635950463593480}
   m_Layer: 20
   m_Name: BossHamster
   m_TagString: Boss
@@ -198,31 +198,6 @@ CircleCollider2D:
   m_Offset: {x: 0.8, y: 0.3}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &5045536371841986352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749760193107581115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91e6c50f8cca3b5419c19280ed927899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
-  _damage: 1
-  _speed: 150
-  _timeBtwAttack: 1
-  _navAgent: {fileID: 0}
-  _maxHealth: 100
-  _bullet: {fileID: 6207451842096547130, guid: ac0d78a9d48da634dbd04282e7434771, type: 3}
-  _portal: {fileID: 4894385596281390470, guid: 984dffa68195b1742a4faae4afb34591, type: 3}
-  _bulletPoint: {fileID: 1749760193589685384}
-  _bulletPoint2: {fileID: 1749760193821080611}
-  _bulletCount: 36
-  _shootClip: {fileID: 8300000, guid: c8d9773866dc80b4ca5c4cd922449814, type: 3}
-  _runClip: {fileID: 8300000, guid: 7baf6f88c7133d745b1a33ec46bd2d5d, type: 3}
 --- !u!114 &6990069107504587917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +311,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6218635950463593480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749760193107581115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79163922c52b63418d0f1d4415789c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _damage: 1
+  _timeBtwAttack: 1
+  _speed: 80
+  _navAgent: {fileID: 0}
+  _maxHealth: 100
+  _portal: {fileID: 4894385596281390470, guid: 984dffa68195b1742a4faae4afb34591, type: 3}
+  _shotPoint1: {fileID: 1749760193589685384}
+  _shotPoint2: {fileID: 1749760193821080611}
+  _bullet: {fileID: 6207451842096547130, guid: ac0d78a9d48da634dbd04282e7434771, type: 3}
 --- !u!1 &1749760193589685385
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class Enemy : Entity
     {
         base.Start();
         _startPosition = transform.position;
+        if (_navAgent != null)
         _navAgent.speed = _speed;
         _mainScript.AddEnemyToList(this);
         TryGetComponent(out _audioSource);
@@ -32,6 +33,12 @@ public class Enemy : Entity
     {
         EnemyMove();
         RotateSprite();
+    }
+
+    protected virtual void EnemyMove()
+    {
+        if (transform.position != _startPosition)
+            Move(_target, _player.activeInHierarchy);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -87,12 +94,6 @@ public class Enemy : Entity
         Vector3 vec = transform.position;
         vec.z = 0;
         transform.position = vec;
-    }
-
-    protected virtual void EnemyMove()
-    {
-        if (transform.position != _startPosition)
-        Move(_target, _player.activeInHierarchy);
     }
 
     private IEnumerator TargetForMovePos()
