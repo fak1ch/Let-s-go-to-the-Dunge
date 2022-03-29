@@ -200,12 +200,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 3
   _damage: 1
-  _speed: 100
   _timeBtwAttack: 1
+  _speed: 50
   _navAgent: {fileID: 2530283526733188054}
   _bullet: {fileID: 4114687247719641019, guid: 239aea93406e2514d86cc6ae164a5957, type: 3}
   _shotPoint: {fileID: 1350237800907043289}
-  _startTimeBtwShots: 1
+  _timeBtwShots: 1.2
 --- !u!61 &8411737148852354997
 BoxCollider2D:
   m_ObjectHideFlags: 0

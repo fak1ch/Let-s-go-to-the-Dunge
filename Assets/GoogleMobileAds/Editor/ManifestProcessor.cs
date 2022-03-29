@@ -89,6 +89,7 @@ public class ManifestProcessor : IPreprocessBuild
 
         if (appId.Length == 0)
         {
+            Debug.Log(appId);
             StopBuildWithMessage(
                 "Android Google Mobile Ads app ID is empty. Please enter a valid app ID to run ads properly.");
         }

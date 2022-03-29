@@ -104,10 +104,4 @@ public class TriangleEnemy : Enemy
         yield return new WaitForSeconds(_timeBetweenGetDistance);
         StartCoroutine(GetDistanceBetweenPlayerAndEnemy());
     }
-
-    private void ShotAudioPlay()
-    {
-        _audioSource.Stop();
-        _audioSource.Play();
-    }
 }

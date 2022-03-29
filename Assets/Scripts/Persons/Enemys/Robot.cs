@@ -18,6 +18,7 @@ public class Robot : Enemy
         SetMoveBehaviour(new NavMeshMoveToTarget(_navAgent, GetComponent<Animator>(), transform.position));
         _rotateToTarget = new RotateToTarget(_mainScript.MainCamera);
         _timeBtwShots = Random.Range(_timeBtwShots - 0.5f, _timeBtwShots + 0.5f);
+        StartCoroutine(ShootCooldown());
     }
 
     protected override void Update()
@@ -31,7 +32,7 @@ public class Robot : Enemy
     {
         if (_player.activeInHierarchy)
         {
-            _rotateToTarget.Rotate(_player.transform.position, transform);
+            _rotateToTarget.Rotate(_player.transform.position, _shotPoint);
         }
     }
 

@@ -6036,5 +6036,15 @@ PrefabInstance:
       propertyPath: _adUnitId
       value: ca-app-pub-4798620459420498/1867321685
       objectReference: {fileID: 0}
+    - target: {fileID: 2482534062621582662, guid: d8622ab3167da1d4ea4859a07007615b,
+        type: 3}
+      propertyPath: _testMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482534062621582662, guid: d8622ab3167da1d4ea4859a07007615b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8622ab3167da1d4ea4859a07007615b, type: 3}

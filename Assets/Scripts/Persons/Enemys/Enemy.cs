@@ -101,6 +101,7 @@ public class Enemy : Entity
         _target = _player.transform.position;
         float time = Vector2.Distance(_player.transform.position, transform.position) / 1500;
         yield return new WaitForSeconds(time);
+        StartCoroutine(TargetForMovePos());
     }
 
     protected virtual void EnemyHasBeenKilled()

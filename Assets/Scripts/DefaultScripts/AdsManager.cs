@@ -7,7 +7,6 @@ public class AdsManager : MonoBehaviour
 {
     [SerializeField] private RewardedAdsButton _button;
     [SerializeField] private string _adUnitId;
-    [SerializeField] private string _videoAdMobId;
     [SerializeField] bool _testMode = true;
 
     private InterstitialAd _interstitial;
@@ -53,7 +52,7 @@ public class AdsManager : MonoBehaviour
 
     public void ShowRewardedAd()
     {
-        if (_rewardedAd.IsLoaded())
+        if (_rewardedAd.IsLoaded() && !_testMode)
         {
             _rewardedAd.Show();
         }

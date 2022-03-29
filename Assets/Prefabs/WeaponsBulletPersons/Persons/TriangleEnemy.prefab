@@ -446,8 +446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 3
   _damage: 1
-  _speed: 50
   _timeBtwAttack: 1
+  _speed: 70
   _navAgent: {fileID: 9088716632350684225}
   _bullet: {fileID: 5540746877597236983, guid: 355057c8f390a494c82620b36557353a, type: 3}
   _shotPoint: {fileID: 8087016183779879616}
