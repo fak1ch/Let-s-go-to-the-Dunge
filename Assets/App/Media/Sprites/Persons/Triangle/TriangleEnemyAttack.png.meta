@@ -1,0 +1,447 @@
+fileFormatVersion: 2
+guid: 158db25db02e63145be13604538ea56e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3115526155524065768
+    second: TriangleEnemyAttack_0
+  - first:
+      213: -8557515400249617237
+    second: TriangleEnemyAttack_1
+  - first:
+      213: 7287125792588182343
+    second: TriangleEnemyAttack_2
+  - first:
+      213: -6348093579225839214
+    second: TriangleEnemyAttack_3
+  - first:
+      213: 5655086206845065963
+    second: TriangleEnemyAttack_4
+  - first:
+      213: 2739390804757708645
+    second: TriangleEnemyAttack_5
+  - first:
+      213: -6010803945204893073
+    second: TriangleEnemyAttack_6
+  - first:
+      213: 8942747988303977954
+    second: TriangleEnemyAttack_7
+  - first:
+      213: -736710084953524780
+    second: TriangleEnemyAttack_8
+  - first:
+      213: -5816299203880654337
+    second: TriangleEnemyAttack_9
+  - first:
+      213: -2438817556217852384
+    second: TriangleEnemyAttack_10
+  - first:
+      213: -2799924793088647245
+    second: TriangleEnemyAttack_11
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 816bc83e77d63c4d0800000000000000
+      internalID: -3115526155524065768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_1
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba4df2845199d3980800000000000000
+      internalID: -8557515400249617237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_2
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7433eccac42112560800000000000000
+      internalID: 7287125792588182343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_3
+      rect:
+        serializedVersion: 2
+        x: 1656
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2994e49f58a07e7a0800000000000000
+      internalID: -6348093579225839214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_4
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bea163571f6ea7e40800000000000000
+      internalID: 5655086206845065963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_5
+      rect:
+        serializedVersion: 2
+        x: 2760
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56ffd8a4c65440620800000000000000
+      internalID: 2739390804757708645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_6
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6abb8f88a5559ca0800000000000000
+      internalID: -6010803945204893073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_7
+      rect:
+        serializedVersion: 2
+        x: 3864
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ed92b62ae50b1c70800000000000000
+      internalID: 8942747988303977954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_8
+      rect:
+        serializedVersion: 2
+        x: 4416
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d5b5ebb41ea6c5f0800000000000000
+      internalID: -736710084953524780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_9
+      rect:
+        serializedVersion: 2
+        x: 4968
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff96e4da0ba584fa0800000000000000
+      internalID: -5816299203880654337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_10
+      rect:
+        serializedVersion: 2
+        x: 5520
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02e06a1aa54972ed0800000000000000
+      internalID: -2438817556217852384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TriangleEnemyAttack_11
+      rect:
+        serializedVersion: 2
+        x: 6072
+        y: 138
+        width: 552
+        height: 862
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bf542e3c3ba429d0800000000000000
+      internalID: -2799924793088647245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      TriangleEnemyAttack_0: -3115526155524065768
+      TriangleEnemyAttack_2: 7287125792588182343
+      TriangleEnemyAttack_8: -736710084953524780
+      TriangleEnemyAttack_11: -2799924793088647245
+      TriangleEnemyAttack_3: -6348093579225839214
+      TriangleEnemyAttack_5: 2739390804757708645
+      TriangleEnemyAttack_9: -5816299203880654337
+      TriangleEnemyAttack_1: -8557515400249617237
+      TriangleEnemyAttack_6: -6010803945204893073
+      TriangleEnemyAttack_7: 8942747988303977954
+      TriangleEnemyAttack_4: 5655086206845065963
+      TriangleEnemyAttack_10: -2438817556217852384
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
